@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDAO;
 
 /**
  * Servlet implementation class LoginServlet
@@ -26,7 +27,6 @@ public class LoginServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -36,7 +36,11 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
+
+		// ログイン処理を行う
+		UserDAO iDao = new UserDAO();
+		//もしログインできたらメニューページにフォワード
+		//もしログインできなかったらログインページにフォワード
 	}
+
 }
-
-
