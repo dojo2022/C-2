@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class HomeServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/HomeServlet")
+public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -22,21 +21,16 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 結果ページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
-		dispatcher.forward(request, response);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+				dispatcher.forward(request, response);
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String password = request.getParameter("password");
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
 }
-
-

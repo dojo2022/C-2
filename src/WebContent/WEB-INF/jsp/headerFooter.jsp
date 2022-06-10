@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LOGIN</title>
-<link rel="stylesheet" type="text/css" href="/coordinator/css/login.css">
+<title>Insert title here</title>
 </head>
 <body>
-ログイン
+
 </body>
 </html>
