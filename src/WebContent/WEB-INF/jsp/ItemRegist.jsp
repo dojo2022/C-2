@@ -11,10 +11,10 @@
 <nav>
  <ul>
 <li><a href="/coordinator/HomeServlet">HOME</a></li>
-<li><a href="/coordinator/DiaryServlet">diary</a></li>
-<li> <a href="/coordinator/ItemSearchServlet">search</a></li>
-<li><a href="/coordinator/ItemRegistUpdateServlet">resist</a></li>
-<li><a href="/coordinator/LoginServlet">log out</a></li>
+<li><a href="/coordinator/DiaryServlet">DIARY</a></li>
+<li> <a href="/coordinator/ItemSearchServlet">SEARCH</a></li>
+<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
+<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 </ul>
 </nav>
 <form method="POST" action="/coordinator/ItemRegistServlet">

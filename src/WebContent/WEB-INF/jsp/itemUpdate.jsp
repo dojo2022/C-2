@@ -7,6 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+登録
+<nav>
+ <ul>
+<li><a href="/coordinator/HomeServlet">HOME</a></li>
+<li><a href="/coordinator/DiaryServlet">DIARY</a></li>
+<li> <a href="/coordinator/ItemSearchServlet">SEARCH</a></li>
+<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
+<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
+</ul>
+</nav>
 <a href="/coordinator/ItemSearchServlet"></a>
 <!-- <form method="POST" action="/coordinator/LoginServlet" id="form"> -->
 
