@@ -89,7 +89,4 @@ public class Diary {
 	public void setAmountOfRain(double amountOfRain) {
 		this.amountOfRain = amountOfRain;
 	}
-
-
-
 }
