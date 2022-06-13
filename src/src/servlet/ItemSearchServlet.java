@@ -10,18 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class DiaryServlet
+ * Servlet implementation class ItemSearchServlet
  */
-@WebServlet("/DiaryServlet")
-public class DiaryServlet extends HttpServlet {
+@WebServlet("/ItemSearchServlet")
+public class ItemSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// フォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearch.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -29,17 +28,8 @@ public class DiaryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		// リクエストパラメータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String startDate = request.getParameter("start_date");
-		String endDate = request.getParameter("end_date");
-
-		// フォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");
-		dispatcher.forward(request, response);
-
-
+		// TODO Auto-generated method stub
+				doGet(request, response);
 	}
+
 }
