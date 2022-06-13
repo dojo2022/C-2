@@ -34,8 +34,11 @@ public class UserRegistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		// リクエストパラメータを取得する
+				request.setCharacterEncoding("UTF-8");
+				String id = request.getParameter("ID");
+				String password = request.getParameter("PASSWORD");
+
 	}
 
 }
