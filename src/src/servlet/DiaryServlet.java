@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +27,11 @@ public class DiaryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	}
+
 	// リクエストパラメータを取得する
 	//引数をまだ決めてませんよね♡
 			request.setCharacterEncoding("UTF-8");
-			String start_date = request.getParameter("start_date");
-			String end_date = request.getParameter("end_date");
-
+			String startDate = request.getParameter("start_date");
+			String endDate = request.getParameter("end_date");
+	}
 }

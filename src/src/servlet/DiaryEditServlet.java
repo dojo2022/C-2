@@ -27,9 +27,10 @@ public class DiaryEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	}
+
 	// リクエストパラメータを取得する
 	request.setCharacterEncoding("UTF-8");
-	String start_date = request.getParameter("start_date");
-	String end_date = request.getParameter("end_date");
+	String startDate = request.getParameter("start_date");
+	String endDate = request.getParameter("end_date");
+	}
 }
