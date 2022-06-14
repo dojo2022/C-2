@@ -6,9 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>ItemRegist</title>
+<link rel="stylesheet" href="/coordinator/css/itemRegist.css">
 </head>
 <body>
-<nav>
+アイテム登録ページ
+<nav class="nav">
  <ul>
 <li><a href="/coordinator/HomeServlet">HOME</a></li>
 <li><a href="/coordinator/DiaryServlet">DIARY</a></li>
@@ -18,12 +20,12 @@
 </ul>
 </nav>
 <form method="POST" action="/coordinator/ItemRegistServlet">
-<table>
+	<table>
 		<tr>
 		<td><input type="submit" name="REGIST" value="登録">
 		<input type="reset" name="reset" value="リセット"></td>
 		</tr>
-		</table>
-		</form>
+	</table>
+</form>
 </body>
 </html>

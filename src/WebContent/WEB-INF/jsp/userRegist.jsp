@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/coordinator/css/userRegist.css">
 </head>
 <body>
 新規登録
