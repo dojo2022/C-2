@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>HOME</title>
+<link rel="stylesheet" href="/coordinator/css/home.css">
 </head>
 <body>
-HOME
-<nav>
+
+<h1>Coordinator</h1>
+<nav class="nav">
  <ul>
 <li><a href="/coordinator/HomeServlet">HOME</a></li>
 <li><a href="/coordinator/DiaryServlet">DIARY</a></li>
@@ -18,6 +20,9 @@ HOME
 <li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 </ul>
 </nav>
+<h3>Recommends and Forecast</h3>
+<h3>History</h3>
 <a href="/coordinator/DiaryServlet">ViewMore</a>
+<h3>Forecast</h3>
 </body>
 </html>

@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>DIARY</title>
+<link rel="stylesheet" href="/coordinator/css/diary.css">
+
 </head>
 <body>
 diary
-<nav>
+<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
 			<li><a href="/coordinator/DiaryServlet">DIARY</a></li>

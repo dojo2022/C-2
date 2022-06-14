@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/coordinator/css/diaryEdit.css">
 </head>
 <body>
 日記の編集
-<nav>
+<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
 			<li><a href="/coordinator/DiaryServlet">DIARY</a></li>

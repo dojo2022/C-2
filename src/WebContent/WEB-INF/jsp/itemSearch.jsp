@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>itemSearch</title>
+<link rel="stylesheet" href="/coordinator/css/itemSearch.css">
 </head>
 <body>
 検索
-<nav>
+<nav class="nav">
  <ul>
 <li><a href="/coordinator/HomeServlet">HOME</a></li>
 <li><a href="/coordinator/DiaryServlet">DIARY</a></li>

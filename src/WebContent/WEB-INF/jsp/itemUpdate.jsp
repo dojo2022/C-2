@@ -5,10 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/coordinator/css/itemUpdate.css">
+
 </head>
 <body>
 登録
-<nav>
+<nav class="nav">
  <ul>
 <li><a href="/coordinator/HomeServlet">HOME</a></li>
 <li><a href="/coordinator/DiaryServlet">DIARY</a></li>
@@ -23,12 +25,8 @@
 		<input type="submit" name="UPDATE" value="更新"> <input
 			type="submit" name="DELETE" value="削除">
 <!-- </form> -->
-<script>
-	'use strict';
-	window.alert('更新成功'):
 
-</script>
-
+<script src="itemUpdate.js"></script>
 </body>
 
 
