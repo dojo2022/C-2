@@ -1,1 +1,6 @@
 @charset "UTF-8";
+.nav li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 30px;
+}
