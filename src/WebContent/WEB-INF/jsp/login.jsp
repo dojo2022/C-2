@@ -11,7 +11,7 @@
 ログイン
   <a href="/coordinator/UserRegistServlet">新規会員登録はこちら</a>
 
-	<!-- <form method="POST" action="/coordinator/LoginServlet" id="form"> -->
+	<form method="POST" action="/coordinator/LoginServlet" id="form">
 		<table>
 			<tr>
 				<td>ID</td>
@@ -25,6 +25,6 @@
 		</table>
 		<input type="submit" name="LOGIN" value="ログイン"> <input
 			type="reset" name="LESET" value="リセット">
-
+	</form>
 </body>
 </html>
