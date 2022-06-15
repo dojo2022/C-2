@@ -14,7 +14,7 @@
 新規登録
 
 
-<!-- <form method="POST" action="/coordinator/LoginServlet" id="form"> -->
+ <form method="POST" action="/coordinator/LoginServlet" id="form">
 	<table>
 		<tr>
 			<td>名前</td>
@@ -35,6 +35,7 @@
 
 	</table>
 	<input type="submit" name="REGIST" value="登録">
+</form>
 	<a href="/coordinator/LoginServlet">ログイン画面に戻る</a>
 </body>
 
