@@ -7,8 +7,8 @@ public class Item {
 	int pattern;
 	int rain;
 	int wind;
-	int photo;
-	public Item(int id, String userId, int partsCode, int pattern, int rain, int wind, int photo) {
+	String photo;
+	public Item(int id, String userId, int partsCode, int pattern, int rain, int wind, String photo) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -19,7 +19,7 @@ public class Item {
 		this.photo = photo;
 	}
 	public Item() {
-		this(-10000, null, -10000, -10000, -10000, -10000, -10000);
+		this(-10000, null, -10000, -10000, -10000, -10000, null);
 	}
 	public int getId() {
 		return id;
@@ -57,10 +57,10 @@ public class Item {
 	public void setWind(int wind) {
 		this.wind = wind;
 	}
-	public int getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(int photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
