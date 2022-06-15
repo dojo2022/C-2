@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>itemSearch</title>
 <link rel="stylesheet" href="/coordinator/css/itemSearch.css">
+<link rel="stylesheet" href="/coordinator/css/common.css">
+<script src="js/itemSearch.js"></script>
+<script src="js/common.js"></script>
 </head>
 <body>
 検索

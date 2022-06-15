@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/coordinator/css/userRegist.css">
+<link rel="stylesheet" href="/coordinator/css/common.css">
+<script src="js/userRegist.js"></script>
+<script src="js/common.js"></script>
 </head>
 <body>
 新規登録

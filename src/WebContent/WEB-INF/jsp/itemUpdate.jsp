@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/coordinator/css/itemUpdate.css">
-
+<link rel="stylesheet" href="/coordinator/css/common.css">
+<script src="js/itemUpdate.js"></script>
+<script src="js/common.js"></script>
 </head>
 <body>
 登録
@@ -26,7 +28,7 @@
 			type="submit" name="DELETE" value="削除">
 <!-- </form> -->
 
-<script src="itemUpdate.js"></script>
+
 </body>
 
 
