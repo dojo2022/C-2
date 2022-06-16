@@ -40,24 +40,31 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("PASSWORD");
 
 		// ログイン処理を行う
-				UserDAO iDao = new UserDAO();
-				if (iDao.isLoginOK(new User(id, null, password))) { // ログイン成功
-					// セッションスコープにIDを格納する
-					HttpSession session = request.getSession();
-					session.setAttribute("id", new User(id, null, null));
+		UserDAO iDao = new UserDAO();
+		if (iDao.isLoginOK(new User(id, null, password))) { // ログイン成功
+			// セッションスコープにIDを格納する
+			HttpSession session = request.getSession();
+			session.setAttribute("id", new User(id, null, null));
 
-					// メニューサーブレットにリダイレクトする
-					response.sendRedirect("/coordinator/HomeServlet");
-				} else {
+			// メニューサーブレットにリダイレクトする
+			response.sendRedirect("/coordinator/HomeServlet");
+		} else {
+
+			//リクエストスコープにログインが失敗した事を伝えるメッセージを格納する。
+			int aaa = 10;			//基本型
+			Integer bbb = 10;		//オブジェクト型
+
+			//ログイン画面用のjspにフォワードする。
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+			dispatcher.forward(request, response);
 
 
-
-					/*// ログイン失敗
+			/*// ログイン失敗
 					// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
 					request.setAttribute("result",
 							new Result("ログイン失敗！", "IDまたはPWに間違いがあります。", "/coordinator/LoginServlet"));
-*/
-				}
+			 */
+		}
 	}
 
 }

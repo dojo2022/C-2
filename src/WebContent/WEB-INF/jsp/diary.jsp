@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>DIARY</title>
 <link rel="stylesheet" href="/coordinator/css/diary.css">
-
+<link rel="stylesheet" href="/coordinator/css/common.css">
+<script src="js/diary.js"></script>
+<script src="js/common.js"></script>
 </head>
 <body>
 diary
