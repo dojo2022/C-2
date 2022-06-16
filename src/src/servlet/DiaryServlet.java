@@ -36,6 +36,8 @@ public class DiaryServlet extends HttpServlet {
 		String startDate = request.getParameter("start_date");
 		String endDate = request.getParameter("end_date");
 
+		//今取ってきた始まりの日と終わりの日をdaoに渡して日記のリストが返される。それをスコープに入れる
+
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");
 		dispatcher.forward(request, response);
