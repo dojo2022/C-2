@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>HOME</title>
 <link rel="stylesheet" href="/coordinator/css/home.css">
+<link rel="stylesheet" href="/coordinator/css/common.css">
+<script src="js/home.js"></script>
+<script src="js/common.js"></script>
 </head>
 <body>
 

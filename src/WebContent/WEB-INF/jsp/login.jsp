@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>LOGIN</title>
 <link rel="stylesheet" type="text/css" href="/coordinator/css/login.css">
+<link rel="stylesheet" href="/coordinator/css/common.css">
+<script src="js/login.js"></script>
+<script src="js/common.js"></script>
 </head>
 <body>
 ログイン
