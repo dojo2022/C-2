@@ -15,6 +15,7 @@ public class DiaryDAO {
 
 	//日記を取ってくるためのメソッド
 
+	//★selectDiaryのメソッド、引数↓にデータベースの検索条件「？」にセットする値の変数を定義しましょう。
 	public List<Diary> selectDiary() {
 		Connection conn = null;
 		List<Diary> diaryList = new ArrayList<Diary>();
@@ -34,6 +35,12 @@ public class DiaryDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
+			//★ここでセットする値は、基本的にメソッドの引数で指定された値を設定しましょう。
+			//	そうすることで、DiaryDaoのselectDiaryメソッドを呼び出す際に、検索条件の値が変更出来るようになります。
+
+			//	1:表示したいユーザーIDを設定
+			//	2:画面に表示したい日記日付の開始日
+			//	3:画面に表示したい日記日付の終了日
 			pStmt.setString(1, id);
 			pStmt.setString(2, String.valueOf(parts_code)); //pStmt.setStringはString型しか受け付けないので、int型のparts_codeをString型に変換 */
 
@@ -44,9 +51,11 @@ public class DiaryDAO {
 
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
-				Diary diary = new Diary(
+				Diary diary = new Diary();
+				//★diary.setUserId(rs.getString(""));
+				//	…
+				//	SQLで取得したデータを全部diaryオブジェクトに格納
 
-				);
 				diaryList.add(diary);
 			}
 		}

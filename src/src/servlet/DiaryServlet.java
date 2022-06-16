@@ -38,6 +38,12 @@ public class DiaryServlet extends HttpServlet {
 
 		//今取ってきた始まりの日と終わりの日をdaoに渡して日記のリストが返される。それをスコープに入れる
 
+		//★↑日付のみが条件だと、「誰の」日記か判定出来ないのでユーザーID情報も必要ですね！
+		//	今回のシステムだと、セッションスコープにユーザー情報が入る事になるので、そこからユーザーIDを取り出してDaoに渡しましょう！
+
+
+
+
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");
 		dispatcher.forward(request, response);

@@ -22,11 +22,11 @@ public class ItemSearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-				HttpSession session = request.getSession();
-				if (session.getAttribute("id") == null) {
-					response.sendRedirect("/coordinator/LoginServlet");
-					return;
-				}
+//				HttpSession session = request.getSession();
+//				if (session.getAttribute("id") == null) {
+//					response.sendRedirect("/coordinator/LoginServlet");
+//					return;
+//				}
 
 				// 検索ページにフォワードする
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearch.jsp");
@@ -48,13 +48,13 @@ public class ItemSearchServlet extends HttpServlet {
 
 				// リクエストパラメータを取得する　改造項目数
 				request.setCharacterEncoding("UTF-8");
-				String  = request.getParameter("");
-				String  = request.getParameter("");
-				String  = request.getParameter("");
-				String  = request.getParameter("");
-				String  = request.getParameter("");
-				String  = request.getParameter("");
-				String  = request.getParameter("");
+//				String  = request.getParameter("");
+//				String  = request.getParameter("");
+//				String  = request.getParameter("");
+//				String  = request.getParameter("");
+//				String  = request.getParameter("");
+//				String  = request.getParameter("");
+//				String  = request.getParameter("");
 
 
 	}
