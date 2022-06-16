@@ -26,6 +26,13 @@ public class ItemDAO {
 	アイテム検索ページの一覧検索ボタンを押した時などに使います。
 	アイテムが一つもない場合は空のList<Item>が戻ります。
 	*/
+
+	/**
+	 *
+	 * @param id			：ユーザid
+	 * @param parts_code	：パーツコード
+	 * @return				：指定したいユーザー、パーツコードのアイテム一覧
+	 */
 	public List<Item> searchParts(String id, int parts_code){
 		Connection conn = null;
 		//戻り値にするアイテムのリストを用意
