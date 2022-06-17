@@ -64,13 +64,13 @@ public class ItemDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				Item item = new Item(
-						Integer.parseInt(rs.getString("ID")),
-						rs.getString("USER_ID"),
-						Integer.parseInt(rs.getString("PARTS_CODE")),
-						Integer.parseInt(rs.getString("PATTERN")),
-						Integer.parseInt(rs.getString("RAIN")),
-						Integer.parseInt(rs.getString("WIND")),
-						rs.getString("PHOTO"));
+					Integer.parseInt(rs.getString("ID")),
+					rs.getString("USER_ID"),
+					Integer.parseInt(rs.getString("PARTS_CODE")),
+					Integer.parseInt(rs.getString("PATTERN")),
+					Integer.parseInt(rs.getString("RAIN")),
+					Integer.parseInt(rs.getString("WIND")),
+					rs.getString("PHOTO"));
 				itemList.add(item);
 			}
 		} catch (SQLException e) {
@@ -94,4 +94,83 @@ public class ItemDAO {
 		// 結果を返す
 		return itemList;
 	}
+
+// 引数itemで指定されたレコードを登録し、成功したらtrueを返す
+public boolean insert(Item item) {
+	Connection conn = null;
+	boolean result = false;
+
+	try {
+		// JDBCドライバを読み込む
+		Class.forName("org.h2.Driver");
+
+		// データベースに接続する
+		conn = DriverManager.getConnection(dbURL, "sa", "");
+
+		// item体ブルにインサート
+		// SQL文を準備する
+		String sql = "insert into Item (id, user_id, parts_code, pattern, rain, wind, photo) values (?, ?, ?, ?, ?, ?, ?)";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+
+		// SQL文を完成させる
+		pStmt.setString(1, String.valueOf(item.getId));
+
+		pStmt.setString(2, item.getUserId());
+
+		pStmt.setString(3, item.getPartsCode());
+
+		pStmt.setString(4, item.getPattern());
+
+		pStmt.setString(5, item.getRain());
+
+		pStmt.setString(6, item.getWind());
+
+		pStmt.setString(7, item.getPhoto());
+
+		// SQL文を実行する
+		if (pStmt.executeUpdate() == 1) {
+			result = true;
+		}
+	}
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	}
+	finally {
+		// データベースを切断
+		if (conn != null) {
+			try {
+				conn.close();
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	// item体ブルにインサートここまで
+
+	//アイテム季節設定マスターにインサート
+	// insert into Item_season (item_id, code, flag) values (?, 1, 1);"
+	// insert into Item_season (item_id, code, flag) values (?, 2, 1);"
+	// insert into Item_season (item_id, code, flag) values (?, 3, 0);"
+	// insert into Item_season (item_id, code, flag) values (?, 4, 0);"
+
+	//アイテム色設定マスターにインサート
+	// insert into Item_color (item_id, code, flag) values (?, 1, 1);"
+	// insert into Item_color (item_id, code, flag) values (?, 2, 0);"
+	// insert into Item_color (item_id, code, flag) values (?, 3, 0);"
+	// insert into Item_color (item_id, code, flag) values (?, 4, 0);"
+	// insert into Item_color (item_id, code, flag) values (?, 5, 1);"
+	// insert into Item_color (item_id, code, flag) values (?, 6, 0);"
+	// insert into Item_color (item_id, code, flag) values (?, 7, 0);"
+	// insert into Item_color (item_id, code, flag) values (?, 8, 0);"
+	// insert into Item_color (item_id, code, flag) values (?, 9, 0);"
+
+
+
+	// 結果を返す
+	return result;
+}
 }

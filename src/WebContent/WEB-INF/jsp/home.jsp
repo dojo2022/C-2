@@ -25,6 +25,11 @@
 </nav>
 <h3>Recommends and Forecast</h3>
 <h3>History</h3>
+<!-- 過去3日分の服 -->
+<c:forEach var="e" items="${photo}">
+${e.date}
+${e.photo}
+</c:forEach>
 <a href="/coordinator/DiaryServlet">ViewMore</a>
 <h3>Forecast</h3>
 </body>
