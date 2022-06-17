@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 <script src="js/common.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
 
 <div class="wrapper">
     <h1 id="logo">
@@ -56,6 +58,12 @@
 
 
 <!--
+=======
+<div class="wrapper">
+ログイン
+
+<!-- もしログイン失敗でこのページにフォワードされてきてたら、ログイン失敗と出す。 -->
+>>>>>>> cee739031f253d04beb6e7c6b69b3375fb77410d
 	<c:if test="${result.result == false}">
 		<p>ログイン失敗</p>
 	</c:if>
@@ -76,4 +84,10 @@
 			type="reset" name="LESET" value="リセット"><br>
 			<a href="/coordinator/UserRegistServlet" id="userRegistBtn">初めての方はこちら</a>
 	</form>
+<<<<<<< HEAD
     -->
+=======
+	</div>
+</body>
+</html>
+>>>>>>> cee739031f253d04beb6e7c6b69b3375fb77410d

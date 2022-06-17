@@ -12,7 +12,7 @@ public abstract class ItemDAOTest {
 		// select()のテスト
 		System.out.println("---------- select()のテスト ----------");
 		//List<Item> itemList = dao.searchParts(new Item(0 , "", 0, 0, 0, 0, ""));
-		List<Item> itemList = dao.searchParts("aaaaa", 6);
+		List<Item> itemList = dao.searchParts("aaaaa", 1);
 		for (Item item : itemList) {
 			System.out.println(item.getId());
 			System.out.println(item.getUserId());

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import model.Result;
 import model.User;
 
 
@@ -36,24 +37,25 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+
 		String id = request.getParameter("ID");
-		String password = request.getParameter("PASSWORD");
+		String password = request.getParameter("PW");
+
+		System.out.println("login dopost pw:"+password);
 
 		// ログイン処理を行う
 		UserDAO iDao = new UserDAO();
 		if (iDao.isLoginOK(new User(id, null, password))) { // ログイン成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			session.setAttribute("id", new User(id, null, null));
+			session.setAttribute("id", new User(id, null, password));
 
 			// メニューサーブレットにリダイレクトする
 			response.sendRedirect("/coordinator/HomeServlet");
 		} else {
 
-			//リクエストスコープにログインが失敗した事を伝えるメッセージを格納する。
-			int aaa = 10;			//基本型
-			Integer bbb = 10;		//オブジェクト型
-
+			// リクエストスコープに結果
+						request.setAttribute("result", new Result(false));
 			//ログイン画面用のjspにフォワードする。
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 			dispatcher.forward(request, response);
