@@ -1,6 +1,54 @@
 @charset "UTF-8";
-.nav li {
+body {
+	margin: 0 auto 0 auto;
+	padding: 0 auto 0 auto;
+	color: black;
+	font-size: 16px;
+}
+
+.wrapper {
+  margin: 0 auto 0 auto;
+  width: max;
+}
+
+h1 {
+  text-align: center;
+	font-size: 18px;
+	margin-top: 20px 0px 20px 0px;
+	padding-top: 10px 10px 10px 10px;
+}
+
+#nav {
+  margin: 0 0 0 0;
+  padding: 15px 20px 12px 20px;
+}
+#nav {
+  text-align: center;
+}
+#nav li {
 	display: inline;
 	list-style-type: none;
-	padding-right: 30px;
+	padding-right: 20px;
+}
+
+div#table {
+  margin: 0px auto;
+}
+
+table#list th, table#list td {
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+  border-bottom-color: black;
+  padding: 4px 16px 4px 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#diarycomment {
+    border: 2px solid #f7ad4d;
+    padding: 50px;
+}
+
+.data_row{
+  height: 150px;
 }
