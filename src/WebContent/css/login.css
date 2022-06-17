@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
 #logo {
   text-align: center;
 }
@@ -27,11 +26,10 @@ form {
     padding: 6px;
     color: black;
   }
-=======
+
 
 .wrapper {
 	margin: 0px auto 0px auto; /* 中央揃え */
 	width: 1000px; /* 幅を固定 */
 
 }
->>>>>>> cee739031f253d04beb6e7c6b69b3375fb77410d
