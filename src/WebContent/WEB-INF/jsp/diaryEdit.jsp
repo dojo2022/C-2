@@ -12,7 +12,10 @@
 <script src="js/common.js"></script>
 </head>
 <body>
-日記の編集
+<div class="wrapper">
+  <h1 id="logo">
+   <img src="\test\logo.PNG" alt="coordinator">
+   </h1>
 <nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -22,11 +25,24 @@
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
 	</nav>
-	<form method="POST" action="/coordinator/DiaryServlet">
-	<input type="submit" name="update" value="更新">
-	</form>
-	<a href="/coordinator/DiaryServlet">日記画面に戻る</a>
 
+<form method="POST" action="/coordinator/DiaryServlet">
+  <img src="\dojo6\src\WebContent\photo\aaaaa5.png">
+  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
+  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
+  <br>
+  画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
+		<canvas id="preview" style="max-width:200px;"></canvas>
+    <br>
+  <textarea></textarea>
+  <button type="reset">リセット</button>
+  <br>
+  <input type="submit" name="update" value="更新">
+</form>
+<a href="/coordinator/DiaryServlet">日記画面に戻る</a>
+
+</body>
+</html>
 
 </body>
 </html>

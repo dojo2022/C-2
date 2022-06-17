@@ -11,8 +11,54 @@
 <script src="js/common.js"></script>
 </head>
 <body>
-ログイン
-  <a href="/coordinator/UserRegistServlet">新規会員登録はこちら</a>
+
+<div class="wrapper">
+    <h1 id="logo">
+        <img src="\test\logo.PNG" alt="coordinator">
+        </h1>
+        <h2>ログイン</h2>
+        <form id="login_form" method="GET" action="index.html">
+          <div id ="table">
+            <table id="list" align="center">
+            <tr>
+              <td>
+                <label>ユーザーID<br>
+                <input type="text" name="user_id">
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>パスワード<br>
+                <input type="password" name="password">
+                </label>
+              </td>
+            <tr>
+            <tr>
+              <td colspan="2">
+                <input type="submit" name="submit" value="ログイン">
+                <input type="reset" name="reset" value="リセット">
+                <span id="error_message"></span>
+              <td>
+            </tr>
+            <tr>
+                <td>
+                <a href="/coordinator/UserRegistServlet" id="userRegistBtn">初めての方はこちら</a>
+                </td>
+            </tr>
+          </table>
+        </form>
+        <!-- メイン（ここまで） -->
+
+
+      </div>
+
+
+
+<!--
+	<c:if test="${result.result == false}">
+		<p>ログイン失敗</p>
+	</c:if>
 
 	<form method="POST" action="/coordinator/LoginServlet" id="form">
 		<table>
@@ -27,7 +73,7 @@
 
 		</table>
 		<input type="submit" name="LOGIN" value="ログイン"> <input
-			type="reset" name="LESET" value="リセット">
+			type="reset" name="LESET" value="リセット"><br>
+			<a href="/coordinator/UserRegistServlet" id="userRegistBtn">初めての方はこちら</a>
 	</form>
-</body>
-</html>
+    -->
