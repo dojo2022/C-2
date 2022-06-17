@@ -27,12 +27,13 @@ public class UserDAO {
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
-			String sql = "select count(*) from IDPW where ID = ? and PW = ?";
+			String sql = "select count(*) from USER where ID = ? and PASSWORD = ?";
 
 			// SQL文を完成させる
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, user.getId());
 			pStmt.setString(2,user.getPassword());
+			System.out.println("select count(*) from USER where ID = " +user.getId()+" and PASSWORD = " + user.getPassword());
 
 
 			// SELECT文を実行し、結果表を取得する
@@ -41,7 +42,9 @@ public class UserDAO {
 
 			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
 			rs.next();
-			if (rs.getInt("count(*)") == 1) {
+			int tmp = rs.getInt("count(*)");
+			System.out.println(tmp);
+			if (tmp == 1) {
 				loginResult = true;
 			}
 		}

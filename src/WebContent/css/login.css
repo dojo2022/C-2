@@ -1,2 +1,8 @@
 @charset "UTF-8";
 
+
+.wrapper {
+	margin: 0px auto 0px auto; /* 中央揃え */
+	width: 1000px; /* 幅を固定 */
+
+}
