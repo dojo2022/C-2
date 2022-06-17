@@ -1,6 +1,5 @@
 package servlet;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,11 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import model.JsonUserBeans;
-
+import dao.WeatherForecastDAO;
 
 @WebServlet("/AjaxSampleServlet")
 public class AjaxSampleServlet extends HttpServlet {
@@ -21,7 +16,7 @@ public class AjaxSampleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//ajaxInOut.jspへフォワードするだけ
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ajaxInOut.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/weatherForecast.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -32,17 +27,47 @@ public class AjaxSampleServlet extends HttpServlet {
 		response.setHeader("Cache-Control", "nocache");
 		response.setCharacterEncoding("utf-8");
 
+
 		// 送信されたデータの取得
-		String data1 = request.getParameter("data1");
-		String data2 = request.getParameter("data2");
-		String data3 = request.getParameter("data3");
-
+		int itemQuantity = Integer.parseInt(request.getParameter("itemQuantity"));
+		//送られてきたjsonの時間を配列に
+		String[] time = new String[itemQuantity];
+		String[] temperature = new String[itemQuantity];
+		String[] rain = new String[itemQuantity];
+		String[] windspeed = new String[itemQuantity];
+		String[] weathercode = new String[itemQuantity];
+		for (int i = 0; i < itemQuantity; i++) {
+			time[i] = request.getParameter("time" + i);
+			temperature[i] = request.getParameter("temperature" + i);
+			rain[i] = request.getParameter("rain" + i);
+			windspeed[i] = request.getParameter("windspeed" + i);
+			weathercode[i] = request.getParameter("weathercode" + i);
+		}
+		//daoに渡してデータベースに天気予報を登録してもらう
+		WeatherForecastDAO wDAO = new WeatherForecastDAO();
+		boolean result = wDAO.setWeatherForecastDB(time, temperature, rain, windspeed, weathercode);
+		System.out.println("DBset:" + result);
 		// 一応表示
-		System.out.println("AjaxSampleServlet doPost");
-		System.out.println(data1);
-		System.out.println(data2);
-		System.out.println(data3);
+		/*
+		for (int i = 0; i < time.length; i++) {
+			System.out.println(time[i]);
+		}
+		for (int i = 0; i < temperature.length; i++) {
+			System.out.println(temperature[i]);
+		}
+		for (int i = 0; i < rain.length; i++) {
+			System.out.println(rain[i]);
+		}
+		for (int i = 0; i < windspeed.length; i++) {
+			System.out.println(windspeed[i]);
+		}
+		for (int i = 0; i < weathercode.length; i++) {
+			System.out.println(weathercode[i]);
+		}
+		*/
 
+
+		/*
 		//ArrayListをインスタンス化
 		ArrayList<JsonUserBeans> list = new ArrayList<>();
 
@@ -78,6 +103,8 @@ public class AjaxSampleServlet extends HttpServlet {
 //		out.print(data1+","+data2+","+data3);
 //
 //        return;
+ * */
+
 
 	}
 
