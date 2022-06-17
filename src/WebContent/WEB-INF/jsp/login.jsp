@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,13 @@
 <script src="js/common.js"></script>
 </head>
 <body>
+<div class="wrapper">
 ログイン
-  <a href="/coordinator/UserRegistServlet">新規会員登録はこちら</a>
+
+<!-- もしログイン失敗でこのページにフォワードされてきてたら、ログイン失敗と出す。 -->
+	<c:if test="${result.result == false}">
+		<p>ログイン失敗</p>
+	</c:if>
 
 	<form method="POST" action="/coordinator/LoginServlet" id="form">
 		<table>
@@ -27,7 +33,9 @@
 
 		</table>
 		<input type="submit" name="LOGIN" value="ログイン"> <input
-			type="reset" name="LESET" value="リセット">
+			type="reset" name="LESET" value="リセット"><br>
+			<a href="/coordinator/UserRegistServlet" id="userRegistBtn">初めての方はこちら</a>
 	</form>
+	</div>
 </body>
 </html>
