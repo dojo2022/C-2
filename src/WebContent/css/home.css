@@ -1,7 +1,93 @@
 @charset "UTF-8";
 
-.nav li {
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*.nav li {
 	display: inline;
 	list-style-type: none;
-	padding-right: 30px;
+    padding: 20px;
+}
+
+.nav a {
+    color: black;
+}
+
+.nav a:hover {
+    color: grey;
+}*/
+
+h3 {
+    font-size: 30px;
+}
+
+.wrapper div {
+    float: left;
+}
+.recommends, .oneday_weather {
+    display: inline-block;
+    width: 50%;
+}
+
+h3 {
+    clear: both;
+}
+
+
+
+#jk_photo{
+    position: relative;
+    top: -10px;
+    left: 300px;
+}
+
+#tops_photo{
+    position: relative;
+    top: 100px;
+    left: -115px;
+}
+
+#botoms_photo{
+    position: relative;
+    top: 280px;
+    left: -120px;
+}
+
+#shoes_photo{
+    position: relative;
+    top: 0px;
+    left: 80px;
+}
+
+#outer_photo{
+    position: relative;
+    top: -180px;
+    left: 280px;
+}
+
+.hirtory_photo {
+    padding: 20px;
+}
+
+.max {
+    font-size: 25px;
+    color: red;
+    text-align: center;
+}
+
+.min {
+    font-size: 25px;
+    color: blue;
+    text-align: center;
+}
+
+.wind{
+    font-size: 25px;
+    text-align: center;
+}
+
+.kion {
+    text-align: center;
 }
