@@ -36,14 +36,14 @@
               <div class="overSelect"></div>
             </div>
             <div id="checkboxes">
-              <label for="one">
-                <input type="checkbox" id="one" />春</label>
-              <label for="two">
-                <input type="checkbox" id="two" />夏</label>
-              <label for="three">
-                <input type="checkbox" id="three" />秋</label>
-              <label for="four">
-                <input type="checkbox" id="four" />冬</label>
+              <label>
+                <input type="checkbox" name="spring" />春</label>
+              <label>
+                <input type="checkbox" name="summer" />夏</label>
+              <label>
+                <input type="checkbox" name="autumn" />秋</label>
+              <label>
+                <input type="checkbox" name="winter" />冬</label>
             </div>
           </div>
         </td>
@@ -70,51 +70,51 @@
               <div class="overSelect"></div>
             </div>
             <div id="checkboxeses">
-              <label for="five">
-                <input type="checkbox" id="five" />白</label>
-              <label for="six">
-                <input type="checkbox" id="six" />黒</label>
-              <label for="seven">
-                <input type="checkbox" id="seven" />グレー</label>
-              <label for="eight">
-                <input type="checkbox" id="eight" />ベージュ</label>
-              <label for="nine">
-                <input type="checkbox" id="nine" />赤系</label>
-              <label for="ten">
-                <input type="checkbox" id="ten" />青系</label>
-              <label for="eleven">
-                <input type="checkbox" id="eleven" />緑系</label>
-              <label for="twelve">
-                <input type="checkbox" id="twelve" />黄系</label>
-              <label for="thirteen">
-                <input type="checkbox" id="thirteen" />その他</label>
+              <label>
+                <input type="checkbox" name="white" />白</label>
+              <label>
+                <input type="checkbox" name="black" />黒</label>
+              <label>
+                <input type="checkbox" name="grey" />グレー</label>
+              <label>
+                <input type="checkbox" name="beige" />ベージュ</label>
+              <label>
+                <input type="checkbox" name="red" />赤系</label>
+              <label>
+                <input type="checkbox" name="blue" />青系</label>
+              <label>
+                <input type="checkbox" name="green" />緑系</label>
+              <label>
+                <input type="checkbox" name="yellow" />黄系</label>
+              <label>
+                <input type="checkbox" name="other" />その他</label>
             </div>
           </div>
         </td>
         <td>
           <label>柄<br>
-          <input type="radio" name="post_name">あり
+          <input type="radio" name="pattern">あり
           </label>
           <label>
-          <input type="radio" name="post_name">なし
+          <input type="radio" name="pattern">なし
           </label>
         </td>
       </tr>
       <tr>
         <td>
           <label>雨<br>
-          <input type="radio" name="full_name">可
+          <input type="radio" name="rain">可
           </label>
           <label>
-          <input type="radio" name="full_name">不可
+          <input type="radio" name="rain">不可
           </label>
         </td>
         <td>
           <label>風<br>
-          <input type="radio" name="tel">可
+          <input type="radio" name="wind">可
           </label>
           <label>
-          <input type="radio" name="tel">不可
+          <input type="radio" name="wind">不可
           </label>
         </td>
       </tr>
