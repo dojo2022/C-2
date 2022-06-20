@@ -39,7 +39,7 @@
     <div class="oneday_weather">
     <table>
         <th>Morning</th><th>Afternoon</th><th>Evening</th>
-<tr>
+		<tr>
 		<c:set value = "1" var="count"></c:set>
 		<c:forEach var="weather_fourhour" items="${oneDayWeather}">
         <td>
@@ -63,7 +63,7 @@
         </td>
         <c:set value="${count + 1}" var="count"></c:set>
         </c:forEach>
-        <c:out value="${count}"></c:out>
+        <c:remove var="count" value="${count}"/>
 
         <tr class="max">
         <c:forEach var="weather_fourhour" items="${oneDayWeather}">
