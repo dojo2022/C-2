@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 //import java.sql.Date;
 import java.util.List;
@@ -147,5 +149,55 @@ public class DiaryDAO {
 		// 結果を返す
 		return diaryList;
 	}
+	public List<Diary> search3Photos(String id) {
+	    Connection conn = null;
+	    List<Diary> diaryList = new ArrayList<Diary>();
+	    try {
+	      // JDBCドライバを読み込む
+	      Class.forName("org.h2.Driver");
+	      // データベースに接続する
+	      conn = DriverManager.getConnection(dbURL , "sa", "");
+	      // SQL文を準備する
+	      String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '¥photo¥no_image.png' ORDER BY date DESC LIMIT 3";
+	      PreparedStatement pStmt = conn.prepareStatement(sql);
+	      // SQL文を完成させる
+	      pStmt.setString(1, id);
+	      // SQL文を実行し、結果表を取得する
+	      //System.out.println("SQL文を実行し、結果表を取得する");
+	      ResultSet rs = pStmt.executeQuery();
+	      // 結果表をコレクションにコピーする
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	      while (rs.next()) {
+	    	  diaryList.add(new Diary(0, sdf.parse(rs.getString("DATE")), null, null, null, null, rs.getString("PHOTO"), 0,0,0,0,0)
+	    	  );
+	      }
+	    }
+	    catch (SQLException e) {
+	      e.printStackTrace();
+	      diaryList = null;
+	    }
+	    catch (ParseException e) {
+		      e.printStackTrace();
+		      diaryList = null;
+		}
+	    catch (ClassNotFoundException e) {
+	      e.printStackTrace();
+	      diaryList = null;
+	    }
+	    finally {
+	      // データベースを切断
+	      if (conn != null) {
+	        try {
+	          conn.close();
+	        }
+	        catch (SQLException e) {
+	          e.printStackTrace();
+	          diaryList = null;
+	        }
+	      }
+	    }
+	    // 結果を返す
+	    return diaryList;
+	  }
 
 }
