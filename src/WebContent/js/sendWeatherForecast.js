@@ -39,11 +39,11 @@ function goAjax(json){
     timeStamp: new Date().getTime()
     //非同期通信が成功したときの処理
   }).done(function(data) {
-    alert("成功1");
+    //alert("成功1");
     })
     //非同期通信が失敗したときの処理
     .fail(function() {
-    alert("失敗！");
+    //alert("失敗！");
     });
 }
 //APIから取ったjsonをサーブレットに渡す形に変更
