@@ -4,6 +4,8 @@ import java.util.Date;
 public class Diary {
 	int id;
 	Date date;
+	String startDate;
+	String endDate;
 	String userId;
 	String note;
 	String photo;
@@ -12,11 +14,13 @@ public class Diary {
 	double minTemperature;
 	double windSpeed;
 	double amountOfRain;
-	public Diary(int id, Date date, String userId, String note, String photo, int weatherCode, double maxTemperature,
+	public Diary(int id, Date date, String startDate, String endDate, String userId, String note, String photo, int weatherCode, double maxTemperature,
 			double minTemperature, double windSpeed, double amountOfRain) {
 		super();
 		this.id = id;
 		this.date = date;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.userId = userId;
 		this.note = note;
 		this.photo = photo;
@@ -27,7 +31,7 @@ public class Diary {
 		this.amountOfRain = amountOfRain;
 	}
 	public Diary() {
-		this(-10000, null, null, null, null, -10000, -10000.0, -10000.0, -10000.0, -10000.0);
+		this(-10000, null, null, null, null, null, null, -10000, -10000.0, -10000.0, -10000.0, -10000.0);
 	}
 	public int getId() {
 		return id;
@@ -40,6 +44,18 @@ public class Diary {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public Date getStartDate() {
+		return date;
+	}
+	public void setStartDate(String StartDate) {
+		this.startDate = StartDate;
+	}
+	public Date getEndDate() {
+		return date;
+	}
+	public void setEndDate(String EndDate) {
+		this.endDate = EndDate;
 	}
 	public String getUserId() {
 		return userId;

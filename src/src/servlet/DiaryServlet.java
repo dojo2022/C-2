@@ -32,9 +32,11 @@ public class DiaryServlet extends HttpServlet {
 
 
 		// リクエストパラメータを取得する
+		//☆のとここれであってる？？
 		request.setCharacterEncoding("UTF-8");
-		String startDate = request.getParameter("start_date");
-		String endDate = request.getParameter("end_date");
+		String startDate = request.getParameter("startDate");
+		String endDate = request.getParameter("endDate");
+		String userId = request.getParameter("userId");
 
 		//今取ってきた始まりの日と終わりの日をdaoに渡して日記のリストが返される。それをスコープに入れる
 
