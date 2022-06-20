@@ -45,10 +45,10 @@ public class LoginServlet extends HttpServlet {
 
 		// ログイン処理を行う
 		UserDAO iDao = new UserDAO();
-		if (iDao.isLoginOK(new User(id, null, password))) { // ログイン成功
+		if (iDao.isLoginOK(new User(id, null, password,null))) { // ログイン成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			session.setAttribute("id", new User(id, null, password));
+			session.setAttribute("id", new User(id, null, password,null));
 
 			// メニューサーブレットにリダイレクトする
 			response.sendRedirect("/coordinator/HomeServlet");
