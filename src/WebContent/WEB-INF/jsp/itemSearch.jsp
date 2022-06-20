@@ -37,28 +37,40 @@
                                 <div class="overSelect"></div>
                             </div>
                             <div id="checkboxes">
-                                <label for="one">
-                                    <input type="checkbox" id="one" />春</label>
-                                <label for="two">
-                                    <input type="checkbox" id="two" />夏</label>
-                                <label for="three">
-                                    <input type="checkbox" id="three" />秋</label>
-                                <label for="four">
-                                    <input type="checkbox" id="four" />冬</label>
+                                <label>
+                                    <input type="checkbox" name="spring">春</label>
+                                <label>
+                                    <input type="checkbox" name="summer">夏</label>
+                                <label>
+                                    <input type="checkbox" name="autumn">秋</label>
+                                <label>
+                                    <input type="checkbox" name="winter">冬</label>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <label>パーツ<br>
+                    <div class="multiselect">
+                        <div class="selectBox" onclick="showCheckboxeseses()">
                             <select>
-                                <option value="outer">アウター</option>
-                                <option value="jacket">ジャケット</option>
-                                <option value="tops">トップス</option>
-                                <option value="skirt">スカート</option>
-                                <option value="pants">パンツ</option>
-                                <option value="shoes">シューズ</option>
+                            	<option>パーツ</option>
                             </select>
-                        </label>
+                            <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxeseses">
+                            <label>
+                                <input type="checkbox" name="outer">アウター</label>
+                            <label>
+                                <input type="checkbox" name="jacket">ジャケット</label>
+                            <label>
+                                <input type="checkbox" name="tops">トップス</label>
+                            <label>
+                                <input type="checkbox" name="skirt">スカート</label>
+                            <label>
+                                <input type="checkbox" name="pants">パンツ</label>
+                            <label>
+                                <input type="checkbox" name="shoes">シューズ</label>
+                        </div>
+                    </div>
                     </td>
                 </tr>
                 <tr>
@@ -71,51 +83,51 @@
                                 <div class="overSelect"></div>
                             </div>
                             <div id="checkboxeses">
-                                <label for="five">
-                                    <input type="checkbox" id="five" />白</label>
-                                <label for="six">
-                                    <input type="checkbox" id="six" />黒</label>
-                                <label for="seven">
-                                    <input type="checkbox" id="seven" />グレー</label>
-                                <label for="eight">
-                                    <input type="checkbox" id="eight" />ベージュ</label>
-                                <label for="nine">
-                                    <input type="checkbox" id="nine" />赤系</label>
-                                <label for="ten">
-                                    <input type="checkbox" id="ten" />青系</label>
-                                <label for="eleven">
-                                    <input type="checkbox" id="eleven" />緑系</label>
-                                <label for="twelve">
-                                    <input type="checkbox" id="twelve" />黄系</label>
-                                <label for="thirteen">
-                                    <input type="checkbox" id="thirteen" />その他</label>
+                                <label>
+                                    <input type="checkbox" name="white">白</label>
+                                <label>
+                                    <input type="checkbox" name="black">黒</label>
+                                <label>
+                                    <input type="checkbox" name="grey">グレー</label>
+                                <label>
+                                    <input type="checkbox" name="beige">ベージュ</label>
+                                <label>
+                                    <input type="checkbox" name="red">赤系</label>
+                                <label>
+                                    <input type="checkbox" name="blue">青系</label>
+                                <label>
+                                    <input type="checkbox" name="green">緑系</label>
+                                <label>
+                                    <input type="checkbox" name="yellow">黄系</label>
+                                <label>
+                                    <input type="checkbox" name="other">その他</label>
                             </div>
                         </div>
                     </td>
                     <td>
                         <label>柄<br>
-                            <input type="radio" name="post_name">あり
+                            <input type="checkbox" name="pattern1">あり
                         </label>
                         <label>
-                            <input type="radio" name="post_name">なし
+                            <input type="checkbox" name="pattern0">なし
                         </label>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label>雨<br>
-                            <input type="radio" name="full_name">可
+                            <input type="checkbox" name="rain1">可
                         </label>
                         <label>
-                            <input type="radio" name="full_name">不可
+                            <input type="checkbox" name="rain0">不可
                         </label>
                     </td>
                     <td>
                         <label>風<br>
-                            <input type="radio" name="tel">可
+                            <input type="checkbox" name="wind1">可
                         </label>
                         <label>
-                            <input type="radio" name="tel">不可
+                            <input type="checkbox" name="wind0">不可
                         </label>
                     </td>
                 </tr>
@@ -346,9 +358,21 @@
 
         #checkboxeses label:hover {
             background-color: #1e90ff;
-
-
         }
+
+        #checkboxeseses {
+            display: none;
+            border: 1px #dadada solid;
+        }
+
+        #checkboxeseses label {
+            display: block;
+        }
+
+        #checkboxeseses label:hover {
+            background-color: #1e90ff;
+        }
+
 
         .list{
 	overflow: hidden;
@@ -396,6 +420,17 @@
                 expanded = false;
             }
         }
+        function showCheckboxeseses() {
+            var checkboxes = document.getElementById("checkboxeseses");
+            if (!expanded) {
+                checkboxes.style.display = "block";
+                expanded = true;
+            } else {
+                checkboxes.style.display = "none";
+                expanded = false;
+            }
+        }
+
     </script>
 
 </body>
