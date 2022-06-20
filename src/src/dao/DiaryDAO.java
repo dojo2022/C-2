@@ -42,24 +42,28 @@ public class DiaryDAO {
 			//	1:表示したいユーザーIDを設定
 			//	2:画面に表示したい日記日付の開始日
 			//	3:画面に表示したい日記日付の終了日
-			if (param.getUserId() != null) {
-				pStmt.setString(1, "%" + param.getUserId() + "%");
-			}
-			else {
-				pStmt.setString(1, "%");
-			}
-			if (param.getStartDate() != null) {
-				pStmt.setString(2, "%" + param.getStartDate() + "%");
-			}
-			else {
-				pStmt.setString(2, "%");
-			}
-			if (param.getEndDate() != null) {
-				pStmt.setString(3, "%" + param.getEndDate() + "%");
-			}
-			else {
-				pStmt.setString(3, "%");
-			}
+			pStmt.setString(1, param.getUserId());
+			pStmt.setString(2, param.getStartDate());
+			pStmt.setString(3, param.getEndDate());
+
+//			if (param.getUserId() != null) {
+//				pStmt.setString(1, "%" + param.getUserId() + "%");
+//			}
+//			else {
+//				pStmt.setString(1, "%");
+//			}
+//			if (param.getStartDate() != null) {
+//				pStmt.setString(2, "%" + param.getStartDate() + "%");
+//			}
+//			else {
+//				pStmt.setString(2, "%");
+//			}
+//			if (param.getEndDate() != null) {
+//				pStmt.setString(3, "%" + param.getEndDate() + "%");
+//			}
+//			else {
+//				pStmt.setString(3, "%");
+//			}
 			/*
 			if (param.getStartDate() != null) {
 				pStmt.setString(2,  String.valueOf(StartDate));
@@ -89,8 +93,8 @@ public class DiaryDAO {
 				diary.setId(Integer.parseInt(rs.getString("id")));
 				diary.setDate(rs.getDate("date"));
 				//rs.getDate("date"); //java.sql.Date型の日付データがかえってくる。→java.util.Date型に変換する
-				diary.setStartDate(rs.getString("startDate"));
-				diary.setEndDate(rs.getString("endDate"));
+//				diary.setStartDate(rs.getString("startDate"));
+//				diary.setEndDate(rs.getString("endDate"));
 				diary.setUserId(rs.getString("userId"));
 				diary.setNote(rs.getString("note"));
 				diary.setPhoto(rs.getString("photo"));

@@ -45,18 +45,21 @@ public class Diary {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Date getStartDate() {
-		return date;
+
+	public String getStartDate() {
+		return startDate;
 	}
 	public void setStartDate(String StartDate) {
 		this.startDate = StartDate;
 	}
-	public Date getEndDate() {
-		return date;
+
+	public String getEndDate() {
+		return endDate;
 	}
 	public void setEndDate(String EndDate) {
 		this.endDate = EndDate;
 	}
+	
 	public String getUserId() {
 		return userId;
 	}
