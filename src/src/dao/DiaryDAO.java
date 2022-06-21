@@ -97,14 +97,15 @@ public class DiaryDAO {
 				//rs.getDate("date"); //java.sql.Date型の日付データがかえってくる。→java.util.Date型に変換する
 //				diary.setStartDate(rs.getString("startDate"));
 //				diary.setEndDate(rs.getString("endDate"));
-				diary.setUserId(rs.getString("userId"));
+				String ret = rs.getString("user_Id");
+				diary.setUserId(ret);
 				diary.setNote(rs.getString("note"));
 				diary.setPhoto(rs.getString("photo"));
-				diary.setWeatherCode(Integer.parseInt(rs.getString("weatherCode")));
-				diary.setMaxTemperature(Double.parseDouble(rs.getString("maxTemperature")));
-				diary.setMinTemperature(Double.parseDouble(rs.getString("minTemperature")));
-				diary.setWindSpeed(Double.parseDouble(rs.getString("windSpeed")));
-				diary.setAmountOfRain(Double.parseDouble(rs.getString("amountOfRain")));
+				diary.setWeatherCode(Integer.parseInt(rs.getString("weather_Code")));
+				diary.setMaxTemperature(Double.parseDouble(rs.getString("max_Temperature")));
+				diary.setMinTemperature(Double.parseDouble(rs.getString("min_Temperature")));
+				diary.setWindSpeed(Double.parseDouble(rs.getString("wind_Speed")));
+				diary.setAmountOfRain(Double.parseDouble(rs.getString("amount_Of_Rain")));
 //				Diary diary = new Diary(
 //				//diary.setUserId(
 //						Integer.parseInt(rs.getString("id")),
