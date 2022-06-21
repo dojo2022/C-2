@@ -20,13 +20,19 @@ public class RegistInf {
 	String green;
 	String yellow;
 	String other;
-	String pattern;
-	String rain;
-	String wind;
+	String patternYES;
+	String patternNO;
+	String rainOK;
+	String rainNG;
+	String windOK;
+	String windNG;
+	String parts;
+
+
 	public RegistInf(String spring, String summer, String autumn, String winter, String outer, String jacket,
 			String tops, String skirt, String pants, String shoes, String white, String black, String grey,
-			String beige, String red, String blue, String green, String yellow, String other, String pattern,
-			String rain, String wind) {
+			String beige, String red, String blue, String green, String yellow, String other, String patternYES,
+			String patternNO, String rainOK, String rainNG, String windOK, String windNG, String parts) {
 		super();
 		this.spring = spring;
 		this.summer = summer;
@@ -47,13 +53,17 @@ public class RegistInf {
 		this.green = green;
 		this.yellow = yellow;
 		this.other = other;
-		this.pattern = pattern;
-		this.rain = rain;
-		this.wind = wind;
+		this.patternYES = patternYES;
+		this.patternNO = patternNO;
+		this.rainOK = rainOK;
+		this.rainNG = rainNG;
+		this.windOK = windOK;
+		this.windNG = windNG;
+		this.parts = parts;
 	}
 	public RegistInf() {
 		this(null, null, null, null, null, null, null, null, null, null, null,
-			  null, null, null, null, null, null, null, null, null, null, null);
+			  null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 	}
 	public String getSpring() {
 		return spring;
@@ -169,22 +179,47 @@ public class RegistInf {
 	public void setOther(String other) {
 		this.other = other;
 	}
-	public String getPattern() {
-		return pattern;
+	public String getPatternYES() {
+		return patternYES;
 	}
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
+	public void setPatternYES(String patternYES) {
+		this.patternYES = patternYES;
 	}
-	public String getRain() {
-		return rain;
+	public String getPatternNO() {
+		return patternNO;
 	}
-	public void setRain(String rain) {
-		this.rain = rain;
+	public void setPatternNO(String patternNO) {
+		this.patternNO = patternNO;
 	}
-	public String getWind() {
-		return wind;
+	public String getRainOK() {
+		return rainOK;
 	}
-	public void setWind(String wind) {
-		this.wind = wind;
+	public void setRainOK(String rainOK) {
+		this.rainOK = rainOK;
 	}
+	public String getRainNG() {
+		return rainNG;
+	}
+	public void setRainNG(String rainNG) {
+		this.rainNG = rainNG;
+	}
+	public String getWindOK() {
+		return windOK;
+	}
+	public void setWindOK(String windOK) {
+		this.windOK = windOK;
+	}
+	public String getWindNG() {
+		return windNG;
+	}
+	public void setWindNG(String windNG) {
+		this.windNG = windNG;
+	}
+	public String getParts() {
+		return parts;
+	}
+	public void setParts(String parts) {
+		this.parts = parts;
+	}
+
 }
