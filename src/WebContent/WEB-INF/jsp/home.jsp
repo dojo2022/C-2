@@ -97,8 +97,9 @@
 <table align="center">
 	<c:forEach var="history" items="${diaryList}">
     <th>
-    	${history.date}
-    	<fmt:formatDate value="${.date}" pattern="MM月dd日" />
+    <!--
+    	日付
+    	-->
     </th>
     </c:forEach>
     <tr class="history_photo">
@@ -120,11 +121,13 @@
 
 <h3 align="center">Forecast</h3>
 <table border="1" style="border-collapse: collapse" align="center" >
+
 	<c:forEach var="weather_week" items="${weeklyWeather}">
     <th>
     ${weather_week.dateStr}
     </th>
     </c:forEach>
+
     <tr>
     	<c:forEach var="weather_week" items="${weeklyWeather}">
         <td>
