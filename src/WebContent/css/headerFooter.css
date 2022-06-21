@@ -1,1 +1,22 @@
 @charset "UTF-8";
+
+/* ヘッター */
+.nav{
+	text-align: center;
+}
+
+.nav li {
+	display: inline;
+	list-style-type: none;
+    padding: 20px;
+}
+
+.nav a {
+    color: black;
+}
+
+.nav a:hover {
+    color: grey;
+}
+
+/* フッター */
