@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ItemDAO;
+import model.RegistInf;
 import model.Result;
 
 /**
@@ -25,7 +26,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 結果ページにフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ItemRegist.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemRegist.jsp");
 				dispatcher.forward(request, response);
 	}
 
@@ -67,7 +68,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 
 				// 登録処理を行う
 				ItemDAO iDao = new ItemDAO();
-				if (iDao.insert(new SearchCondition(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
+				if (iDao.insert(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
 						white, black, grey, beige, red, blue, green, yellow, other, pattern, rain, wind))) {	// 登録成功
 					request.setAttribute("result",
 					new Result(true));
@@ -84,7 +85,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 				// 更新または削除を行う
 				ItemDAO tDao = new ItemDAO();
 				if (request.getParameter("SUBMIT").equals("更新")) {
-					if (tDao.update(new SearchCondition(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
+					if (tDao.update(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
 							white, black, grey, beige, red, blue, green, yellow, other, pattern, rain, wind))) {	// 更新成功
 						request.setAttribute("result",
 						new Result(true));
