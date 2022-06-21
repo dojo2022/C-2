@@ -63,7 +63,7 @@
         </td>
         <c:set value="${count + 1}" var="count"></c:set>
         </c:forEach>
-        <c:remove var="count" value="${count}"/>
+        <c:remove var="count"/>
 
         <tr class="max">
         <c:forEach var="weather_fourhour" items="${oneDayWeather}">
@@ -96,7 +96,10 @@
 <!-- 過去3日分の服 -->
 <table align="center">
 	<c:forEach var="history" items="${diaryList}">
-    <th>${history.date}</th>
+    <th>
+    	${history.date}
+    	<fmt:formatDate value="${.date}" pattern="MM月dd日" />
+    </th>
     </c:forEach>
     <tr class="history_photo">
     	<c:forEach var="history" items="${diaryList}">
@@ -117,7 +120,11 @@
 
 <h3 align="center">Forecast</h3>
 <table border="1" style="border-collapse: collapse" align="center" >
-    <th>6/6</th><th>6/7</th><th>6/8</th><th>6/9</th><th>6/10</th><th>6/11</th>
+	<c:forEach var="weather_week" items="${weeklyWeather}">
+    <th>
+    ${weather_week.dateStr}
+    </th>
+    </c:forEach>
     <tr>
     	<c:forEach var="weather_week" items="${weeklyWeather}">
         <td>
