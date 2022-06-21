@@ -33,7 +33,7 @@ public class DiaryEditServlet extends HttpServlet {
 
 	// リクエストパラメータを取得する
 	request.setCharacterEncoding("UTF-8");
-	String date = request.getParameter("date");
+	String diaryId = request.getParameter("diary_id");
 	// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diaryEdit.jsp");
 			dispatcher.forward(request, response);
