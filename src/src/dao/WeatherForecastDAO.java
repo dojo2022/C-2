@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -178,7 +179,12 @@ public class WeatherForecastDAO {
 				if (20 <= Integer.parseInt(new SimpleDateFormat("HH").format(new Date()))) { //もし20時を過ぎてたら明日の予報
 					prog++;
 				}
+
+				String strDate = LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 				pStmt.setString(1, LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            Date date = sdFormat.parse(strDate);
+
 				//デバッグ用。表示したい日を入れてください。
 				//pStmt.setString(1, LocalDate.now().plusDays(0).format(DateTimeFormatter.ofPattern("2022-06-25")));
 				// SQL文を実行し、結果表を取得する
@@ -217,10 +223,12 @@ public class WeatherForecastDAO {
 					}
 				}
 				weatherList.add(new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-						highestTemperature, lowestTemperature));
+						highestTemperature, lowestTemperature, date));
 			}
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -257,8 +265,11 @@ public class WeatherForecastDAO {
 				String sql = "select * FROM WEATHER_FORECAST WHERE date = ? AND ( HOUR BETWEEN 7 AND 19 );";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる(i日後の天気を取得)
-				pStmt.setString(1, LocalDate.now().plusDays(i).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				// SQL文を完成させる(i日後の天気を取得),
+				String strDate = LocalDate.now().plusDays(i).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				pStmt.setString(1, strDate);
+				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            Date date = sdFormat.parse(strDate);
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
@@ -296,10 +307,12 @@ public class WeatherForecastDAO {
 					}
 				}
 				weatherList.add(new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-						highestTemperature, lowestTemperature));
+						highestTemperature, lowestTemperature, date));
 			}
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
