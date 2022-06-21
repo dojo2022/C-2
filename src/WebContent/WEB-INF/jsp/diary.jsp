@@ -22,6 +22,11 @@
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
 		<h1>DIARY</h1>
+		<form method="POST" action="/coordinator/DiaryServlet">
+		<input type="date" name="startDate">から
+		<input type="date" name="endDate">
+		<input type="submit" name="search" value="検索">
+		</form>
 		<div id="table">
 			<table id="list">
 				<tr>
@@ -37,7 +42,7 @@
       -->
 				<c:forEach var="diary_list" items="${diaryList}">
 					<tr>
-						<td rowspan="2">${diary_list.date}</td>
+						<td rowspan="2">${diary_list.dateStr}</td>
 						<td rowspan="2"><img src="/coordinator/${diary_list.photo}"></td>
 						<td><c:choose>
 								<c:when
@@ -56,13 +61,13 @@
 							</c:choose></td>
 						<td>${diary_list.maxTemperature}</td>
 						<td><img src="/coordinator/photo/wind.PNG"></td>
-						<td rowspan="2">${diary_list.note}</td>
+						<td>${diary_list.note}</td>
 					</tr>
 					<tr class="data_row">
 						<td>${diary_list.amountOfRain}</td>
 						<td>${diary_list.minTemperature}</td>
 						<td>${diary_list.windSpeed}m</td>
-						<td></td>
+						<td><form method="POST" action="/coordinator/DiaryEditServlet"><input type="text" name="diary_id" value=${diary_list.id} class="hidden"><input type="submit" name="edit" value="編集"></form></td>
 					</tr>
 				</c:forEach>
 
