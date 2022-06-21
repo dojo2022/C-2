@@ -50,7 +50,11 @@ public class Diary {
 		this.minTemperature = minTemperature;
 		this.windSpeed = windSpeed;
 		this.amountOfRain = amountOfRain;
-		this.dateStr = (Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
+		if (date != null) {
+			this.dateStr = (Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
+		} else {
+			this.dateStr = null;
+		}
 	}
 	public Diary() {
 		this(-10000, null, null, null, null, null, null, -10000, -10000.0, -10000.0, -10000.0, -10000.0);
