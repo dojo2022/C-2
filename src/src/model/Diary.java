@@ -51,7 +51,7 @@ public class Diary {
 		this.windSpeed = windSpeed;
 		this.amountOfRain = amountOfRain;
 		if (date != null) {
-			this.dateStr = (Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
+			this.dateStr = (Integer.parseInt(new SimpleDateFormat("yyyy").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
 		} else {
 			this.dateStr = null;
 		}

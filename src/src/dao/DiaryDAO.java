@@ -106,6 +106,11 @@ public class DiaryDAO {
 				diary.setMinTemperature(Double.parseDouble(rs.getString("min_Temperature")));
 				diary.setWindSpeed(Double.parseDouble(rs.getString("wind_Speed")));
 				diary.setAmountOfRain(Double.parseDouble(rs.getString("amount_Of_Rain")));
+				//日付（文字列型）フィールドも
+				//日付(String型)を用意する(Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
+				String dateStr = (Integer.parseInt(new SimpleDateFormat("yyyy").format(rs.getDate("date")))) + "/" + (Integer.parseInt(new SimpleDateFormat("MM").format(rs.getDate("date")))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(rs.getDate("date"))));
+			      System.out.println("DiaryDao:" + dateStr);
+				diary.setDateStr(dateStr);
 //				Diary diary = new Diary(
 //				//diary.setUserId(
 //						Integer.parseInt(rs.getString("id")),
@@ -168,6 +173,8 @@ public class DiaryDAO {
 	      ResultSet rs = pStmt.executeQuery();
 	      // 結果表をコレクションにコピーする
 	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+
 	      while (rs.next()) {
 	    	  diaryList.add(new Diary(0, sdf.parse(rs.getString("DATE")), null, null, null, null, rs.getString("PHOTO"), 0,0,0,0,0)
 	    	  );
