@@ -59,7 +59,7 @@ public class Diary {
 	public void setEndDate(String EndDate) {
 		this.endDate = EndDate;
 	}
-	
+
 	public String getUserId() {
 		return userId;
 	}

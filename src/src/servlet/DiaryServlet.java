@@ -30,14 +30,14 @@ public class DiaryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
 		// リクエストパラメータを取得する
 		//☆のとここれであってる？？
 		request.setCharacterEncoding("UTF-8");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		String userId = request.getParameter("userId");
-
+		
+		
 		//今取ってきた始まりの日と終わりの日をdaoに渡して日記のリストが返される。それをスコープに入れる
 
 		//★↑日付のみが条件だと、「誰の」日記か判定出来ないのでユーザーID情報も必要ですね！
