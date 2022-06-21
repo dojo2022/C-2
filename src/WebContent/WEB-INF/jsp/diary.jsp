@@ -67,7 +67,7 @@
 						<td>${diary_list.amountOfRain}</td>
 						<td>${diary_list.minTemperature}</td>
 						<td>${diary_list.windSpeed}m</td>
-						<td><form method="POST" action="/coordinator/DiaryEditServlet"><input type="text" name="diary_id" value=${diary_list.id}><input type="submit" name="edit" value="編集"></form></td>
+						<td><form method="POST" action="/coordinator/DiaryEditServlet"><input type="text" name="diary_id" value=${diary_list.id} class="hidden"><input type="submit" name="edit" value="編集"></form></td>
 					</tr>
 				</c:forEach>
 
