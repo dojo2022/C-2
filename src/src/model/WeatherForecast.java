@@ -1,11 +1,41 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class WeatherForecast {
 	int weatherCode;
 	double rain; //1時間あたり
 	double wind;
 	double highestTemperature;
 	double lowestTemperature;
+	String dateStr;
+	Date date;
+
+	public WeatherForecast(int weatherCode, double rain, double wind, double highestTemperature,
+			double lowestTemperature, String dateStr, Date date) {
+		super();
+		this.weatherCode = weatherCode;
+		this.rain = rain;
+		this.wind = wind;
+		this.highestTemperature = highestTemperature;
+		this.lowestTemperature = lowestTemperature;
+		this.dateStr = dateStr;
+		this.date = date;
+	}
+	public WeatherForecast(int weatherCode, double rain, double wind, double highestTemperature,
+			double lowestTemperature, Date date) {
+		super();
+		this.weatherCode = weatherCode;
+		this.rain = rain;
+		this.wind = wind;
+		this.highestTemperature = highestTemperature;
+		this.lowestTemperature = lowestTemperature;
+		this.dateStr = (Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
+		this.date = date;
+
+
+	}
 	public WeatherForecast(int weatherCode, double rain, double wind, double highestTemperature,
 			double lowestTemperature) {
 		super();
@@ -14,6 +44,8 @@ public class WeatherForecast {
 		this.wind = wind;
 		this.highestTemperature = highestTemperature;
 		this.lowestTemperature = lowestTemperature;
+		this.dateStr = null;
+		this.date = null;
 	}
 	public WeatherForecast() {
 		this(-10000, -10000.0, -10000.0, -10000.0, -10000.0);
@@ -48,4 +80,17 @@ public class WeatherForecast {
 	public void setLowestTemperature(double lowestTemperature) {
 		this.lowestTemperature = lowestTemperature;
 	}
+	public String getDateStr() {
+		return dateStr;
+	}
+	public void setDateStr(String dateStr) {
+		this.dateStr = dateStr;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 }
