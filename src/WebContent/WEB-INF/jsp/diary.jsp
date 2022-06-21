@@ -35,36 +35,33 @@
 				<!--
         <tr class="data_row"><td>2022-05-31</td><td><img src="\dojo6\src\WebContent\photo\aaaaa5.png" alt="aaaaa"></td><td><img src="\test\sunny.PNG"></td><div class="maxTemp"><td>25</td></div><div class="minTemp"><td>18</td></div><td><img src="\test\wind.PNG"></td><td>4m</td><td><input type="text"></td></tr>
       -->
-				<c:forEach var="diary" items="${diary.diaryList}">
+				<c:forEach var="diary_list" items="${diaryList}">
 					<tr>
-						<td rowspan="2">${diary.date}</td>
-						<td rowspan="2">${diary.photo}</td>
+						<td rowspan="2">${diary_list.date}</td>
+						<td rowspan="2"><img src="/coordinator/${diary_list.photo}"></td>
 						<td><c:choose>
 								<c:when
-									test="${diary.weatherCode == 1 && count != 3}">
+									test="${diary_list.weatherCode == 1}">
 									<img src="/coordinator/photo/sunny.PNG" alt="晴れ">
 								</c:when>
-								<c:when test="${diary.weatherCode == 2}">
+								<c:when test="${diary_list.weatherCode == 2}">
 									<img src="/coordinator/photo/cloudy.png" alt="曇り">
 								</c:when>
-								<c:when test="${diary.weatherCode == 3}">
+								<c:when test="${diary_list.weatherCode == 3}">
 									<img src="/coordinator/photo/rainy.PNG" alt="雨">
 								</c:when>
-								<c:when test="${diary.weatherCode == 4}">
+								<c:when test="${diary_list.weatherCode == 4}">
 									<img src="/coordinator/photo/snowy.PNG" alt="雪">
 								</c:when>
-								<c:when test="${diary.weatherCode == 1 && count==3}">
-									<img src="/coordinator/photo/moon.PNG" alt="月">
-								</c:when>
 							</c:choose></td>
-						<td>${diary.maxTemperature}</td>
+						<td>${diary_list.maxTemperature}</td>
 						<td><img src="/coordinator/photo/wind.PNG"></td>
-						<td rowspan="2">${diary.note}</td>
+						<td rowspan="2">${diary_list.note}</td>
 					</tr>
 					<tr class="data_row">
-						<td>${diary.amountOfRain}</td>
-						<td>${diary.minTemperature}</td>
-						<td>${diary.windSpeed}m</td>
+						<td>${diary_list.amountOfRain}</td>
+						<td>${diary_list.minTemperature}</td>
+						<td>${diary_list.windSpeed}m</td>
 						<td></td>
 					</tr>
 				</c:forEach>
