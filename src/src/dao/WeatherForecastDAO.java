@@ -179,7 +179,8 @@ public class WeatherForecastDAO {
 					prog++;
 				}
 				pStmt.setString(1, LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
+				//デバッグ用。表示したい日を入れてください。
+				//pStmt.setString(1, LocalDate.now().plusDays(0).format(DateTimeFormatter.ofPattern("2022-06-25")));
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
 				int cnt = 0;
@@ -215,7 +216,7 @@ public class WeatherForecastDAO {
 						weatherCodeAve = j + 1;
 					}
 				}
-				weatherList.add(new WeatherForecast(weatherCodeAve, rainAmount / cnt, windAmount / cnt,
+				weatherList.add(new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
 						highestTemperature, lowestTemperature));
 			}
 
@@ -294,7 +295,7 @@ public class WeatherForecastDAO {
 						weatherCodeAve = j + 1;
 					}
 				}
-				weatherList.add(new WeatherForecast(weatherCodeAve, rainAmount / cnt, windAmount / cnt,
+				weatherList.add(new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
 						highestTemperature, lowestTemperature));
 			}
 
