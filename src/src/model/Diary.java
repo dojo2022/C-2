@@ -1,4 +1,5 @@
 package model;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Diary {
@@ -14,6 +15,26 @@ public class Diary {
 	double minTemperature;
 	double windSpeed;
 	double amountOfRain;
+	String dateStr;
+
+	public Diary(int id, Date date, String startDate, String endDate, String userId, String note, String photo,
+			int weatherCode, double maxTemperature, double minTemperature, double windSpeed, double amountOfRain,
+			String dateStr) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.userId = userId;
+		this.note = note;
+		this.photo = photo;
+		this.weatherCode = weatherCode;
+		this.maxTemperature = maxTemperature;
+		this.minTemperature = minTemperature;
+		this.windSpeed = windSpeed;
+		this.amountOfRain = amountOfRain;
+		this.dateStr = dateStr;
+	}
 	public Diary(int id, Date date, String startDate, String endDate, String userId, String note, String photo, int weatherCode, double maxTemperature,
 			double minTemperature, double windSpeed, double amountOfRain) {
 		super();
@@ -29,6 +50,7 @@ public class Diary {
 		this.minTemperature = minTemperature;
 		this.windSpeed = windSpeed;
 		this.amountOfRain = amountOfRain;
+		this.dateStr = (Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
 	}
 	public Diary() {
 		this(-10000, null, null, null, null, null, null, -10000, -10000.0, -10000.0, -10000.0, -10000.0);
@@ -45,21 +67,18 @@ public class Diary {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String StartDate) {
-		this.startDate = StartDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-
 	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(String EndDate) {
-		this.endDate = EndDate;
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
-
 	public String getUserId() {
 		return userId;
 	}
@@ -108,4 +127,11 @@ public class Diary {
 	public void setAmountOfRain(double amountOfRain) {
 		this.amountOfRain = amountOfRain;
 	}
+	public String getDateStr() {
+		return dateStr;
+	}
+	public void setDateStr(String dateStr) {
+		this.dateStr = dateStr;
+	}
+
 }
