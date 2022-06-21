@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ItemRegist</title>
+<title>itemRegist</title>
 <link rel="stylesheet" href="/coordinator/css/itemRegist.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
 <script src="js/itemRegist.js"></script>
