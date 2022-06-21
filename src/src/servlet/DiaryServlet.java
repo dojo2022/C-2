@@ -32,8 +32,8 @@ public class DiaryServlet extends HttpServlet {
 		DiaryDAO dDAO = new DiaryDAO();
 		Diary param = new Diary();
 		//ユーザーid,開始日付、終了日付をセッターメソッドで格納する
-		param.setStartDate("2021-01-06");
-		param.setEndDate("2021-01-12");
+		param.setStartDate("2022-05-30");
+		param.setEndDate("2022-06-04");
 		param.setUserId(userId);
 
 		List<Diary> diaryList = dDAO.selectDiary(param);
