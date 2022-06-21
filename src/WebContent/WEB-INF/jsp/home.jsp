@@ -97,6 +97,7 @@
 <table align="center">
 	<c:forEach var="history" items="${diaryList}">
     <th>
+    ${history.dateStr}
     <!--
     	日付
     	-->
