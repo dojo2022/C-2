@@ -6,10 +6,11 @@ body {
 	font-size: 16px;
 }
 
-.wrapper {
-  margin: 0 auto 0 auto;
-  width: max;
-}
+/*.wrapper {
+	text-align: center;
+	margin: 0 auto 0 auto;
+	width: 1000px;
+}*/
 
 h1 {
   text-align: center;
@@ -18,18 +19,7 @@ h1 {
 	padding-top: 10px 10px 10px 10px;
 }
 
-#nav {
-  margin: 0 0 0 0;
-  padding: 15px 20px 12px 20px;
-}
-#nav {
-  text-align: center;
-}
-#nav li {
-	display: inline;
-	list-style-type: none;
-	padding-right: 20px;
-}
+
 
 div#table {
   margin: 0px auto;
@@ -51,4 +41,14 @@ table#list th, table#list td {
 
 .data_row{
   height: 150px;
+}
+
+.max {
+    font-size: 25px;
+    color: red;
+}
+
+.min {
+    font-size: 25px;
+    color: blue;
 }
