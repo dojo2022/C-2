@@ -47,7 +47,10 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		//String id = ((User) session.getAttribute("id")).getId();
 		String id = "aaaaa";
 
+		// いったんエラーを消すためだけの処理
 		String photoExtension = "";
+		String userID = "";
+		String itemID = "";
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -107,7 +110,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			ItemDAO tDao = new ItemDAO();
 			if (request.getParameter("SUBMIT").equals("更新")) {
 				if (tDao.update(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
-						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts))) { // 更新成功
+						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), userID, itemID, photoExtension)) { // 更新成功
 					request.setAttribute("result",
 							new Result(true));
 				} else { // 更新失敗
