@@ -27,14 +27,14 @@
 	</nav>
 
 <form method="POST" action="/coordinator/DiaryServlet">
-  <img src="\dojo6\src\WebContent\photo\aaaaa5.png">
+  <img src="/coordinator${diary.photo}">
   <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
   <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
   <br>
   画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
 		<canvas id="preview" style="max-width:200px;"></canvas>
     <br>
-  <textarea></textarea>
+  <textarea>${diary.note}</textarea>
   <button type="reset">リセット</button>
   <br>
   <input type="submit" name="update" value="更新">
