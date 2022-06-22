@@ -1,10 +1,14 @@
 @charset "UTF-8";
-.nav li {
+/*.nav li {
 	display: inline;
 	list-style-type: none;
 	padding-right: 30px;
 	text-align: center;
-}
+}*/
 .hidden {
 	display: none;
+}
+
+body{
+	font-family: 'arial narrow';
 }

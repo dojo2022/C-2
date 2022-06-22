@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 
-body {
-    font-family: Bahnschrift Light Condensed;
-}
+/*body {
+    font-family: 'Bahnschrift Light Condensed', sans-serif;
+}*/
 
 /*.nav li {
 	display: inline;
@@ -18,6 +18,10 @@ body {
 .nav a:hover {
     color: grey;
 }*/
+
+h1{
+	margin: 20px 5px;
+}
 
 h3 {
     font-size: 30px;

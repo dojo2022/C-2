@@ -20,7 +20,7 @@ h1 {
 }
 
 
-
+/*
 div#table {
   margin: 0px auto;
 }
@@ -42,7 +42,7 @@ table#list th, table#list td {
 .data_row{
   height: 150px;
 }
-
+*/
 .max {
     font-size: 25px;
     color: red;

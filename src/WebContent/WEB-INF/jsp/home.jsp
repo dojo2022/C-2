@@ -13,8 +13,7 @@
 <script src="js/common.js"></script>
 </head>
 <body>
-
-    <img src="/coordinator/photo/logo.PNG" alt="coodinater">
+<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
 <nav class="nav">
  <ul>
     <li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -25,9 +24,14 @@
 </ul>
 </nav>
 
-<hr>
-
 <h3 align="center">Recommends and Forecast</h3>
+<c:set value="1" var="count"></c:set>
+<c:forEach var="weather_fourhour" items="${oneDayWeather}">
+<c:when test="${count==1}">
+${weather_fourhour.dateStr}
+<c:set value="${count + 1}" var="count"></c:set>
+</c:when>
+</c:forEach>
 <div class="wrapper">
     <div class="recommends">
     <img id="jk_photo" src="/coordinator/photo/4.PNG" width="224" height="268" alt="aaaaa">
@@ -173,5 +177,6 @@
     </c:forEach>
     </tr>
 </table>
+<p>Weather from 07:00 to 19:00</p>
 </body>
 </html>

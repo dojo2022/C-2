@@ -8,11 +8,12 @@
 <title>DIARY</title>
 <link rel="stylesheet" href="/coordinator/css/diary.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
+<link rel="stylesheet" href="/coordinator/css/headerFooter.css">
 <script src="js/diary.js"></script>
 <script src="js/common.js"></script>
 </head>
 <body>
-	diary
+	<img src="/coordinator/photo/logo.PNG" alt="coodinater">
 	<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -21,30 +22,31 @@
 			<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
+	</nav>
 		<h1>DIARY</h1>
 		<form method="POST" action="/coordinator/DiaryServlet">
-		<input type="date" name="startDate">から
+		<input type="date" name="startDate">～
 		<input type="date" name="endDate">
 		<input type="submit" name="search" value="検索">
 		</form>
 		<div id="table">
-			<table id="list">
+			<table id="list" align="center">
 				<tr>
-					<th>日付</th>
-					<th>画像</th>
+					<th>DATE</th>
+					<th>COORDINATE</th>
 					<th></th>
-					<th>天気</th>
+					<th>WEATHER</th>
 					<th></th>
-					<th>コメント</th>
+					<th>COMMENT</th>
 				</tr>
 				<!--
         <tr class="data_row"><td>2022-05-31</td><td><img src="\dojo6\src\WebContent\photo\aaaaa5.png" alt="aaaaa"></td><td><img src="\test\sunny.PNG"></td><div class="maxTemp"><td>25</td></div><div class="minTemp"><td>18</td></div><td><img src="\test\wind.PNG"></td><td>4m</td><td><input type="text"></td></tr>
       -->
 				<c:forEach var="diary_list" items="${diaryList}">
 					<tr>
-						<td rowspan="2">${diary_list.dateStr}</td>
-						<td rowspan="2"><img src="/coordinator/${diary_list.photo}"></td>
-						<td><c:choose>
+						<td rowspan="3">${diary_list.dateStr}</td>
+						<td rowspan="3"><img src="/coordinator/${diary_list.photo}" width="257" height="375"></td>
+						<td rowspan="2"><c:choose>
 								<c:when
 									test="${diary_list.weatherCode == 1}">
 									<img src="/coordinator/photo/sunny.PNG" alt="晴れ">
@@ -59,23 +61,29 @@
 									<img src="/coordinator/photo/snowy.PNG" alt="雪">
 								</c:when>
 							</c:choose></td>
-						<td>${diary_list.maxTemperature}</td>
-						<td><img src="/coordinator/photo/wind.PNG"></td>
-						<td>${diary_list.note}</td>
+						<td class="max">${diary_list.maxTemperature}</td>
+						<td><img src="/coordinator/photo/rain.PNG" width="80" height="96"></td>
+						<td>${diary_list.amountOfRain}mm</td>
+					</tr>
+					<tr>
+						<td class="min">${diary_list.minTemperature}</td>
+						<td><img src="/coordinator/photo/wind.PNG" width="80" height="96"></td>
+						<td class="wind">${diary_list.windSpeed}m</td>
 					</tr>
 					<tr class="data_row">
-						<td>${diary_list.amountOfRain}</td>
-						<td>${diary_list.minTemperature}</td>
-						<td>${diary_list.windSpeed}m</td>
+					<td></td>
+						<td></td>
+
+						<td>${diary_list.note}</td>
+					<!--<td></td>
+						<td></td>
+					-->
 						<td><form method="POST" action="/coordinator/DiaryEditServlet"><input type="text" name="diary_id" value=${diary_list.id} class="hidden"><input type="submit" name="edit" value="編集"></form></td>
 					</tr>
 				</c:forEach>
-
-
-				<a href="/coordinator/DiaryEditServlet">日記の編集</a>
+				<!-- <a href="/coordinator/DiaryEditServlet">日記の編集</a> -->
 			</table>
 		</div>
-	</nav>
 </body>
 </html>
 
