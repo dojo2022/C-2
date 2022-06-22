@@ -208,4 +208,133 @@ public class DiaryDAO {
 	    return diaryList;
 	  }
 
+	public Diary search(String id) {
+		Connection conn = null;
+		Diary diary = new Diary();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL , "sa", "");
+
+			// SQL文を準備する
+			String sql = " SELECT * "
+					+ " FROM Diary "
+					+ " WHERE Diary.id = ?";
+
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setString(1, id);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) {
+				diary = new Diary(
+				Integer.parseInt(rs.getString("id")),
+				rs.getDate("date"),
+				null,
+				null,
+				rs.getString("user_id"),
+				rs.getString("note"),
+				rs.getString("photo"),
+				-10000,
+				-10000,
+				-10000,
+				-10000,
+				-10000
+				);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			diary = null;
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			diary = null;
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+					diary = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return diary;
+	}
+
+	public boolean update(Diary edit) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+						Class.forName("org.h2.Driver");
+
+						// データベースに接続する
+						conn = DriverManager.getConnection(dbURL , "sa", "");
+			// SQL文を準備する　ここも改造
+			String sql = "UPDATE Diary SET Id=?, photo=?, note=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる 改造
+			if (edit.getId() >= 1 ) {
+				pStmt.setString(1, String.valueOf(edit.getId()));
+			}
+			else {
+				pStmt.setString(1, null);
+			}
+
+			if (edit.getPhoto() != null && !edit.getPhoto().equals("")) {
+				pStmt.setString(2, edit.getPhoto());
+			}
+			else {
+				pStmt.setString(2, null);
+			}
+
+			if (edit.getNote() != null && !edit.getNote().equals("")) {
+				pStmt.setString(3, edit.getNote());
+			}
+			else {
+				pStmt.setString(3, null);
+			}
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
 }

@@ -24,7 +24,7 @@
 	</nav>
   <main>
   <h2>登録</h2>
-	<form method="POST" action="/coordinator/ItemRegistServlet">
+	<form method="POST" action="/coordinator/ItemRegistUpdateServlet">
 		<table>
       <tr>
         <td>
@@ -49,7 +49,7 @@
         </td>
         <td>
           <label>パーツ<br>
-          <select>
+          <select name="parts">
             <option value="outer">アウター</option>
             <option value="jacket">ジャケット</option>
             <option value="tops">トップス</option>
@@ -93,28 +93,28 @@
         </td>
         <td>
           <label>柄<br>
-          <input type="radio" name="pattern">あり
+          <input type="radio" name="pattern_yes">あり
           </label>
           <label>
-          <input type="radio" name="pattern">なし
+          <input type="radio" name="pattern_no">なし
           </label>
         </td>
       </tr>
       <tr>
         <td>
           <label>雨<br>
-          <input type="radio" name="rain">可
+          <input type="radio" name="rain_ok">可
           </label>
           <label>
-          <input type="radio" name="rain">不可
+          <input type="radio" name="rain_ng">不可
           </label>
         </td>
         <td>
           <label>風<br>
-          <input type="radio" name="wind">可
+          <input type="radio" name="wind_ok">可
           </label>
           <label>
-          <input type="radio" name="wind">不可
+          <input type="radio" name="wind_ng">不可
           </label>
         </td>
       </tr>
