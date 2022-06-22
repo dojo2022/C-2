@@ -26,15 +26,16 @@
 		</ul>
 	</nav>
 
-<form method="POST" action="/coordinator/DiaryServlet">
+<form method="POST" action="/coordinator/DiaryEditServlet">
   <img src="/coordinator${diary.photo}">
   <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
   <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
   <br>
+  <input type="text" name="diary_id" value="${diary.id}"class="hidden">
   画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
 		<canvas id="preview" style="max-width:200px;"></canvas>
     <br>
-  <textarea>${diary.note}</textarea>
+  <textarea name="note">${diary.note}</textarea>
   <button type="reset">リセット</button>
   <br>
   <input type="submit" name="update" value="更新">
