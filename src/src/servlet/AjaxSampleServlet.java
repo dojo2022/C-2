@@ -57,7 +57,7 @@ public class AjaxSampleServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("oneDayWeather", oneDayWeatherList);
 
-		// セッションスコープに一日天気予報のデータを格納する
+		// セッションスコープに週間天気予報のデータを格納する
 		List<WeatherForecast> weeklyWeatherList = wDAO.weeklyWeatherForecast();
 		session.setAttribute("weeklyWeather", weeklyWeatherList);
 
