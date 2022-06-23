@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.DiaryDAO;
 import dao.WeatherForecastDAO;
 import model.Diary;
+import model.Item;
 import model.WeatherForecast;
 
 /**
@@ -37,6 +38,11 @@ public class HomeServlet extends HttpServlet {
 		// セッションスコープに週間天気予報のデータを格納する
 		List<WeatherForecast> weeklyWeatherList = wDAO.weeklyWeatherForecast();
 		session.setAttribute("weeklyWeather", weeklyWeatherList);
+		/*
+		for (int i = 0; i < weeklyWeatherList.size(); i++) {
+			System.out.println(weeklyWeatherList.get(i).getDateStr());
+		}
+		*/
 
 		//写真３枚取ってくる
 		DiaryDAO dDAO = new DiaryDAO();
@@ -50,6 +56,10 @@ public class HomeServlet extends HttpServlet {
 		}
 		//リクエストスコープに写真のデータを格納する
 		request.setAttribute("diaryList", diaryList);
+
+		//リクエストスコープにおすすめコーデを保存
+		List<Item> recommends = wDAO.recommendCoordinate(id);
+		request.setAttribute("recommends", recommends);
 
 		// 結果ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
