@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.DiaryDAO;
 import model.Diary;
+import model.WeatherForecast;
 
 /**
  * Servlet implementation class DiaryServlet
@@ -33,9 +34,13 @@ public class DiaryServlet extends HttpServlet {
 		String userId = "aaaaa";
 		DiaryDAO dDAO = new DiaryDAO();
 		//もし今日の日記がまだなければ追加
-
+		WeatherForecast weather = (WeatherForecast)session.getAttribute("todayWeather");
+		//boolean戻り値
+		boolean b = dDAO.insertTodayDiary(weather,userId);
+		System.out.println(b);
 
 		Diary param = new Diary();
+
 		//ユーザーid,開始日付、終了日付をセッターメソッドで格納する
 		param.setStartDate("2022-05-30");
 		param.setEndDate("2022-06-04");
@@ -64,7 +69,6 @@ public class DiaryServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// リクエストパラメータを取得する
-		//☆のとここれであってる？？
 		request.setCharacterEncoding("UTF-8");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
