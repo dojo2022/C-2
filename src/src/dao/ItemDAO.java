@@ -10,6 +10,7 @@ import java.util.List;
 
 import model.Item;
 import model.RegistInf;
+import model.SearchCondition;
 
 public class ItemDAO {
 	/* データベースのURLは後で共有フォルダのやつに書き換えます。
@@ -395,6 +396,254 @@ public class ItemDAO {
 		}
 		// 結果を返す
 		return result;
+
 	}
-}
+
+
+	//検索
+
+	public List<Item> select(SearchCondition sc, String id) {
+		Connection conn = null;
+		//null:初期化
+		List<Item> itemList2 = new ArrayList<Item>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL, "sa", "");
+
+			// SQL文を準備する
+						String sql = "SELECT *"
+								+ " FROM Item INNER JOIN Item_Season ON Item.id = Item_Season.Item_id INNER JOIN Item_Color ON Item.id = Item_Color.Item_id "// INNER JOIN Parts ON Item.parts_code = Parts.code"
+								+ " WHERE (";
+						sql += " ((Item_season.code = 1 AND Item_season.flag = ?) OR (Item_season.code = 2 AND Item_season.flag = ?) OR (Item_season.code = 3 AND Item_season.flag = ?) OR (Item_season.code = 4 AND Item_season.flag = ?))";
+						sql += " AND ((Item_color.code = 1 AND Item_color.flag = ?) OR (Item_color.code = 2 AND Item_color.flag = ?) OR (Item_color.code = 3 AND Item_color.flag = ?) OR (Item_color.code = 4 AND Item_color.flag = ?) OR (Item_color.code = 5 AND Item_color.flag = ?) OR (Item_color.code = 6 AND Item_color.flag = ?) OR (Item_color.code = 7 AND Item_color.flag = ?) OR (Item_color.code = 8 AND Item_color.flag = ?) OR (Item_color.code = 9 AND Item_color.flag = ?)))";
+						sql += " AND Item.user_id = ?";
+						//sql += "(Item.pattern = ?) AND (Item_color.code = 2 AND Item_color.flag = ?) AND (Item_color.code = 3 AND Item_color.flag = ?) AND (Item_color.code = 4 AND Item_color.flag = ?)AND (Item_color.code = 5 AND Item_color.flag = ?) AND (Item_color.code = 6 AND Item_color.flag = ?)";
+						if ((sc.getPatternYES() != null && sc.getPatternNO() == null)) {
+							sql += " AND Item.pattern = 1";
+						}else if ((sc.getPatternYES() == null && sc.getPatternNO() != null)) {
+							sql += " AND Item.pattern = 0";
+						}
+
+						if ((sc.getRainOK() != null && sc.getRainNG() == null)) {
+							sql += " AND Item.rain = 1";
+						}else if ((sc.getRainOK() == null && sc.getRainNG() != null)) {
+							sql += " AND Item.rain = 0";
+						}
+
+						if ((sc.getWindOK() != null && sc.getWindNG() == null)) {
+							sql += " AND Item.wind = 1";
+						}else if ((sc.getWindOK() == null && sc.getWindNG() != null)) {
+							sql += " AND Item.wind = 0";
+						}
+
+						if (sc.getOuter() != null || sc.getJacket() != null || sc.getTops() != null || sc.getSkirt() != null || sc.getPants() != null || sc.getShoes() != null) {
+							boolean flg = false;
+							sql += " AND(";
+							if (sc.getOuter() != null) {
+								if (flg) {
+									sql += " OR";
+								}
+								sql += " Item.parts_code = 1";
+								flg = true;
+							}
+							if (sc.getJacket() != null) {
+								if (flg) {
+									sql += " OR";
+								}
+								sql += " Item.parts_code = 2";
+								flg = true;
+							}
+
+							if (sc.getTops() != null) {
+								if (flg) {
+									sql += " OR";
+								}
+								sql += " Item.parts_code = 3";
+								flg = true;
+							}
+
+							if (sc.getSkirt() != null) {
+								if (flg) {
+									sql += " OR";
+								}
+								sql += " Item.parts_code = 4";
+								flg = true;
+							}
+
+							if (sc.getPants() != null) {
+								if (flg) {
+									sql += " OR";
+								}
+								sql += " Item.parts_code = 5";
+								flg = true;
+							}
+
+							if (sc.getShoes() != null) {
+								if (flg) {
+									sql += " OR";
+								}
+								sql += " Item.parts_code = 6";
+								flg = true;
+							}
+							sql += " );";
+						}
+
+
+
+
+						/*
+						sql += "(Item_season.code = 1 AND Item_season.flag = ";
+						if (sc.getSpring() != null) {
+							 sql += "1";
+						} else {
+							sql += "0";
+						}
+						sql += ") AND";
+						*/
+						/*
+						if (sc.getSpring() != null) {
+							 sql += "(Item_season.code = 1 AND Item_season.flag = 1)";
+						} else {
+							sql += "(Item_season.code = 1 AND Item_season.flag = 0)";
+						}
+
+
+
+						sql += ")";
+						*/
+
+
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+
+						// SQL文を完成させる
+						if (sc.getSpring() != null) {
+							pStmt.setString(1, "1");
+						} else {
+							pStmt.setString(1, "0");
+						}
+
+						if (sc.getSummer() != null) {
+							pStmt.setString(2, "1");
+						} else {
+							pStmt.setString(2, "0");
+						}
+
+						if (sc.getAutumn() != null) {
+							pStmt.setString(3, "1");
+						} else {
+							pStmt.setString(3, "0");
+						}
+
+						if (sc.getWinter() != null) {
+							pStmt.setString(4, "1");
+						} else {
+							pStmt.setString(4, "0");
+						}
+
+						if (sc.getWhite() != null) {
+							pStmt.setString(5, "1");
+						} else {
+							pStmt.setString(5, "0");
+						}
+
+						if (sc.getBlack() != null) {
+							pStmt.setString(6, "1");
+						} else {
+							pStmt.setString(6, "0");
+						}
+
+						if (sc.getGrey() != null) {
+							pStmt.setString(7, "1");
+						} else {
+							pStmt.setString(7, "0");
+						}
+
+						if (sc.getBeige() != null) {
+							pStmt.setString(8, "1");
+						} else {
+							pStmt.setString(8, "0");
+						}
+
+						if (sc.getRed() != null) {
+							pStmt.setString(9, "1");
+						} else {
+							pStmt.setString(9, "0");
+						}
+
+						if (sc.getBlue() != null) {
+							pStmt.setString(10, "1");
+						} else {
+							pStmt.setString(10, "0");
+						}
+
+						if (sc.getGreen() != null) {
+							pStmt.setString(11, "1");
+						} else {
+							pStmt.setString(11, "0");
+						}
+
+						if (sc.getYellow() != null) {
+							pStmt.setString(12, "1");
+						} else {
+							pStmt.setString(12, "0");
+						}
+
+						if (sc.getOther() != null) {
+							pStmt.setString(13, "1");
+						} else {
+							pStmt.setString(13, "0");
+						}
+						
+						pStmt.setString(14, id);
+
+
+
+
+						// SQL文を実行し、結果表を取得する
+
+						ResultSet rs = pStmt.executeQuery();
+
+						// 結果表をコレクションにコピーする
+						while (rs.next()) {
+							Item item = new Item(
+									Integer.parseInt(rs.getString("ID")),
+									rs.getString("USER_ID"),
+									Integer.parseInt(rs.getString("PARTS_CODE")),
+									Integer.parseInt(rs.getString("PATTERN")),
+									Integer.parseInt(rs.getString("RAIN")),
+									Integer.parseInt(rs.getString("WIND")),
+									rs.getString("PHOTO"));
+							itemList2.add(item);
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						itemList2 = null;
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						itemList2 = null;
+					} finally {
+						// データベースを切断
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+								itemList2 = null;
+							}
+						}
+					}
+
+					// 結果を返す
+					return itemList2;
+		}
+
+	}
+
+
+
+
 
