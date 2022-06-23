@@ -17,6 +17,7 @@ public class RecommendTest {
 			} else {
 				System.out.println("id" + itemList.get(i).getId());
 				System.out.println("パーツコード" + itemList.get(i).getPartsCode());
+				System.out.println("photo:" + itemList.get(i).getPhoto());
 			}
 			System.out.println();
 		}
