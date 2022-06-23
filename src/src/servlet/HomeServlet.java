@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -44,6 +45,11 @@ public class HomeServlet extends HttpServlet {
 		}
 		*/
 
+		// sessionスコープに今日の天気予報データを格納する
+		WeatherForecast todayWeather = wDAO.todayWeather();
+		session.setAttribute("todayWeather", todayWeather);
+		//System.out.println(todayWeather.getWeatherCode() + "  "+  todayWeather.getRain());
+
 		//写真３枚取ってくる
 		DiaryDAO dDAO = new DiaryDAO();
 		//String型のidを取ってくる
@@ -58,7 +64,7 @@ public class HomeServlet extends HttpServlet {
 		request.setAttribute("diaryList", diaryList);
 
 		//リクエストスコープにおすすめコーデを保存
-		List<Item> recommends = wDAO.recommendCoordinate(id);
+		List<Item> recommends = this.sortItemList(wDAO.recommendCoordinate(id));
 		request.setAttribute("recommends", recommends);
 
 		// 結果ページにフォワードする
@@ -73,6 +79,18 @@ public class HomeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	public List<Item> sortItemList(List<Item> originalList) {
+		List<Item> itemList = new ArrayList<Item>();
+		if (originalList.size() == 5) {
+			itemList.add(originalList.get(1));
+			itemList.add(originalList.get(2));
+			itemList.add(originalList.get(3));
+			itemList.add(originalList.get(4));
+			itemList.add(originalList.get(0));
+		}
+		return itemList;
 	}
 
 }
