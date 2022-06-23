@@ -16,11 +16,11 @@
 
 	<div class="wrapper">
 		<h1 id="logo">
-			<img src="\test\logo.PNG" alt="coordinator">
+			<img src="/coordinator/photo/logo.PNG" alt="coordinator">
 		</h1>
 		<h2>ログイン</h2>
 		<c:if test="${result.result == false}">
-			<p>ログイン失敗</p>
+
 		</c:if>
 		<form method="POST" action="/coordinator/LoginServlet" id="form">
 			<div id="table">
@@ -38,6 +38,9 @@
 						<td colspan="2"><input type="submit" name="submit"
 							value="ログイン"> <input type="reset" name="reset"
 							value="リセット"> <span id="error_message"></span>
+							<c:if test="${result.result == false}">
+								<p>ログインに失敗しました。</p>
+							</c:if>
 						<td>
 					</tr>
 					<tr>

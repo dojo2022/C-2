@@ -24,24 +24,50 @@
 </ul>
 </nav>
 
-<h3 align="center">Recommends and Forecast</h3>
+<h3 align="center">
 <c:set value="1" var="count"></c:set>
 <c:forEach var="weather_fourhour" items="${oneDayWeather}">
-<c:when test="${count==1}">
+<c:if test="${count==1}">
 ${weather_fourhour.dateStr}
+</c:if>
 <c:set value="${count + 1}" var="count"></c:set>
-</c:when>
 </c:forEach>
+Recommends and Forecast</h3>
+
 <div class="wrapper">
     <div class="recommends">
+    	<c:set value = "1" var="count"></c:set>
+    	<c:forEach var="item" items="${recommends}">
+    		<c:choose>
+        		<c:when test="count == 1">
+        			<img id="outer_photo" src="/coordinator/${item.photo}" width="148" height="275" alt="outer">
+        		</c:when>
+        		<c:when test="count == 2">
+        			<img id="jk_photo" src="/coordinator/${item.photo}" width="224" height="268" alt="jk">
+        		</c:when>
+        		<c:when test="count == 3">
+        			<img id="tops_photo" src="/coordinator/${item.photo}" width="200" height="271" alt="tops">
+        		</c:when>
+        		<c:when test="count == 4">
+        			<img id="bottoms_photo" src="/coordinator/${item.photo}" width="212" height="288" alt="bottoms">
+        		</c:when>
+        		<c:when test="count == 5">
+        			<img id="shoes_photo" src="/coordinator/${item.photo}" width="224" height="142" alt="shoes">
+        		</c:when>
+    		</c:choose>
+    	</c:forEach>
+    	<c:remove var="count"/>
+
+    <!--
     <img id="jk_photo" src="/coordinator/photo/4.PNG" width="224" height="268" alt="aaaaa">
     <img id="tops_photo" src="/coordinator/photo/21.PNG" width="200" height="271" alt="aaaaa">
     <img id="botoms_photo" src="/coordinator/photo/8.PNG" width="212" height="288" alt="aaaaa">
     <img id="shoes_photo" src="/coordinator/photo/16.PNG" width="224" height="142" alt="aaaaa">
     <img id="outer_photo" src="/coordinator/photo/17.PNG" width="148" height="275" alt="aaaaa">
+    -->
     </div>
     <div class="oneday_weather">
-    <table>
+    <table class="ondayWeather_table">
         <th>Morning</th><th>Afternoon</th><th>Evening</th>
 		<tr>
 		<c:set value = "1" var="count"></c:set>
@@ -119,7 +145,7 @@ ${weather_fourhour.dateStr}
         <td><img src="/coordinator/photo/aaaaa3.png" width="162" height="270" alt="aaaaa"></td>  -->
 
 </table>
-<a href="/coordinator/DiaryServlet"><img src="/coordinator/photo/viewmore.PNG"  alt="View More" align="right"></a>
+<a href="/coordinator/DiaryServlet"><img class="viewmore" src="/coordinator/photo/viewmore.PNG"  alt="View More"></a>
 
 <br>
 <br>
@@ -177,6 +203,6 @@ ${weather_fourhour.dateStr}
     </c:forEach>
     </tr>
 </table>
-<p>Weather from 07:00 to 19:00</p>
+<p class="time">Weather from 07:00 to 19:00</p>
 </body>
 </html>

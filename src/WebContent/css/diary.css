@@ -46,9 +46,54 @@ table#list th, table#list td {
 .max {
     font-size: 25px;
     color: red;
+    vertical-align:bottom;
 }
 
 .min {
     font-size: 25px;
     color: blue;
+    vertical-align:top
+}
+
+
+/*.data_row{
+	border-bottom-width: 5px;
+	border-bottom-style: dotted;
+	border-bottom-color: black;
+}*/
+
+.data_row td {
+  border-bottom-width: 7px;
+  border-bottom-style:  dashed;
+  border-bottom-color: #232323;
+  padding: 4px 16px 4px 0;
+  text-align: left;
+  white-space: nowrap;
+  position:relative;
+}
+
+table#list th{
+	border-bottom-color: #232323;
+}
+
+.btn{
+	margin: 0 10px;
+	padding: 6px 25px;
+	color: #232323;
+	font-weight: bold;
+	letter-spacing: 0.5pt;
+	text-decoration: none;
+	background-color: #f7f7f7;
+	border: 1px solid #232323;
+	cursor: pointer;
+	transition-duration:0.3s;
+    -webkit-transition-duration:0.3s;
+    -moz-transition-duration:0.3s;
+    -o-transition-duration:0.3s;
+    -ms-transition-duration:0.3s;
+}
+
+.btn:hover{
+    color: #f7f7f7;
+    background-color: #232323;
 }

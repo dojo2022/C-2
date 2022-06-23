@@ -1834,11 +1834,11 @@ INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, mi
 INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-5-28','aaaaa','','\photo\no_image.png',1,25,12,5,5);
 INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-5-29','aaaaa','','\photo\no_image.png',1,25,12,5,5);
 INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-5-30','aaaaa','','\photo\no_image.png',1,25,12,5,5);
-INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-5-31','aaaaa','','\photo\aaaaa5.png',1,25,12,5,5);
-INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-1','aaaaa','','\photo\aaaaa4.png',1,25,12,5,5);
-INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-2','aaaaa','','\photo\aaaaa3.png',1,25,12,5,5);
-INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-3','aaaaa','','\photo\aaaaa2.png',1,25,12,5,5);
-INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-4','aaaaa','','\photo\aaaaa1.png',1,25,12,5,5);
+INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-5-31','aaaaa','ベージュのセットアップと濃いめグレーのセットアップがあるとクロスで使えるコーディネートができる','\photo\aaaaa5.png',1,25,12,5,5);
+INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-1','aaaaa','全体的にゆったり目に作られたデザインで、ボトムのラインも細過ぎずにとても楽に履ける','\photo\aaaaa4.png',1,25,12,5,5);
+INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-2','aaaaa','コーディネートに淡濃を出すとバランスの良いスタイリングができる','\photo\aaaaa3.png',1,25,12,5,5);
+INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-3','aaaaa','ジャケットはノーカラーの細身シルエットで綺麗めな印象、ペグトップパンツは脚長効果あり','\photo\aaaaa2.png',1,25,12,5,5);
+INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2022-6-4','aaaaa','柔らかい素材でサラッとしたジャケットパンツ','\photo\aaaaa1.png',1,25,12,5,5);
 
 /* Bさん */
 INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values ('2021-1-4','bbbbb','test','\photo\no_image.png',1,25,12,5,5);

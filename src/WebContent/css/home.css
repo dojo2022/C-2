@@ -53,7 +53,7 @@ h3 {
     left: -115px;
 }
 
-#botoms_photo{
+#bottoms_photo{
     position: relative;
     top: 280px;
     left: -120px;
@@ -94,4 +94,20 @@ h3 {
 
 .kion {
     text-align: center;
+}
+
+.time{
+	position: relative;
+	left: 950px;
+}
+
+.viewmore{
+	position: relative;
+	left: 1000px;
+}
+
+.ondayWeather_table{
+	position: relative;
+	top: 50px;
+	left: 30px;
 }
