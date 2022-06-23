@@ -39,22 +39,24 @@ Recommends and Forecast</h3>
     	<c:set value = "1" var="count"></c:set>
     	<c:forEach var="item" items="${recommends}">
     		<c:choose>
-        		<c:when test="count == 1">
-        			<img id="outer_photo" src="/coordinator/${item.photo}" width="148" height="275" alt="outer">
-        		</c:when>
-        		<c:when test="count == 2">
+        		<c:when test="${count == 1}">
         			<img id="jk_photo" src="/coordinator/${item.photo}" width="224" height="268" alt="jk">
         		</c:when>
-        		<c:when test="count == 3">
+        		<c:when test="${count == 2}">
         			<img id="tops_photo" src="/coordinator/${item.photo}" width="200" height="271" alt="tops">
         		</c:when>
-        		<c:when test="count == 4">
+        		<c:when test="${count == 3}">
         			<img id="bottoms_photo" src="/coordinator/${item.photo}" width="212" height="288" alt="bottoms">
         		</c:when>
-        		<c:when test="count == 5">
+        		<c:when test="${count == 4}">
         			<img id="shoes_photo" src="/coordinator/${item.photo}" width="224" height="142" alt="shoes">
         		</c:when>
+        		<c:when test="${count == 5}">
+        			<img id="outer_photo" src="/coordinator/${item.photo}" width="148" height="275" alt="outer">
+
+        		</c:when>
     		</c:choose>
+    		<c:set value = "${count + 1}" var="count"></c:set>
     	</c:forEach>
     	<c:remove var="count"/>
 

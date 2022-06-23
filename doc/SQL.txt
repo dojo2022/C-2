@@ -494,141 +494,141 @@ INSERT INTO Item_season (item_id, code, flag) Values (68, 4, 1);
 
 /* アイテムマスターデータ */
 /* 1 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\1.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 0, 1, 1, '\photo\1.PNG');
 /* 2 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\2.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 0, 1, 1, '\photo\2.PNG');
 /* 3 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\3.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 0, 1, 1, '\photo\3.PNG');
 /* 4 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 1, 1, 1, 'C:\dojo6\src\WebContent\photo\4.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 2, 1, 1, 1, '\photo\4.PNG');
 /* 5 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\5.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, '\photo\5.PNG');
 /* 6 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\6.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, '\photo\6.PNG');
 /* 7 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\7.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, '\photo\7.PNG');
 /* 8 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\8.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 4, 0, 1, 0, '\photo\8.PNG');
 /* 9 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\9.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, '\photo\9.PNG');
 /* 10 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\10.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, '\photo\10.PNG');
 /* 11 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\11.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, '\photo\11.PNG');
 /* 12 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\12.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 5, 0, 1, 1, '\photo\12.PNG');
 /* 13 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\13.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, '\photo\13.PNG');
 /* 14 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\14.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, '\photo\14.PNG');
 /* 15 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\15.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, '\photo\15.PNG');
 /* 16 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\16.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 6, 0, 1, 1, '\photo\16.PNG');
 /* 17 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\17.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 1, 0, 1, 1, '\photo\17.PNG');
 /* 18 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\18.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 0, 1, 1, '\photo\18.PNG');
 /* 19 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\19.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 0, 1, 1, '\photo\19.PNG');
 /* 20 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 1, 1, 1, 'C:\dojo6\src\WebContent\photo\20.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 1, 1, 1, '\photo\20.PNG');
 /* 21 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\21.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 3, 0, 1, 1, '\photo\21.PNG');
 /* 22 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('bbbbb', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\22.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('bbbbb', 3, 0, 1, 1, '\photo\22.PNG');
 /* 23 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\23.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 1, 0, 1, 1, '\photo\23.PNG');
 /* 24 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\24.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 2, 0, 1, 1, '\photo\24.PNG');
 /* 25 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\25.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 3, 0, 1, 1, '\photo\25.PNG');
 /* 26 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\26.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 4, 0, 1, 0, '\photo\26.PNG');
 /* 27 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\27.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 5, 0, 1, 1, '\photo\27.PNG');
 /* 28 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 6, 0, 0, 1, 'C:\dojo6\src\WebContent\photo\28.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ccccc', 6, 0, 0, 1, '\photo\28.PNG');
 /* 29 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\29.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 2, 0, 1, 1, '\photo\29.PNG');
 /* 30 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\30.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 3, 0, 1, 1, '\photo\30.PNG');
 /* 31 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\31.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 4, 0, 1, 0, '\photo\31.PNG');
 /* 32 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\32.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 5, 0, 1, 1, '\photo\32.PNG');
 /* 33 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\33.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ddddd', 6, 0, 1, 1, '\photo\33.PNG');
 /* 34 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\34.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 0, 1, 0, '\photo\34.PNG');
 /* 35 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 0, 0, 0, 'C:\dojo6\src\WebContent\photo\35.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 0, 0, 0, '\photo\35.PNG');
 /* 36 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\36.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 0, 1, 0, '\photo\36.PNG');
 /* 37 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 1, 1, 0, 'C:\dojo6\src\WebContent\photo\37.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('eeeee', 4, 1, 1, 0, '\photo\37.PNG');
 /* 38 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 1, 1, 1, 1, 'C:\dojo6\src\WebContent\photo\38.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 1, 1, 1, 1, '\photo\38.PNG');
 /* 39 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 2, 1, 1, 1, 'C:\dojo6\src\WebContent\photo\39.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 2, 1, 1, 1, '\photo\39.PNG');
 /* 40 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\40.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 3, 0, 1, 1, '\photo\40.PNG');
 /* 41 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 4, 0, 0, 0, 'C:\dojo6\src\WebContent\photo\41.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 4, 0, 0, 0, '\photo\41.PNG');
 /* 42 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\42.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 5, 0, 1, 1, '\photo\42.PNG');
 /* 43 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 6, 0, 0, 1, 'C:\dojo6\src\WebContent\photo\43.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('fffff', 6, 0, 0, 1, '\photo\43.PNG');
 /* 44 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\44.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 1, 0, 1, 1, '\photo\44.PNG');
 /* 45 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\45.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 1, 0, 1, 1, '\photo\45.PNG');
 /* 46 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\46.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 2, 0, 1, 1, '\photo\46.PNG');
 /* 47 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\47.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 2, 0, 1, 1, '\photo\47.PNG');
 /* 48 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 3, 1, 1, 1, 'C:\dojo6\src\WebContent\photo\48.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 3, 1, 1, 1, '\photo\48.PNG');
 /* 49 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\49.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 3, 0, 1, 1, '\photo\49.PNG');
 /* 50 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 4, 0, 0, 0, 'C:\dojo6\src\WebContent\photo\50.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 4, 0, 0, 0, '\photo\50.PNG');
 /* 51 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 4, 0, 0, 0, 'C:\dojo6\src\WebContent\photo\51.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 4, 0, 0, 0, '\photo\51.PNG');
 /* 52 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\52.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 5, 0, 1, 1, '\photo\52.PNG');
 /* 53 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\53.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 5, 0, 1, 1, '\photo\53.PNG');
 /* 54 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 6, 0, 0, 1, 'C:\dojo6\src\WebContent\photo\54.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 6, 0, 0, 1, '\photo\54.PNG');
 /* 55 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 6, 0, 0, 1, 'C:\dojo6\src\WebContent\photo\55.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('ggggg', 6, 0, 0, 1, '\photo\55.PNG');
 /* 56 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\56.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('aaaaa', 1, 0, 1, 1, '\photo\56.PNG');
 /* 57 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\57.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 1, 0, 1, 1, '\photo\57.PNG');
 /* 58 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\58.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 2, 0, 1, 1, '\photo\58.PNG');
 /* 59 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\59.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 2, 0, 1, 1, '\photo\59.PNG');
 /* 60 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 3, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\60.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 3, 0, 1, 1, '\photo\60.PNG');
 /* 61 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 4, 0, 1, 0, 'C:\dojo6\src\WebContent\photo\61.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 4, 0, 1, 0, '\photo\61.PNG');
 /* 62 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\62.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 5, 0, 1, 1, '\photo\62.PNG');
 /* 63 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\63.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('hhhhh', 6, 0, 1, 1, '\photo\63.PNG');
 /* 64 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 1, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\64.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 1, 0, 1, 1, '\photo\64.PNG');
 /* 65 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 2, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\65.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 2, 0, 1, 1, '\photo\65.PNG');
 /* 66 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 3, 1, 1, 1, 'C:\dojo6\src\WebContent\photo\66.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 3, 1, 1, 1, '\photo\66.PNG');
 /* 67 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 5, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\67.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 5, 0, 1, 1, '\photo\67.PNG');
 /* 68 */
-INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 6, 0, 1, 1, 'C:\dojo6\src\WebContent\photo\68.PNG');
+INSERT INTO Item (user_id, parts_code, pattern, rain, wind, photo) Values ('iiiii', 6, 0, 1, 1, '\photo\68.PNG');
 
 
 /* ----------------------------------------------------------------------------------------------------------- */

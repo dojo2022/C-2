@@ -368,7 +368,7 @@ public class WeatherForecastDAO {
 
 			ResultSet recommendRs = pStmt.executeQuery();
 			if (recommendRs.next()) { //もしおすすめコーデがすでにあったら
-				System.out.println("おすすめコーデすでにあり");
+				//System.out.println("おすすめコーデすでにあり");
 				String[] items = { "OUTER", "JACKET", "TOPS", "SKIRT", "PANTS", "SHOES" };
 				for (int i = 0; i < 6; i++) {
 					String itemId = recommendRs.getString(items[i]);

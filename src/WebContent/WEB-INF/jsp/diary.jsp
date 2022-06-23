@@ -13,7 +13,8 @@
 <script src="js/common.js"></script>
 </head>
 <body>
-	<img src="/coordinator/photo/logo.PNG" alt="coodinater">
+<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
+	<br>
 	<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -23,12 +24,14 @@
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
 	</nav>
+	<br>
 		<h1>DIARY</h1>
-		<form method="POST" action="/coordinator/DiaryServlet">
+		<form method="POST" action="/coordinator/DiaryServlet" align="center">
 		<input type="date" name="startDate">～
 		<input type="date" name="endDate">
-		<input type="submit" name="search" value="検索" class="btn">
+		<input type="submit" name="search" value="search" class="searchbtn">
 		</form>
+		<br>
 		<div id="table">
 			<table id="list" align="center">
 				<tr>
