@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import model.Item;
 import model.WeatherForecast;
@@ -183,7 +184,7 @@ public class WeatherForecastDAO {
 				String strDate = LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 				pStmt.setString(1, LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-	            Date date = sdFormat.parse(strDate);
+				Date date = sdFormat.parse(strDate);
 
 				//デバッグ用。表示したい日を入れてください。
 				//pStmt.setString(1, LocalDate.now().plusDays(0).format(DateTimeFormatter.ofPattern("2022-06-25")));
@@ -222,8 +223,9 @@ public class WeatherForecastDAO {
 						weatherCodeAve = j + 1;
 					}
 				}
-				weatherList.add(new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-						highestTemperature, lowestTemperature, date));
+				weatherList.add(
+						new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
+								highestTemperature, lowestTemperature, date));
 			}
 
 		} catch (SQLException e) {
@@ -269,7 +271,7 @@ public class WeatherForecastDAO {
 				String strDate = LocalDate.now().plusDays(i).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 				pStmt.setString(1, strDate);
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-	            Date date = sdFormat.parse(strDate);
+				Date date = sdFormat.parse(strDate);
 
 				// SQL文を実行し、結果表を取得する
 				ResultSet rs = pStmt.executeQuery();
@@ -306,8 +308,9 @@ public class WeatherForecastDAO {
 						weatherCodeAve = j + 1;
 					}
 				}
-				weatherList.add(new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-						highestTemperature, lowestTemperature, date));
+				weatherList.add(
+						new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
+								highestTemperature, lowestTemperature, date));
 			}
 
 		} catch (SQLException e) {
@@ -335,8 +338,8 @@ public class WeatherForecastDAO {
 	 * 最初のものから順にアウター、ジャケット、トップス、スカートorパンツ、シューズ
 	 * 暑くてアウター無しがおすすめ等、ないパーツはnullです。
 	 */
-	public List<Item> recommendCoordinate() {
-		List<WeatherForecast> weatherList = new ArrayList<WeatherForecast>();
+	public List<Item> recommendCoordinate(String id) {
+		List<Item> itemList = new ArrayList<Item>();
 		Connection conn = null;
 		try {
 			// JDBCドライバを読み込む
@@ -345,111 +348,164 @@ public class WeatherForecastDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 
-			// 季節、7から19時の最高気温、最低気温、雨降るか、最大風速を取得
-			String weatherSql = "select * FROM WEATHER_FORECAST WHERE date = ? AND ( HOUR BETWEEN 7 AND 19 );";
-			PreparedStatement pStmt = conn.prepareStatement(weatherSql);
-			//もし20時を過ぎてたら明日、そうでなければ今日の日付にする
+			//もし20時を過ぎてたら明日、そうでなければ今日の日付を用意
 			int prog = 0;
 			if (20 <= Integer.parseInt(new SimpleDateFormat("HH").format(new Date()))) {
 				prog++;
 			}
-			pStmt.setString(1, LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+			String subjectDate = LocalDate.now().plusDays(prog).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-			//検索に必要な情報の変数を用意
-			int seasonCode = 0;
-			double rainAmount = 0.0;
-			double maxWind = 0.0;
-			double highestTemperature = -10000.0;
-			double lowestTemperature = 10000.0;
+			//そのユーザーID,日付のデータがあるか確認
+			String recommendSql = "SELECT * FROM RECOMMENDS WHERE date = ? AND user_id = ?";
+			PreparedStatement pStmt = conn.prepareStatement(recommendSql);
+			pStmt.setString(1, subjectDate);
+			pStmt.setString(2, id);
 
-			//結果表から上記の変数に値を入れる
-			while (rs.next()) {
-				seasonCode = Integer.parseInt(rs.getString("SEASON_CODE"));
-				rainAmount += Double.parseDouble(rs.getString("RAIN"));
-				if (maxWind < Double.parseDouble(rs.getString("WIND"))) {
-					maxWind = Double.parseDouble(rs.getString("WIND"));
+			ResultSet recommendRs = pStmt.executeQuery();
+			if (recommendRs.next()) { //もしおすすめコーデがすでにあったら
+				String[] items = {"OUTER", "JACKET", "TOPS", "SKIRT", "PANTS", "SHOES"};
+				for (int i = 0; i < 6; i++) {
+					String existRecSql = "select * FROM Item WHERE id = ?";
+					pStmt = conn.prepareStatement(existRecSql);
+					pStmt.setString(1, recommendRs.getString(items[i]));
+					ResultSet rs = pStmt.executeQuery();
+					if (rs.next()) {
+						itemList.add(i, new Item(
+								Integer.parseInt(rs.getString("ID")),
+								rs.getString("USER_ID"),
+								Integer.parseInt(rs.getString("PARTS_CODE")),
+								Integer.parseInt(rs.getString("PATTERN")),
+								Integer.parseInt(rs.getString("RAIN")),
+								Integer.parseInt(rs.getString("WIND")),
+								rs.getString("PHOTO"))
+								);
+					} else {
+						itemList.add(i,null);
+					}
 				}
-				if (highestTemperature < Double.parseDouble(rs.getString("TEMPERATURE"))) {
-					highestTemperature = Double.parseDouble(rs.getString("TEMPERATURE"));
+				//パンツかスカートのどっちかはnullなので削除
+				if (itemList.get(3) == null && itemList.get(4) != null) {
+					itemList.remove(3);
+				} else if (itemList.get(3) != null && itemList.get(4) == null) {
+					itemList.remove(4);
+				} else {
+					itemList.remove(new Random().nextInt(2) + 3);
 				}
-				if (lowestTemperature > Double.parseDouble(rs.getString("TEMPERATURE"))) {
-					lowestTemperature = Double.parseDouble(rs.getString("TEMPERATURE"));
+
+			} else { //おすすめコーデがまだなかったら
+
+				// 季節、7から19時の最高気温、最低気温、雨降るか、最大風速を取得
+				String weatherSql = "select * FROM WEATHER_FORECAST WHERE date = ? AND ( HOUR BETWEEN 7 AND 19 );";
+				PreparedStatement pStmtWeather = conn.prepareStatement(weatherSql);
+				//もし20時を過ぎてたら明日、そうでなければ今日の日付にする
+
+				pStmtWeather.setString(1, subjectDate);
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmtWeather.executeQuery();
+
+				//検索に必要な情報の変数を用意
+				int seasonCode = 0;
+				double rainAmount = 0.0;
+				double maxWind = 0.0;
+				double highestTemperature = -10000.0;
+				double lowestTemperature = 10000.0;
+
+				//結果表から上記の変数に値を入れる
+				while (rs.next()) {
+					seasonCode = Integer.parseInt(rs.getString("SEASON_CODE"));
+					rainAmount += Double.parseDouble(rs.getString("RAIN"));
+					if (maxWind < Double.parseDouble(rs.getString("WIND"))) {
+						maxWind = Double.parseDouble(rs.getString("WIND"));
+					}
+					if (highestTemperature < Double.parseDouble(rs.getString("TEMPERATURE"))) {
+						highestTemperature = Double.parseDouble(rs.getString("TEMPERATURE"));
+					}
+					if (lowestTemperature > Double.parseDouble(rs.getString("TEMPERATURE"))) {
+						lowestTemperature = Double.parseDouble(rs.getString("TEMPERATURE"));
+					}
 				}
-			}
 
-			//一応表示
-			System.out.println("おすすめコーデのための変数　季節コード:" + seasonCode + "　雨量：" + rainAmount + "　最大風速：" + maxWind + " 最高気温：" + highestTemperature + " 最低気温：" + lowestTemperature);
+				//一応表示
+				System.out.println(
+						"おすすめコーデのための変数　季節コード:" + seasonCode + "　雨量：" + rainAmount + "　最大風速：" + maxWind + " 最高気温："
+								+ highestTemperature + " 最低気温：" + lowestTemperature);
 
-			//最低気温基準はアウターだけ？
-			// その条件に合ったアイテムのリストを取ってくる
-			String itemSql = "SELECT * FROM Item"
+				List<Item> tmpItemList = new ArrayList<Item>();
+
+				for (int i = 0; i < 6; i++) {
+					// その条件に合ったアイテムのリストを取ってくる
+					System.out.println(i+ "周目");
+					String itemSql = "SELECT ITEM.ID, ITEM.USER_ID, ITEM.PARTS_CODE, ITEM.PATTERN, ITEM.RAIN, ITEM.WIND, ITEM.PHOTO FROM Item"
 							+ " INNER JOIN Item_season ON Item.id = Item_season.item_id"
 							+ " INNER JOIN Season ON Item_season.code = Season.code"
 							+ " WHERE Item.user_id = ?"
-							+ " WHERE Item.parts_code = ?"
+							+ " AND Item.parts_code = ?"
 							+ " AND (Item_season.code = ? AND Item_season.flag = 1)"
 							+ " AND (Season.LOWERLIMIT_TEMPERATURE <= ? AND ? <= Season.UPPERLIMIT_TEMPERATURE)";
-			if (rainAmount > 0) { //雨降るなら雨可のみ
-				itemSql += " AND Item.rain = 1";
-			}
-			if (maxWind > 4) { //風吹くなら風可のみ。4はけっこう行っちゃうから、平均にするか3にするかしてもいいかも
-				itemSql += " AND Item.wind = 1";
-			}
-			itemSql += ";";
-
-
-
-
-			//7時からと１１時からと１５時からの３回
-			for (int i = 1; i <= 6; i++) {
-				// SQL文を準備する
-				String sql = "select * FROM WEATHER_FORECAST WHERE date = ? AND ( HOUR BETWEEN 7 AND 19 );";
-				PreparedStatement pStmt = conn.prepareStatement(sql);
-
-				// SQL文を完成させる(i日後の天気を取得)
-				pStmt.setString(1, LocalDate.now().plusDays(i).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-				// SQL文を実行し、結果表を取得する
-				ResultSet rs = pStmt.executeQuery();
-				int cnt = 0;
-				int[] weatherCodeCnt = { 0, 0, 0, 0 };
-				double rainAmount = 0.0;
-				double windAmount = 0.0;
-				double highestTemperature = -10000.0;
-				double lowestTemperature = 10000.0;
-				while (rs.next()) {
-					//天気は平均、多数決で決める
-					cnt++;
-					//天気コードの出現回数を記録
-					weatherCodeCnt[Integer.parseInt(rs.getString("WEATHER_CODE")) - 1]++;
-					//最低、最高気温の設定
-					double t = Double.parseDouble(rs.getString("TEMPERATURE"));
-					if (t > highestTemperature) {
-						highestTemperature = t;
+					if (rainAmount > 0) { //雨降るなら雨可のみ
+						itemSql += " AND Item.rain = 1";
 					}
-					if (t < lowestTemperature) {
-						lowestTemperature = t;
+					if (maxWind > 4) { //風吹くなら風可のみ。4はけっこう行っちゃうから、平均にするか3にするかしてもいいかも
+						itemSql += " AND Item.wind = 1";
 					}
-					//降水量の加算
-					rainAmount += Double.parseDouble(rs.getString("RAIN"));
-					//風速の加算
-					windAmount += Double.parseDouble(rs.getString("WIND"));
+					itemSql += ";";
+					pStmt = conn.prepareStatement(itemSql);
+					pStmt.setString(1, id);
+					pStmt.setString(2, String.valueOf(i));
+					pStmt.setString(3, String.valueOf(seasonCode));
+					if (i == 1 || i == 2) { //アウターとジャケットは最低気温基準
+						pStmt.setString(4, String.valueOf((int)Math.floor(lowestTemperature)));
+						pStmt.setString(5, String.valueOf((int)Math.floor(lowestTemperature)));
+					} else { //それ以外のパーツは最高気温基準
+						pStmt.setString(4, String.valueOf((int)Math.floor(highestTemperature)));
+						pStmt.setString(5, String.valueOf((int)Math.floor(highestTemperature)));
+					}
+					ResultSet rsOnePartsItem = pStmt.executeQuery();
+					//検索に引っかかったアイテムidをリストに
+					while (rsOnePartsItem.next()) {
+						tmpItemList.add(new Item(
+								Integer.parseInt(rs.getString("ID")),
+								rs.getString("USER_ID"),
+								Integer.parseInt(rs.getString("PARTS_CODE")),
+								Integer.parseInt(rs.getString("PATTERN")),
+								Integer.parseInt(rs.getString("RAIN")),
+								Integer.parseInt(rs.getString("WIND")),
+								rs.getString("PHOTO")));
+					}
+					if (i == 3) { //スカートならパンツもやる
+						continue;
+					}
+					//アイテムを格納
+					if (tmpItemList.size() == 0) { //アイテムなかったら無し
+						itemList.add(i, null);
+					} else {
+						itemList.add(i, tmpItemList.get(new Random().nextInt(tmpItemList.size())));
+					}
+					//tmpList削除
+					tmpItemList.clear();
 				}
-				//その時間帯の天気は多数決で選ぶ。同率1位なら悪天候側。
-				int weatherCodeAve = 0;
-				int tmpMax = -1;
-				for (int j = 0; j < weatherCodeCnt.length; j++) {
-					if (tmpMax <= weatherCodeCnt[j]) {
-						tmpMax = weatherCodeCnt[j];
-						weatherCodeAve = j + 1;
-					}
-				}
-				weatherList.add(new WeatherForecast(weatherCodeAve, rainAmount / cnt, windAmount / cnt,
-						highestTemperature, lowestTemperature));
-			}
+				//スカートのnullを消す
+				itemList.remove(3);
+				//それをおすすめコーデテーブルに保存
+				for (int i = 0; i < itemList.size(); i++) {
+					String insertRecommendSql = "INSERT INTO RECOMMENDS (USER_ID, DATE, OUTER, JACKET, TOPS, SKIRT, PANTS, SHOES) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+					pStmt = conn.prepareStatement(insertRecommendSql);
+					pStmt.setString(1, id);
+					pStmt.setString(2, subjectDate);
+					for (int j = 3; j <= 8; j++) {
+						pStmt.setString(i, null);
+						for (int k = 0; k < itemList.size(); k++) {
+							if (itemList.get(j) == null && (itemList.get(j).getPartsCode() == (j - 2))) {
+								pStmt.setString(1, String.valueOf(itemList.get(k).getId()));
+								break;
+							}
+						}
 
+					}
+
+				}
+
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -465,7 +521,7 @@ public class WeatherForecastDAO {
 			}
 		}
 		// 結果を返す
-		return weatherList;
+		return itemList;
 	}
 
 	//time（'2022-06-14T00:00'の形）からDB用のdate型（'2022-06-14'の形）に加工
