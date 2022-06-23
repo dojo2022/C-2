@@ -625,7 +625,81 @@ public class WeatherForecastDAO {
 		// 結果を返す
 		return itemList;
 	}
+	// 今日の天気予報を返す
+	public WeatherForecast todayWeather() {
+		WeatherForecast weatherList = null;
+		Connection conn = null;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
 
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL, "sa", "");
+			//今日の天気予報を取ってくる
+			String sql = "select * FROM WEATHER_FORECAST WHERE date = ? AND ( HOUR BETWEEN 7 AND 19 );";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			String strDate = LocalDate.now().plusDays(0).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			pStmt.setString(1, strDate);
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = sdFormat.parse(strDate);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+			int cnt = 0;
+			int[] weatherCodeCnt = { 0, 0, 0, 0 };
+			double rainAmount = 0.0;
+			double windAmount = 0.0;
+			double highestTemperature = -10000.0;
+			double lowestTemperature = 10000.0;
+			while (rs.next()) {
+				//天気は平均、多数決で決める
+				cnt++;
+				//天気コードの出現回数を記録
+				weatherCodeCnt[Integer.parseInt(rs.getString("WEATHER_CODE")) - 1]++;
+				//最低、最高気温の設定
+				double t = Double.parseDouble(rs.getString("TEMPERATURE"));
+				if (t > highestTemperature) {
+					highestTemperature = t;
+				}
+				if (t < lowestTemperature) {
+					lowestTemperature = t;
+				}
+				//降水量の加算
+				rainAmount += Double.parseDouble(rs.getString("RAIN"));
+				//風速の加算
+				windAmount += Double.parseDouble(rs.getString("WIND"));
+			}
+			//その時間帯の天気は多数決で選ぶ。同率1位なら悪天候側。
+			int weatherCodeAve = 0;
+			int tmpMax = -1;
+			for (int j = 0; j < weatherCodeCnt.length; j++) {
+				if (tmpMax <= weatherCodeCnt[j]) {
+					tmpMax = weatherCodeCnt[j];
+					weatherCodeAve = j + 1;
+				}
+			}
+			weatherList = new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
+					highestTemperature, lowestTemperature, date);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// 結果を返す
+		return weatherList;
+	}
 	//time（'2022-06-14T00:00'の形）からDB用のdate型（'2022-06-14'の形）に加工
 	public String timeToDate(String time) {
 		char[] charArray = time.toCharArray();
