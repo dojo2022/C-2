@@ -338,6 +338,7 @@ public class WeatherForecastDAO {
 	 * 最初のものから順にアウター、ジャケット、トップス、スカートorパンツ、シューズ
 	 * 暑くてアウター無しがおすすめ等、ないパーツはデフォルトコンストラクタのありえないアイテムです。
 	 */
+	//public boolean recommendCoordinate(String id , item アウター,item ジャケッ・・・・)
 	public List<Item> recommendCoordinate(String id) {
 		List<Item> itemList = new ArrayList<Item>();
 		for (int i = 0; i < 6; i++) {
@@ -578,6 +579,32 @@ public class WeatherForecastDAO {
 					}
 				}
 				pStmt.executeUpdate();
+			}
+			//itemListの、ないアイテムのところはphotoをnoImageに
+			for (int i = 0; i < itemList.size(); i++) {
+				String photoFileName = "";
+				switch (i) {
+					case 0:
+						photoFileName = "noImage_outer.png";
+						break;
+					case 1:
+						photoFileName = "noImage_jk.png";
+						break;
+					case 2:
+						photoFileName = "noImage_tmp.png";
+						break;
+					case 3:
+						photoFileName = "noImage_tmp.png";
+						break;
+					case 4:
+						photoFileName = "noImage_tmp.png";
+						break;
+					default:
+						break;
+				}
+				if (itemList.get(i).getPhoto() == null) {
+					itemList.get(i).setPhoto(photoFileName);
+				}
 			}
 
 
