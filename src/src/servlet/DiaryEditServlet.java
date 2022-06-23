@@ -42,7 +42,7 @@ public class DiaryEditServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String s1 = request.getParameter("edit");
 		String s2 = request.getParameter("update");
-		if (s1.equals("編集")) {
+		if (s1 != null) {
 
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
@@ -56,31 +56,11 @@ public class DiaryEditServlet extends HttpServlet {
 			//dをスコープに入れる
 			request.setAttribute("diary", diary);
 
-			/*if (request.getParameter("SUBMIT").equals("更新")) {
-				if (dDao.update(new Diary("photo","note"))) { // 更新成功
-					request.setAttribute("result",
-							new Result("更新成功！", "レコードを更新しました。", "/simpleBC/MenuServlet"));
-				} else { // 更新失敗
-					request.setAttribute("result",
-							new Result("更新失敗！", "レコードを更新できませんでした。", "/simpleBC/MenuServlet"));
-				}
-			*/
-
-			/*else {
-				if (bDao.delete(number)) { // 削除成功
-					request.setAttribute("result",
-							new Result("削除成功！", "レコードを削除しました。", "/simpleBC/MenuServlet"));
-				} else { // 削除失敗
-					request.setAttribute("result",
-							new Result("削除失敗！", "レコードを削除できませんでした。", "/simpleBC/MenuServlet"));
-				}
-			}*/
-
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diaryEdit.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (s2.equals("更新")) {
+		} else if (s2 != null) {
 			//id
 			HttpSession session = request.getSession();
 			String userId = ((User)session.getAttribute("id")).getId();;
@@ -88,20 +68,25 @@ public class DiaryEditServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			Part part = request.getPart("IMAGE"); // getPartで取得
 			String photo = "\\photo\\" + userId + System.currentTimeMillis() + this.getExtension(this.getFileName(part));
-
 			part.write(photo);
-
 			String diaryId = request.getParameter("diary_id");
 			String note = request.getParameter("note");
 
 
 			//dao
-
-
 			DiaryDAO dDao = new DiaryDAO();
-			Diary diary = dDao.search(diaryId);
+			Diary diary = new Diary();
+
+			//diaryオブジェクトにデータを格納する。
+			diary.setId(Integer.parseInt(diaryId));
+			diary.setPhoto(photo);
+			diary.setNote(note);
+
+
+			boolean ret = dDao.update(diary);
+
 			//リクエストスコープに保存する
-			//request.setAttribute("diaryList");
+			request.setAttribute("diary", diary);
 
 			//jspにフォワード
 			// 結果ページにフォワードする
