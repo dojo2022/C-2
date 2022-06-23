@@ -336,10 +336,14 @@ public class WeatherForecastDAO {
 	/** 今日の（20時以降なら明日の）おすすめコーデのアイテムリストを返す。
 	 * @return 戻り値はItem型が5つ入っています。
 	 * 最初のものから順にアウター、ジャケット、トップス、スカートorパンツ、シューズ
-	 * 暑くてアウター無しがおすすめ等、ないパーツはnullです。
+	 * 暑くてアウター無しがおすすめ等、ないパーツはデフォルトコンストラクタのありえないアイテムです。
 	 */
 	public List<Item> recommendCoordinate(String id) {
 		List<Item> itemList = new ArrayList<Item>();
+		for (int i = 0; i < 6; i++) {
+			itemList.add(new Item());
+		}
+		//System.out.println("itemListサイズ：" + itemList.size());
 		Connection conn = null;
 		try {
 			// JDBCドライバを読み込む
@@ -363,30 +367,40 @@ public class WeatherForecastDAO {
 
 			ResultSet recommendRs = pStmt.executeQuery();
 			if (recommendRs.next()) { //もしおすすめコーデがすでにあったら
-				String[] items = {"OUTER", "JACKET", "TOPS", "SKIRT", "PANTS", "SHOES"};
+				System.out.println("おすすめコーデすでにあり");
+				String[] items = { "OUTER", "JACKET", "TOPS", "SKIRT", "PANTS", "SHOES" };
 				for (int i = 0; i < 6; i++) {
+					String itemId = recommendRs.getString(items[i]);
+					if (itemId == null) {
+						continue;
+					}
+					//System.out.println(i + "周目,アイテムid:" + itemId);
 					String existRecSql = "select * FROM Item WHERE id = ?";
 					pStmt = conn.prepareStatement(existRecSql);
-					pStmt.setString(1, recommendRs.getString(items[i]));
+					pStmt.setString(1, itemId);
 					ResultSet rs = pStmt.executeQuery();
 					if (rs.next()) {
-						itemList.add(i, new Item(
+						itemList.set(i, new Item(
 								Integer.parseInt(rs.getString("ID")),
 								rs.getString("USER_ID"),
 								Integer.parseInt(rs.getString("PARTS_CODE")),
 								Integer.parseInt(rs.getString("PATTERN")),
 								Integer.parseInt(rs.getString("RAIN")),
 								Integer.parseInt(rs.getString("WIND")),
-								rs.getString("PHOTO"))
-								);
-					} else {
-						itemList.add(i,null);
+								rs.getString("PHOTO")));
 					}
 				}
+				/*
+				System.out.println("おすすめコーデすでにありの場合の、パンツスカート統合前のリスト");
+				for (int n = 0; n < itemList.size(); n++ ) {
+					System.out.println(n + "周目" + itemList.get(n).getId());
+				}
+				*/
+
 				//パンツかスカートのどっちかはnullなので削除
-				if (itemList.get(3) == null && itemList.get(4) != null) {
+				if (itemList.get(3).getUserId() == null && itemList.get(4).getUserId() != null) {
 					itemList.remove(3);
-				} else if (itemList.get(3) != null && itemList.get(4) == null) {
+				} else if (itemList.get(3).getUserId() != null && itemList.get(4).getUserId() == null) {
 					itemList.remove(4);
 				} else {
 					itemList.remove(new Random().nextInt(2) + 3);
@@ -426,86 +440,147 @@ public class WeatherForecastDAO {
 				}
 
 				//一応表示
+				/*
 				System.out.println(
 						"おすすめコーデのための変数　季節コード:" + seasonCode + "　雨量：" + rainAmount + "　最大風速：" + maxWind + " 最高気温："
 								+ highestTemperature + " 最低気温：" + lowestTemperature);
+				*/
+				//テスト用
+				/*
+				seasonCode = 4;
+				rainAmount = 10.0;
+				maxWind = 5.0;
+				highestTemperature = 10;
+				lowestTemperature = 3;
+				*/
+
+
 
 				List<Item> tmpItemList = new ArrayList<Item>();
 
 				for (int i = 0; i < 6; i++) {
+					//System.out.println("i=" + i + ",itemListサイズ：" + itemList.size());
+					if (i == 4) { //スカートとパンツは3週目で。
+						continue;
+					}
 					// その条件に合ったアイテムのリストを取ってくる
-					System.out.println(i+ "周目");
+					//System.out.println(i+ "周目");
 					String itemSql = "SELECT ITEM.ID, ITEM.USER_ID, ITEM.PARTS_CODE, ITEM.PATTERN, ITEM.RAIN, ITEM.WIND, ITEM.PHOTO FROM Item"
 							+ " INNER JOIN Item_season ON Item.id = Item_season.item_id"
 							+ " INNER JOIN Season ON Item_season.code = Season.code"
 							+ " WHERE Item.user_id = ?"
-							+ " AND Item.parts_code = ?"
 							+ " AND (Item_season.code = ? AND Item_season.flag = 1)"
 							+ " AND (Season.LOWERLIMIT_TEMPERATURE <= ? AND ? <= Season.UPPERLIMIT_TEMPERATURE)";
+
 					if (rainAmount > 0) { //雨降るなら雨可のみ
 						itemSql += " AND Item.rain = 1";
 					}
 					if (maxWind > 4) { //風吹くなら風可のみ。4はけっこう行っちゃうから、平均にするか3にするかしてもいいかも
 						itemSql += " AND Item.wind = 1";
 					}
+					if (i == 3) {
+						itemSql += " AND (Item.parts_code = 4 OR Item.parts_code = 5)";
+					} else {
+						itemSql += " AND (Item.parts_code = " + (i + 1) + ")";
+					}
 					itemSql += ";";
 					pStmt = conn.prepareStatement(itemSql);
 					pStmt.setString(1, id);
-					pStmt.setString(2, String.valueOf(i));
-					pStmt.setString(3, String.valueOf(seasonCode));
-					if (i == 1 || i == 2) { //アウターとジャケットは最低気温基準
-						pStmt.setString(4, String.valueOf((int)Math.floor(lowestTemperature)));
-						pStmt.setString(5, String.valueOf((int)Math.floor(lowestTemperature)));
+					pStmt.setString(2, String.valueOf(seasonCode));
+					if (i == 0 || i == 1) { //アウターとジャケットは最低気温基準
+						pStmt.setString(3, String.valueOf((int) Math.floor(lowestTemperature)));
+						pStmt.setString(4, String.valueOf((int) Math.floor(lowestTemperature)));
 					} else { //それ以外のパーツは最高気温基準
-						pStmt.setString(4, String.valueOf((int)Math.floor(highestTemperature)));
-						pStmt.setString(5, String.valueOf((int)Math.floor(highestTemperature)));
+						pStmt.setString(3, String.valueOf((int) Math.floor(highestTemperature)));
+						pStmt.setString(4, String.valueOf((int) Math.floor(highestTemperature)));
 					}
 					ResultSet rsOnePartsItem = pStmt.executeQuery();
 					//検索に引っかかったアイテムidをリストに
 					while (rsOnePartsItem.next()) {
 						tmpItemList.add(new Item(
-								Integer.parseInt(rs.getString("ID")),
-								rs.getString("USER_ID"),
-								Integer.parseInt(rs.getString("PARTS_CODE")),
-								Integer.parseInt(rs.getString("PATTERN")),
-								Integer.parseInt(rs.getString("RAIN")),
-								Integer.parseInt(rs.getString("WIND")),
-								rs.getString("PHOTO")));
+								Integer.parseInt(rsOnePartsItem.getString("ID")),
+								rsOnePartsItem.getString("USER_ID"),
+								Integer.parseInt(rsOnePartsItem.getString("PARTS_CODE")),
+								Integer.parseInt(rsOnePartsItem.getString("PATTERN")),
+								Integer.parseInt(rsOnePartsItem.getString("RAIN")),
+								Integer.parseInt(rsOnePartsItem.getString("WIND")),
+								rsOnePartsItem.getString("PHOTO")));
 					}
-					if (i == 3) { //スカートならパンツもやる
-						continue;
-					}
+					//System.out.println(i + "周目、季節ありヒット数：" + tmpItemList.size());
 					//アイテムを格納
-					if (tmpItemList.size() == 0) { //アイテムなかったら無し
-						itemList.add(i, null);
-					} else {
-						itemList.add(i, tmpItemList.get(new Random().nextInt(tmpItemList.size())));
+					if (tmpItemList.size() == 0) { //アイテムなかったら、季節の条件をなくして再チャレンジ
+						String itemSqlRe = "SELECT ITEM.ID, ITEM.USER_ID, ITEM.PARTS_CODE, ITEM.PATTERN, ITEM.RAIN, ITEM.WIND, ITEM.PHOTO FROM Item"
+								+ " INNER JOIN Item_season ON Item.id = Item_season.item_id"
+								+ " INNER JOIN Season ON Item_season.code = Season.code"
+								+ " WHERE Item.user_id = ?"
+								//+ " AND (Item_season.code = ? AND Item_season.flag = 1)"
+								+ " AND (Season.LOWERLIMIT_TEMPERATURE <= ? AND ? <= Season.UPPERLIMIT_TEMPERATURE)";
+
+						if (rainAmount > 0) { //雨降るなら雨可のみ
+							itemSql += " AND Item.rain = 1";
+						}
+						if (maxWind > 4) { //風吹くなら風可のみ。4はけっこう行っちゃうから、平均にするか3にするかしてもいいかも
+							itemSql += " AND Item.wind = 1";
+						}
+						if (i == 3) {
+							itemSql += " AND (Item.parts_code = 4 OR Item.parts_code = 5)";
+						} else {
+							itemSql += " AND (Item.parts_code = " + (i + 1) + ")";
+						}
+						itemSql += ";";
+						pStmt = conn.prepareStatement(itemSqlRe);
+						pStmt.setString(1, id);
+						//pStmt.setString(2, String.valueOf(seasonCode));
+						if (i == 0 || i == 1) { //アウターとジャケットは最低気温基準
+							pStmt.setString(2, String.valueOf((int) Math.floor(lowestTemperature)));
+							pStmt.setString(3, String.valueOf((int) Math.floor(lowestTemperature)));
+						} else { //それ以外のパーツは最高気温基準
+							pStmt.setString(2, String.valueOf((int) Math.floor(highestTemperature)));
+							pStmt.setString(3, String.valueOf((int) Math.floor(highestTemperature)));
+						}
+						ResultSet rsOnePartsItemRe = pStmt.executeQuery();
+						//検索に引っかかったアイテムidをリストに
+						while (rsOnePartsItem.next()) {
+							tmpItemList.add(new Item(
+									Integer.parseInt(rsOnePartsItemRe.getString("ID")),
+									rsOnePartsItemRe.getString("USER_ID"),
+									Integer.parseInt(rsOnePartsItemRe.getString("PARTS_CODE")),
+									Integer.parseInt(rsOnePartsItemRe.getString("PATTERN")),
+									Integer.parseInt(rsOnePartsItemRe.getString("RAIN")),
+									Integer.parseInt(rsOnePartsItemRe.getString("WIND")),
+									rsOnePartsItemRe.getString("PHOTO")));
+						}
+						//System.out.println(i + "周目、季節なしヒット数：" + tmpItemList.size());
+					}
+
+					if (tmpItemList.size() != 0) {
+						itemList.set(i, tmpItemList.get(new Random().nextInt(tmpItemList.size())));
 					}
 					//tmpList削除
 					tmpItemList.clear();
+
 				}
-				//スカートのnullを消す
-				itemList.remove(3);
-				//それをおすすめコーデテーブルに保存
-				for (int i = 0; i < itemList.size(); i++) {
-					String insertRecommendSql = "INSERT INTO RECOMMENDS (USER_ID, DATE, OUTER, JACKET, TOPS, SKIRT, PANTS, SHOES) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-					pStmt = conn.prepareStatement(insertRecommendSql);
-					pStmt.setString(1, id);
-					pStmt.setString(2, subjectDate);
-					for (int j = 3; j <= 8; j++) {
-						pStmt.setString(i, null);
-						for (int k = 0; k < itemList.size(); k++) {
-							if (itemList.get(j) == null && (itemList.get(j).getPartsCode() == (j - 2))) {
-								pStmt.setString(1, String.valueOf(itemList.get(k).getId()));
-								break;
-							}
+				//4周目のnullを消す
+				itemList.remove(4);
+
+				//完成したitemListをおすすめコーデテーブルに保存
+				String insertRecommendSql = "INSERT INTO RECOMMENDS (USER_ID, DATE, OUTER, JACKET, TOPS, SKIRT, PANTS, SHOES) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+				pStmt = conn.prepareStatement(insertRecommendSql);
+				pStmt.setString(1, id);
+				pStmt.setString(2, subjectDate);
+				for (int i = 3; i <= 8; i++) {
+					pStmt.setString(i, null);
+					for (int j = 0; j < itemList.size(); j++) {
+						if (itemList.get(j) != null && (itemList.get(j).getPartsCode() == (i - 2))) {
+							pStmt.setString(i, String.valueOf(itemList.get(j).getId()));
+							break;
 						}
-
 					}
-
 				}
-
+				pStmt.executeUpdate();
 			}
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

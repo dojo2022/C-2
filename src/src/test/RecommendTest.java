@@ -12,7 +12,12 @@ public class RecommendTest {
 		List<Item> itemList = wDao.recommendCoordinate("aaaaa");
 		for (int i = 0; i < itemList.size(); i++) {
 			System.out.println(i + "こめ");
-			System.out.println("アイテムコード" + itemList.get(i).getPartsCode());
+			if (itemList.get(i) == null) {
+				System.out.println("なし");
+			} else {
+				System.out.println("id" + itemList.get(i).getId());
+				System.out.println("パーツコード" + itemList.get(i).getPartsCode());
+			}
 			System.out.println();
 		}
 	}
