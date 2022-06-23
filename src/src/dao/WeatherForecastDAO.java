@@ -585,19 +585,19 @@ public class WeatherForecastDAO {
 				String photoFileName = "";
 				switch (i) {
 					case 0:
-						photoFileName = "noImage_outer.png";
+						photoFileName = "\\photo\\noImage_outer.png";
 						break;
 					case 1:
-						photoFileName = "noImage_jk.png";
+						photoFileName = "\\photo\\noImage_jk.png";
 						break;
 					case 2:
-						photoFileName = "noImage_tmp.png";
+						photoFileName = "\\photo\\noImage_tops.png";
 						break;
 					case 3:
-						photoFileName = "noImage_tmp.png";
+						photoFileName = "\\photo\\noImage_bottom.png";
 						break;
 					case 4:
-						photoFileName = "noImage_tmp.png";
+						photoFileName = "\\photo\\noImage_shoes.png ";
 						break;
 					default:
 						break;

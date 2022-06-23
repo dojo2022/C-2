@@ -61,6 +61,7 @@ public class AjaxSampleServlet extends HttpServlet {
 		List<WeatherForecast> weeklyWeatherList = wDAO.weeklyWeatherForecast();
 		session.setAttribute("weeklyWeather", weeklyWeatherList);
 
+
 		//
 
 		//一日天気予報のデータを表示
