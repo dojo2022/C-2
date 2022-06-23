@@ -42,7 +42,7 @@ public class DiaryEditServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String s1 = request.getParameter("edit");
 		String s2 = request.getParameter("update");
-		if (s1.equals("編集")) {
+		if (s1 != null) {
 
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
@@ -60,7 +60,7 @@ public class DiaryEditServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diaryEdit.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (s2.equals("更新")) {
+		} else if (s2 != null) {
 			//id
 			HttpSession session = request.getSession();
 			String userId = ((User)session.getAttribute("id")).getId();;
@@ -76,21 +76,14 @@ public class DiaryEditServlet extends HttpServlet {
 			//dao
 			DiaryDAO dDao = new DiaryDAO();
 			Diary diary = new Diary();
+
 			//diaryオブジェクトにデータを格納する。
-			diary.setId(diaryId);
-			//String.valueOf(edit.getId()));
+			diary.setId(Integer.parseInt(diaryId));
 			diary.setPhoto(photo);
 			diary.setNote(note);
 
 
 			boolean ret = dDao.update(diary);
-
-
-
-			//edit.set(String.valueOf(Id(diaryId)));
-			//edit.setPhoto(photo);
-			//edit.setNote(note);
-
 
 			//リクエストスコープに保存する
 			request.setAttribute("diary", diary);

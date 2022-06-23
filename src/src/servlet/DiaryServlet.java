@@ -26,15 +26,21 @@ public class DiaryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+
 		HttpSession session = request.getSession();
 		//String userId = ((User)session.getAttribute("id")).getId();
 		String userId = "aaaaa";
 		DiaryDAO dDAO = new DiaryDAO();
+		//もし今日の日記がまだなければ追加
+
+
 		Diary param = new Diary();
 		//ユーザーid,開始日付、終了日付をセッターメソッドで格納する
 		param.setStartDate("2022-05-30");
 		param.setEndDate("2022-06-04");
 		param.setUserId(userId);
+
 
 		List<Diary> diaryList = dDAO.selectDiary(param);
 		System.out.println(diaryList);
