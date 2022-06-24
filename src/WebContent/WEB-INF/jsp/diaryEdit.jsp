@@ -8,22 +8,23 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/coordinator/css/diaryEdit.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
-<script src="js/diaryEdit.js"></script>
+<link rel="stylesheet" href="/coordinator/css/headerFooter.css">
+<script src="js/home.js"></script>
 <script src="js/common.js"></script>
 </head>
 <body>
-<div class="wrapper">
-  <h1 id="logo">
-   <img src="\test\logo.PNG" alt="coordinator">
-   </h1>
+<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
 <nav class="nav">
-		<ul>
-			<li><a href="/coordinator/HomeServlet">HOME</a></li>
-			<li><a href="/coordinator/DiaryServlet">DIARY</a></li>
-			<li><a href="/coordinator/ItemSearchServlet">SEARCH</a></li>
-			<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
-			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
-		</ul>
+ <ul>
+    <li><a href="/coordinator/HomeServlet">HOME</a></li>
+    <li><a href="/coordinator/DiaryServlet">DIARY</a></li>
+    <li> <a href="/coordinator/ItemSearchServlet">SEARCH</a></li>
+    <li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
+    <li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
+</ul>
+</nav>
+
+<h3 align="center">
 	</nav>
 
 <form method="POST" action="/coordinator/DiaryEditServlet">
@@ -36,9 +37,9 @@
 		<canvas id="preview" style="max-width:200px;"></canvas>
     <br>
   <textarea name="note">${diary.note}</textarea>
-  <button type="reset">リセット</button>
+  <button type="reset" class="btn">リセット</button>
   <br>
-  <input type="submit" name="update" value="更新">
+  <input type="submit" name="update" value="更新" class="btn">
 </form>
 <a href="/coordinator/DiaryServlet">日記画面に戻る</a>
 

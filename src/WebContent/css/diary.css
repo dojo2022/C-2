@@ -72,7 +72,12 @@ table#list th, table#list td {
   position:relative;
 }
 
+table#list{
+	border-spacing: 0;
+}
+
 table#list th{
+	border-bottom:2px solid #000;
 	border-bottom-color: #232323;
 }
 

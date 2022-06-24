@@ -25,12 +25,13 @@
 		</ul>
 	</nav>
 	<br>
-		<h1>DIARY</h1>
-		<form method="POST" action="/coordinator/DiaryServlet" align="center">
+		<div align="center">DIARY
+		<form method="POST" action="/coordinator/DiaryServlet" >
 		<input type="date" name="startDate">～
 		<input type="date" name="endDate">
 		<input type="submit" name="search" value="search" class="searchbtn">
 		</form>
+		</div>
 		<br>
 		<div id="table">
 			<table id="list" align="center">
@@ -39,6 +40,7 @@
 					<th>COORDINATE</th>
 					<th></th>
 					<th>WEATHER / COMMENT</th>
+					<th></th>
 					<th></th>
 
 				</tr>
