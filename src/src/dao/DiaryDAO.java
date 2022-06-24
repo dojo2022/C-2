@@ -115,7 +115,7 @@ public class DiaryDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '¥photo¥no_image.png' ORDER BY date DESC LIMIT 3";
+			String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '\\photo\\no_image.png' ORDER BY date DESC LIMIT 3";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			pStmt.setString(1, id);

@@ -56,10 +56,11 @@ public class HomeServlet extends HttpServlet {
 		//String id =((User)session.getAttribute("id")).getId();
 		String id = "aaaaa";
 		List<Diary> diaryList= dDAO.search3Photos(id);
+		/*
 		for (int i = 0; i < diaryList.size(); i++) {
 			System.out.println(diaryList.get(i).getPhoto());
 			System.out.println(diaryList.get(i).getDate());
-		}
+		}*/
 		//リクエストスコープに写真のデータを格納する
 		request.setAttribute("diaryList", diaryList);
 
