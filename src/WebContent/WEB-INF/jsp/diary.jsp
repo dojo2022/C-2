@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8">
+<meta charset="UTF-8">
 <title>DIARY</title>
 <link rel="stylesheet" href="/coordinator/css/diary.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
@@ -27,8 +27,8 @@
 	<br>
 		<div align="center"><h3>DIARY</h3>
 		<form method="POST" action="/coordinator/DiaryServlet" >
-		<input type="date" name="startDate" value="${startDate}">～
-		<input type="date" name="endDate"  value="${endDate}">
+		<input type="date" name="startDate">～
+		<input type="date" name="endDate">
 		<input type="submit" name="search" value="SEARCH" class="searchbtn">
 		</form>
 		</div>
@@ -86,3 +86,6 @@
 		</div>
 </body>
 </html>
+
+
+
