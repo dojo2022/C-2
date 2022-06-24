@@ -32,31 +32,29 @@ ${weather_fourhour.dateStr}
 </c:if>
 <c:set value="${count + 1}" var="count"></c:set>
 </c:forEach>
-RECOMMENDS and FORECAST</h3>
+Recommends and Forecast</h3>
 
 <div class="wrapper">
     <div class="recommends">
     	<c:set value = "1" var="count"></c:set>
     	<c:forEach var="item" items="${recommends}">
     		<c:choose>
-        		<c:when test="${count == 1}">
+        		<c:when test="count == 1">
+        			<img id="outer_photo" src="/coordinator/${item.photo}" width="148" height="275" alt="outer">
+        		</c:when>
+        		<c:when test="count == 2">
         			<img id="jk_photo" src="/coordinator/${item.photo}" width="224" height="268" alt="jk">
         		</c:when>
-        		<c:when test="${count == 2}">
+        		<c:when test="count == 3">
         			<img id="tops_photo" src="/coordinator/${item.photo}" width="200" height="271" alt="tops">
         		</c:when>
-        		<c:when test="${count == 3}">
+        		<c:when test="count == 4">
         			<img id="bottoms_photo" src="/coordinator/${item.photo}" width="212" height="288" alt="bottoms">
         		</c:when>
-        		<c:when test="${count == 4}">
+        		<c:when test="count == 5">
         			<img id="shoes_photo" src="/coordinator/${item.photo}" width="224" height="142" alt="shoes">
         		</c:when>
-        		<c:when test="${count == 5}">
-        			<img id="outer_photo" src="/coordinator/${item.photo}" width="148" height="275" alt="outer">
-
-        		</c:when>
     		</c:choose>
-    		<c:set value = "${count + 1}" var="count"></c:set>
     	</c:forEach>
     	<c:remove var="count"/>
 
@@ -70,7 +68,7 @@ RECOMMENDS and FORECAST</h3>
     </div>
     <div class="oneday_weather">
     <table class="ondayWeather_table">
-        <th>MORNING</th><th>AFTERNOON</th><th>EVENING</th>
+        <th>Morning</th><th>Afternoon</th><th>Evening</th>
 		<tr>
 		<c:set value = "1" var="count"></c:set>
 		<c:forEach var="weather_fourhour" items="${oneDayWeather}">
@@ -124,9 +122,9 @@ RECOMMENDS and FORECAST</h3>
 <br>
 <br>
 
-<h3 align="center">HISTORY</h3>
+<h3 align="center">History</h3>
 <!-- 過去3日分の服 -->
-<table align="center" class="history">
+<table align="center">
 	<c:forEach var="history" items="${diaryList}">
     <th>
     ${history.dateStr}
@@ -152,7 +150,7 @@ RECOMMENDS and FORECAST</h3>
 <br>
 <br>
 
-<h3 align="center">FORECAST</h3>
+<h3 align="center">Forecast</h3>
 <table border="1" style="border-collapse: collapse" align="center" >
 
 	<c:forEach var="weather_week" items="${weeklyWeather}">

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8">
+<meta charset="UTF-8">
 <title>DIARY</title>
 <link rel="stylesheet" href="/coordinator/css/diary.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
@@ -13,8 +13,7 @@
 <script src="js/common.js"></script>
 </head>
 <body>
-<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
-	<br>
+	<img src="/coordinator/photo/logo.PNG" alt="coodinater">
 	<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -24,15 +23,21 @@
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
 	</nav>
+<<<<<<< HEAD
 	<br>
 		<div align="center"><h3>DIARY</h3>
 		<form method="POST" action="/coordinator/DiaryServlet" >
 		<input type="date" name="startDate" value="${startDate}">～
 		<input type="date" name="endDate"  value="${endDate}">
 		<input type="submit" name="search" value="SEARCH" class="searchbtn">
+=======
+		<h1>DIARY</h1>
+		<form method="POST" action="/coordinator/DiaryServlet">
+		<input type="date" name="startDate" value="${startDate}">～
+		<input type="date" name="endDate" value="${endDate}">
+		<input type="submit" name="search" value="検索" class="btn">
+>>>>>>> 507f6f9956fb5d89246292e720cc9c69c299cee6
 		</form>
-		</div>
-		<br>
 		<div id="table">
 			<table id="list" align="center">
 				<tr>
@@ -40,7 +45,6 @@
 					<th>COORDINATE</th>
 					<th></th>
 					<th>WEATHER / COMMENT</th>
-					<th></th>
 					<th></th>
 
 				</tr>
@@ -86,3 +90,6 @@
 		</div>
 </body>
 </html>
+
+
+
