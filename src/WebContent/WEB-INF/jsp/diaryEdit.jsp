@@ -24,24 +24,23 @@
 </ul>
 </nav>
 
-<h3 align="center">
-	</nav>
+<h3>${diary.dateStr}</h3>
 
-<form method="POST" action="/coordinator/DiaryEditServlet">
+<form method="POST" action="/coordinator/DiaryEditServlet" enctype="multipart/form-data">
   <img src="/coordinator${diary.photo}">
-  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
-  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
+  <!--  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
+  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>-->
   <br>
   <input type="text" name="diary_id" value="${diary.id}"class="hidden">
   画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
 		<canvas id="preview" style="max-width:200px;"></canvas>
     <br>
   <textarea name="note">${diary.note}</textarea>
-  <button type="reset" class="btn">リセット</button>
+  <!-- <button type="reset" class="btn">リセット</button> -->
   <br>
   <input type="submit" name="update" value="更新" class="btn">
 </form>
-<a href="/coordinator/DiaryServlet">日記画面に戻る</a>
+<a href="/coordinator/DiaryServlet"><img src="/coordinator/photo/backpage.png" alt="Back Page"></a>
 
 </body>
 </html>
