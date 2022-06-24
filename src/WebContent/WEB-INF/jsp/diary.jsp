@@ -25,11 +25,11 @@
 		</ul>
 	</nav>
 	<br>
-		<div align="center">DIARY
+		<div align="center"><h3>DIARY</h3>
 		<form method="POST" action="/coordinator/DiaryServlet" >
 		<input type="date" name="startDate">～
 		<input type="date" name="endDate">
-		<input type="submit" name="search" value="search" class="searchbtn">
+		<input type="submit" name="search" value="SEARCH" class="searchbtn">
 		</form>
 		</div>
 		<br>

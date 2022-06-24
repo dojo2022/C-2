@@ -32,7 +32,7 @@ ${weather_fourhour.dateStr}
 </c:if>
 <c:set value="${count + 1}" var="count"></c:set>
 </c:forEach>
-Recommends and Forecast</h3>
+RECOMMENDS and FORECAST</h3>
 
 <div class="wrapper">
     <div class="recommends">
@@ -70,7 +70,7 @@ Recommends and Forecast</h3>
     </div>
     <div class="oneday_weather">
     <table class="ondayWeather_table">
-        <th>Morning</th><th>Afternoon</th><th>Evening</th>
+        <th>MORNING</th><th>AFTERNOON</th><th>EVENING</th>
 		<tr>
 		<c:set value = "1" var="count"></c:set>
 		<c:forEach var="weather_fourhour" items="${oneDayWeather}">
@@ -124,7 +124,7 @@ Recommends and Forecast</h3>
 <br>
 <br>
 
-<h3 align="center">History</h3>
+<h3 align="center">HISTORY</h3>
 <!-- 過去3日分の服 -->
 <table align="center">
 	<c:forEach var="history" items="${diaryList}">
@@ -152,7 +152,7 @@ Recommends and Forecast</h3>
 <br>
 <br>
 
-<h3 align="center">Forecast</h3>
+<h3 align="center">FORECAST</h3>
 <table border="1" style="border-collapse: collapse" align="center" >
 
 	<c:forEach var="weather_week" items="${weeklyWeather}">

@@ -63,7 +63,7 @@ table#list th, table#list td {
 }*/
 
 .data_row td {
-  border-bottom-width: 7px;
+  border-bottom-width: 2px;
   border-bottom-style:  dashed;
   border-bottom-color: #232323;
   padding: 4px 16px 4px 0;

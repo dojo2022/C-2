@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/coordinator/css/diaryEdit.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
 <link rel="stylesheet" href="/coordinator/css/headerFooter.css">
-<script src="js/home.js"></script>
+<script src="js/diaryEdit.js"></script>
 <script src="js/common.js"></script>
 </head>
 <body>
