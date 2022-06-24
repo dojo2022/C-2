@@ -80,7 +80,7 @@ public class DiaryDAO {
 						+ (Integer.parseInt(new SimpleDateFormat("dd").format(rs.getDate("date"))));
 				System.out.println("DiaryDao:" + dateStr);
 				diary.setDateStr(dateStr);
-				
+
 				//SQLで取得したデータを全部diaryオブジェクトに格納
 				diaryList.add(diary);
 			}
@@ -296,21 +296,21 @@ public class DiaryDAO {
 
 			if (!(rs.next())) {
 				String sql1 = "INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values (?,?,'','\\photo\\no_image.png',?,?,?,?,?);";
-				PreparedStatement pStmt1 = conn.prepareStatement(sql);
+				PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 				// SQL文を完成させる
 
-					pStmt.setString(1, date);
-					pStmt.setString(2, userId);
-					pStmt.setString(3, String.valueOf(weather.getWeatherCode()));
-					pStmt.setString(4, String.valueOf(weather.getHighestTemperature()));
-					pStmt.setString(5, String.valueOf(weather.getLowestTemperature()));
-					pStmt.setString(6, String.valueOf(weather.getWind()));
-					pStmt.setString(7, String.valueOf(weather.getRain()));
+					pStmt1.setString(1, date);
+					pStmt1.setString(2, userId);
+					pStmt1.setString(3, String.valueOf(weather.getWeatherCode()));
+					pStmt1.setString(4, String.valueOf(weather.getHighestTemperature()));
+					pStmt1.setString(5, String.valueOf(weather.getLowestTemperature()));
+					pStmt1.setString(6, String.valueOf(weather.getWind()));
+					pStmt1.setString(7, String.valueOf(weather.getRain()));
 
 
 				// SQL文を実行する
-				if (pStmt.executeUpdate() == 1) {
+				if (pStmt1.executeUpdate() == 1) {
 					result = true;
 				}
 			}

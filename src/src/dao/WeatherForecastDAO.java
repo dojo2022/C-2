@@ -224,8 +224,12 @@ public class WeatherForecastDAO {
 					}
 				}
 				weatherList.add(
-						new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-								highestTemperature, lowestTemperature, date));
+						new WeatherForecast(weatherCodeAve,
+								Double.parseDouble(String.format("%.1f", rainAmount / cnt)),
+								Double.parseDouble(String.format("%.1f", windAmount / cnt)),
+								highestTemperature,
+								lowestTemperature,
+								date));
 			}
 
 		} catch (SQLException e) {
@@ -309,8 +313,12 @@ public class WeatherForecastDAO {
 					}
 				}
 				weatherList.add(
-						new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-								highestTemperature, lowestTemperature, date));
+						new WeatherForecast(weatherCodeAve,
+								Double.parseDouble(String.format("%.1f", rainAmount / cnt)),
+								Double.parseDouble(String.format("%.1f", windAmount / cnt)),
+								highestTemperature,
+								lowestTemperature,
+								date));
 			}
 
 		} catch (SQLException e) {
@@ -678,8 +686,13 @@ public class WeatherForecastDAO {
 					weatherCodeAve = j + 1;
 				}
 			}
-			weatherList = new WeatherForecast(weatherCodeAve, Math.round(rainAmount / cnt), Math.round(windAmount / cnt),
-					highestTemperature, lowestTemperature, date);
+			weatherList = new WeatherForecast(weatherCodeAve,
+					Double.parseDouble(String.format("%.1f", rainAmount / cnt)),
+					Double.parseDouble(String.format("%.1f", windAmount / cnt)),
+					highestTemperature,
+					lowestTemperature,
+					date);
+			System.out.println(weatherCodeAve+Double.parseDouble(String.format("%.1f", rainAmount / cnt))+Double.parseDouble(String.format("%.1f", windAmount / cnt)));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
