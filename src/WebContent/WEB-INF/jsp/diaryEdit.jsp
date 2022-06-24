@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/coordinator/css/diaryEdit.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
+<link rel="stylesheet" href="/coordinator/css/headerFooter.css">
 <script src="js/diaryEdit.js"></script>
 <script src="js/common.js"></script>
 </head>
@@ -16,7 +17,7 @@
   <h1 id="logo">
    <img src="/coordinator/photo/logo.PNG" alt="coordinator">
    </h1>
-   <!--
+
 <nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -25,9 +26,9 @@
 			<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
-	</nav>-->
+	</nav>
 
-    ${diary.dateStr}
+    <h3>${diary.dateStr}</h3>
 
 
 <form method="POST" action="/coordinator/DiaryEditServlet" enctype="multipart/form-data">
@@ -44,8 +45,7 @@
   <br>
   <input type="submit" name="update" value="更新">
 </form>
-<a href="/coordinator/DiaryServlet">日記画面に戻る</a>
-
+<a href="/coordinator/DiaryServlet"><img src="/coordinator/photo/backpage.png" alt="Back Page" ></a>
 </body>
 </html>
 

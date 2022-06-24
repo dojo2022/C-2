@@ -19,6 +19,7 @@ import model.Diary;
 /**
  * Servlet implementation class DiaryEditServlet
  */
+
 //↓これ絶対入れてね！！
 @MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\photo") // アップロードファイルの一時的な保存先
 @WebServlet("/DiaryEditServlet")
