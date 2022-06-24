@@ -150,18 +150,17 @@ public class ItemDAO {
 				pStmt.setString(3, "0");
 			}
 
-
-			if (registinf.getRainOK() != null  && registinf.getRainNG() == null) {
+			if (registinf.getRainOK() != null && registinf.getRainNG() == null) {
 				pStmt.setString(4, "1");
-			} else if (registinf.getRainOK() == null && registinf.getRainNG() != null ) {
+			} else if (registinf.getRainOK() == null && registinf.getRainNG() != null) {
 				pStmt.setString(4, "0");
 			} else {
 				pStmt.setString(4, "1");
 			}
 
-			if (registinf.getWindOK() != null  && registinf.getWindNG() == null) {
+			if (registinf.getWindOK() != null && registinf.getWindNG() == null) {
 				pStmt.setString(5, "1");
-			} else if (registinf.getWindOK() == null && registinf.getWindNG() != null ) {
+			} else if (registinf.getWindOK() == null && registinf.getWindNG() != null) {
 				pStmt.setString(5, "0");
 			} else {
 				pStmt.setString(5, "1");
@@ -170,7 +169,6 @@ public class ItemDAO {
 			//写真の名前
 
 			pStmt.setString(6, photo);
-
 
 			// SQL文を実行する
 			int cnt = pStmt.executeUpdate();
@@ -185,7 +183,7 @@ public class ItemDAO {
 			ResultSet rs = pStmt.getGeneratedKeys();
 			 if (rs.next()) {
 				 ItemID = String.valueOf(rs.getInt(1));
-		     }
+			 }
 			 System.out.println("今増やしたレコードのid:" + ItemID);
 			 */
 
@@ -204,7 +202,6 @@ public class ItemDAO {
 				ItemID = rs.getString("ID");
 			}
 			System.out.println("今増やしたレコードのid:" + ItemID);
-
 
 			String sqlColorSeason = "INSERT INTO Item_season (ITEM_ID, CODE, FLAG) VALUES (?, 1, ?); "
 					+ "INSERT INTO Item_season (ITEM_ID, CODE, FLAG) VALUES (?, 2, ?);"
@@ -321,9 +318,125 @@ public class ItemDAO {
 		return result;
 	}
 
-	public boolean update(RegistInf r , String userID, String itemID, String photo) {
-		return false;
+	public boolean update(RegistInf registinf, String userID, String itemID, String photo) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL, "sa", "");
+
+			// SQL文を準備する
+			String sql = "UPDATE ITEM SET PARTS_CODE=? PATTERN=? RAIN=?	WIND=? PHOTO=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			switch (registinf.getParts()) {
+			case "outer":
+				pStmt.setString(1, "1");
+				break;
+			case "jacket":
+				pStmt.setString(1, "2");
+				break;
+			case "tops":
+				pStmt.setString(1, "3");
+				break;
+			case "skirt":
+				pStmt.setString(1, "4");
+				break;
+			case "pants":
+				pStmt.setString(1, "5");
+				break;
+			case "shoes":
+				pStmt.setString(1, "6");
+				break;
+			default:
+				break;
+			}
+
+			if (registinf.getPatternYES() != null && registinf.getPatternNO() == null) {
+				pStmt.setString(2, "1");
+			} else if (registinf.getPatternYES() == null && registinf.getPatternNO() != null) {
+				pStmt.setString(2, "0");
+			} else {
+				pStmt.setString(2, "0");
+			}
+
+			if (registinf.getRainOK() != null && registinf.getRainNG() == null) {
+				pStmt.setString(3, "1");
+			} else if (registinf.getRainOK() == null && registinf.getRainNG() != null) {
+				pStmt.setString(3, "0");
+			} else {
+				pStmt.setString(3, "1");
+			}
+
+			if (registinf.getWindOK() != null && registinf.getWindNG() == null) {
+				pStmt.setString(4, "1");
+			} else if (registinf.getWindOK() == null && registinf.getWindNG() != null) {
+				pStmt.setString(4, "0");
+			} else {
+				pStmt.setString(4, "1");
+			}
+
+			pStmt.setString(5, photo);
+
+			// SQL文を実行する
+			int cnt = pStmt.executeUpdate();
+			if (cnt == 1) {
+				System.out.println("item:" + cnt);
+				result = true;
+			}
+			//今増やしたレコードのidを取得
+
+			String ItemID = "";
+			/*
+			ResultSet rs = pStmt.getGeneratedKeys();
+			 if (rs.next()) {
+				 ItemID = String.valueOf(rs.getInt(1));
+			 }
+			 System.out.println("今増やしたレコードのid:" + ItemID);
+			 */
+
+			//写真の名前がさっき登録したやつと同じレコードを取得。そのidを調べる
+			// SQL文を準備する
+			String sqlSelectID = "select id FROM Item WHERE photo = ?";
+			pStmt = conn.prepareStatement(sqlSelectID);
+			pStmt.setString(1, photo);
+
+			// SQL文を実行し、結果を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			//
+			// 結果をコピーする
+			while (rs.next()) {
+				ItemID = rs.getString("ID");
+			}
+			System.out.println("今増やしたレコードのid:" + ItemID);
+
+			//String sqlColorSeason =
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// 結果を返す
+		return result;
+
 	}
+
 	public boolean delete(String itemID) {
 		Connection conn = null;
 		boolean result = false;
@@ -347,7 +460,7 @@ public class ItemDAO {
 				result = true;
 			}
 
-				// SQL文を準備する
+			// SQL文を準備する
 			sql = "DELETE FROM ITEM_SEASON WHERE item_id=?";
 			pStmt = conn.prepareStatement(sql);
 
@@ -360,7 +473,6 @@ public class ItemDAO {
 			} else {
 				result = false;
 			}
-
 
 			// SQL文を準備する
 			sql = "DELETE FROM ITEM_COLOR WHERE item_id=?";
@@ -376,20 +488,16 @@ public class ItemDAO {
 				result = false;
 			}
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -398,7 +506,6 @@ public class ItemDAO {
 		return result;
 
 	}
-
 
 	//検索
 
@@ -415,6 +522,7 @@ public class ItemDAO {
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
+			/*
 						String sql = "SELECT *"
 								+ " FROM Item INNER JOIN Item_Season ON Item.id = Item_Season.Item_id INNER JOIN Item_Color ON Item.id = Item_Color.Item_id "// INNER JOIN Parts ON Item.parts_code = Parts.code"
 								+ " WHERE (";
@@ -503,8 +611,8 @@ public class ItemDAO {
 							sql += "0";
 						}
 						sql += ") AND";
-						*/
-						/*
+
+
 						if (sc.getSpring() != null) {
 							 sql += "(Item_season.code = 1 AND Item_season.flag = 1)";
 						} else {
@@ -514,7 +622,7 @@ public class ItemDAO {
 
 
 						sql += ")";
-						*/
+
 
 
 						PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -597,53 +705,288 @@ public class ItemDAO {
 						} else {
 							pStmt.setString(13, "0");
 						}
-						
+
 						pStmt.setString(14, id);
-
-
-
-
-						// SQL文を実行し、結果表を取得する
-
-						ResultSet rs = pStmt.executeQuery();
-
-						// 結果表をコレクションにコピーする
-						while (rs.next()) {
-							Item item = new Item(
-									Integer.parseInt(rs.getString("ID")),
-									rs.getString("USER_ID"),
-									Integer.parseInt(rs.getString("PARTS_CODE")),
-									Integer.parseInt(rs.getString("PATTERN")),
-									Integer.parseInt(rs.getString("RAIN")),
-									Integer.parseInt(rs.getString("WIND")),
-									rs.getString("PHOTO"));
-							itemList2.add(item);
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-						itemList2 = null;
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-						itemList2 = null;
-					} finally {
-						// データベースを切断
-						if (conn != null) {
-							try {
-								conn.close();
-							} catch (SQLException e) {
-								e.printStackTrace();
-								itemList2 = null;
-							}
-						}
+						*/
+			// SQL文を準備する
+			String sql = "select * from item join item_season on item.id = item_season.item_id join item_color on item.id = item_color.item_id";
+			if (!((sc.getSpring() != null && sc.getSummer() != null && sc.getAutumn() != null && sc.getWinter() != null)
+					|| (sc.getSpring() == null && sc.getSummer() == null && sc.getAutumn() == null
+							&& sc.getWinter() == null))) {
+				sql += " where item_season.flag = 1 and item_season.code in (";
+				boolean flg = false;
+				if (sc.getSpring() != null) {
+					if (flg) {
+						sql += ",";
 					}
+					sql += "1";
+					flg = true;
+				}
+				if (sc.getSummer() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "2";
+					flg = true;
+				}
+				if (sc.getAutumn() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "3";
+					flg = true;
+				}
+				if (sc.getWinter() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "4";
+					flg = true;
+				}
 
-					// 結果を返す
-					return itemList2;
+				sql += ")";
+			}
+			if (!((sc.getWhite() != null && sc.getBlack() != null && sc.getGrey() != null && sc.getBeige() != null
+					&& sc.getRed() != null && sc.getBlue() != null && sc.getGreen() != null && sc.getYellow() != null
+					&& sc.getOther() != null)
+					|| (sc.getWhite() == null && sc.getBlack() == null && sc.getGrey() == null && sc.getBeige() == null
+							&& sc.getRed() == null && sc.getBlue() == null && sc.getGreen() == null
+							&& sc.getYellow() == null && sc.getOther() == null))) {
+				sql += " AND item_color.flag = 1 and item_color.code in (";
+				boolean flg = false;
+				if (sc.getWhite() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "1";
+					flg = true;
+				}
+				if (sc.getBlack() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "2";
+					flg = true;
+				}
+				if (sc.getGrey() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "3";
+					flg = true;
+				}
+				if (sc.getBeige() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "4";
+					flg = true;
+				}
+				if (sc.getRed() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "5";
+					flg = true;
+				}
+				if (sc.getBlue() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "6";
+					flg = true;
+				}
+				if (sc.getGreen() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "7";
+					flg = true;
+				}
+				if (sc.getYellow() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "8";
+					flg = true;
+				}
+				if (sc.getOther() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "9";
+					flg = true;
+				}
+				sql += ")";
+
+			}
+
+			if (!((sc.getOuter() != null && sc.getJacket() != null && sc.getTops() != null && sc.getSkirt() != null
+					&& sc.getPants() != null && sc.getShoes() != null)
+					|| (sc.getOuter() == null && sc.getJacket() == null && sc.getTops() == null && sc.getSkirt() == null
+							&& sc.getPants() == null && sc.getShoes() == null))) {
+				sql += " AND item.parts_code in (";
+				boolean flg = false;
+				if (sc.getOuter() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "1";
+					flg = true;
+				}
+				if (sc.getJacket() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "2";
+					flg = true;
+				}
+				if (sc.getTops() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "3";
+					flg = true;
+				}
+				if (sc.getSkirt() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "4";
+					flg = true;
+				}
+				if (sc.getPants() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "5";
+					flg = true;
+				}
+				if (sc.getShoes() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "6";
+					flg = true;
+				}
+				sql += ")";
+			}
+
+			if (!((sc.getPatternYES() != null && sc.getPatternNO() != null)
+					|| (sc.getPatternYES() == null && sc.getPatternNO() == null))) {
+				sql += " AND item.pattern in (";
+				boolean flg = false;
+				if (sc.getPatternYES() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "1";
+					flg = true;
+				}
+				if (sc.getPatternNO() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "0";
+					flg = true;
+				}
+				sql += ")";
+			}
+
+			if (!((sc.getRainOK() != null && sc.getRainNG() != null)
+					|| (sc.getRainOK() == null && sc.getRainNG() == null))) {
+				sql += " AND item.Rain in (";
+				boolean flg = false;
+				if (sc.getRainOK() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "1";
+					flg = true;
+				}
+				if (sc.getRainNG() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "0";
+					flg = true;
+				}
+				sql += ")";
+			}
+
+			if (!((sc.getWindOK() != null && sc.getWindNG() != null)
+					|| (sc.getWindOK() == null && sc.getWindNG() == null))) {
+				sql += " AND item.Wind in (";
+				boolean flg = false;
+				if (sc.getWindOK() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "1";
+					flg = true;
+				}
+				if (sc.getWindNG() != null) {
+					if (flg) {
+						sql += ",";
+					}
+					sql += "0";
+					flg = true;
+				}
+				sql += ")";
+			}
+
+			//sql += " AND Item.user_id in = ";
+			sql += " AND Item.user_id = ?";
+
+			// SQL文を実行し、結果表を取得する
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, id);
+
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+			ArrayList<Integer> al = new ArrayList<Integer>();
+			while (rs.next()) {
+				int tmpId = Integer.parseInt(rs.getString("ID"));
+				boolean tmpFlg = true;
+				for (int i = 0; i < al.size(); i++) {
+					if (al.get(i) == tmpId) {
+						tmpFlg = false;
+					}
+				}
+				if (tmpFlg) {
+					al.add(tmpId);
+					Item item = new Item(
+							Integer.parseInt(rs.getString("ID")),
+							rs.getString("USER_ID"),
+							Integer.parseInt(rs.getString("PARTS_CODE")),
+							Integer.parseInt(rs.getString("PATTERN")),
+							Integer.parseInt(rs.getString("RAIN")),
+							Integer.parseInt(rs.getString("WIND")),
+							rs.getString("PHOTO"));
+					itemList2.add(item);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			itemList2 = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			itemList2 = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					itemList2 = null;
+				}
+			}
 		}
 
+		// 結果を返す
+		return itemList2;
 	}
 
-
-
-
-
+}
