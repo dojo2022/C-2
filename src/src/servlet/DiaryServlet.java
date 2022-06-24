@@ -58,10 +58,14 @@ public class DiaryServlet extends HttpServlet {
 		*/
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
-		param.setEndDate(sqlFormat.format(cal.getTime()));
+		String endDate = sqlFormat.format(cal.getTime());
+		param.setEndDate(endDate);
 		cal.add(Calendar.DATE, -7);
-		param.setStartDate(sqlFormat.format(cal.getTime()));
+		String startDate = sqlFormat.format(cal.getTime());
+		param.setStartDate(startDate);
 		param.setUserId(userId);
+		session.setAttribute("startDate", startDate);
+		session.setAttribute("endDate", endDate);
 
 
 		List<Diary> diaryList = dDAO.selectDiary(param);
@@ -89,6 +93,7 @@ public class DiaryServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
+		//System.out.println("diaryServlet確認" + startDate);
 
 		HttpSession session = request.getSession();
 		//String userId = ((User)session.getAttribute("id")).getId();
@@ -107,15 +112,17 @@ public class DiaryServlet extends HttpServlet {
 		param.setEndDate(endDate);
 
 		List<Diary> diaryList = dDAO.selectDiary(param);
-		System.out.println(diaryList);
-		System.out.println(diaryList.size());
+		//System.out.println(diaryList);
+		//System.out.println(diaryList.size());
 		for (int i = 0; i< diaryList.size(); i++) {
 			System.out.println(diaryList.get(i).getDate());
 			System.out.println(diaryList.get(i).getDateStr());
 		}
 
-		//リクエストスコープに写真のデータを格納する
+		//リクエストスコープに指定した範囲の日記のリストを格納する
 		request.setAttribute("diaryList", diaryList);
+		session.setAttribute("startDate", startDate);
+		session.setAttribute("endDate", endDate);
 
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");

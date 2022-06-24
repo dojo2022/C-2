@@ -50,7 +50,6 @@ public class DiaryDAO {
 			pStmt.setString(2, param.getStartDate());
 			pStmt.setString(3, param.getEndDate());
 
-
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
@@ -226,31 +225,56 @@ public class DiaryDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 			// SQL文を準備する　ここも改造
-			String sql = "UPDATE Diary SET Id=?, photo=?, note=?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			if (edit.getPhoto() != null) {
+				String sql = "UPDATE Diary SET photo= ?, note= ? where Id=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を完成させる 改造
-			if (edit.getId() >= 1) {
-				pStmt.setString(1, String.valueOf(edit.getId()));
+				// SQL文を完成させる 改造
+
+				if (edit.getPhoto() != null && !edit.getPhoto().equals("")) {
+					pStmt.setString(1, edit.getPhoto());
+				} else {
+					pStmt.setString(1, "");
+				}
+
+				if (edit.getNote() != null && !edit.getNote().equals("")) {
+					//System.out.println("3"+ edit.getNote());
+					pStmt.setString(2, edit.getNote());
+				} else {
+					pStmt.setString(2, null);
+				}
+				if (edit.getId() >= 1) {
+					pStmt.setString(3, String.valueOf(edit.getId()));
+				} else {
+					pStmt.setString(3, "");
+				}
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
 			} else {
-				pStmt.setString(1, null);
-			}
+				String sql = "UPDATE Diary SET note= ? where Id=?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			if (edit.getPhoto() != null && !edit.getPhoto().equals("")) {
-				pStmt.setString(2, edit.getPhoto());
-			} else {
-				pStmt.setString(2, null);
-			}
+				// SQL文を完成させる
 
-			if (edit.getNote() != null && !edit.getNote().equals("")) {
-				pStmt.setString(3, edit.getNote());
-			} else {
-				pStmt.setString(3, null);
-			}
+				if (edit.getNote() != null && !edit.getNote().equals("")) {
+					//System.out.println("3"+ edit.getNote());
+					pStmt.setString(1, edit.getNote());
+				} else {
+					pStmt.setString(1, null);
+				}
+				if (edit.getId() >= 1) {
+					pStmt.setString(2, String.valueOf(edit.getId()));
+				} else {
+					pStmt.setString(2, "");
+				}
 
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
-				result = true;
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -300,14 +324,13 @@ public class DiaryDAO {
 
 				// SQL文を完成させる
 
-					pStmt1.setString(1, date);
-					pStmt1.setString(2, userId);
-					pStmt1.setString(3, String.valueOf(weather.getWeatherCode()));
-					pStmt1.setString(4, String.valueOf(weather.getHighestTemperature()));
-					pStmt1.setString(5, String.valueOf(weather.getLowestTemperature()));
-					pStmt1.setString(6, String.valueOf(weather.getWind()));
-					pStmt1.setString(7, String.valueOf(weather.getRain()));
-
+				pStmt1.setString(1, date);
+				pStmt1.setString(2, userId);
+				pStmt1.setString(3, String.valueOf(weather.getWeatherCode()));
+				pStmt1.setString(4, String.valueOf(weather.getHighestTemperature()));
+				pStmt1.setString(5, String.valueOf(weather.getLowestTemperature()));
+				pStmt1.setString(6, String.valueOf(weather.getWind()));
+				pStmt1.setString(7, String.valueOf(weather.getRain()));
 
 				// SQL文を実行する
 				if (pStmt1.executeUpdate() == 1) {

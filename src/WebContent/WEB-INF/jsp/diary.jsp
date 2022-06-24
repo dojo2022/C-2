@@ -25,8 +25,8 @@
 	</nav>
 		<h1>DIARY</h1>
 		<form method="POST" action="/coordinator/DiaryServlet">
-		<input type="date" name="startDate">～
-		<input type="date" name="endDate">
+		<input type="date" name="startDate" value="${startDate}">～
+		<input type="date" name="endDate" value="${endDate}">
 		<input type="submit" name="search" value="検索" class="btn">
 		</form>
 		<div id="table">

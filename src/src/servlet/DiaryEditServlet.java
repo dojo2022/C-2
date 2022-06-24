@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,12 +40,12 @@ public class DiaryEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String s1 = request.getParameter("edit");
 		String s2 = request.getParameter("update");
 		if (s1 != null) {
 
 			// リクエストパラメータを取得する
-			request.setCharacterEncoding("UTF-8");
 			String diaryId = request.getParameter("diary_id");
 
 			System.out.println("日記id:" + diaryId);
@@ -65,13 +66,24 @@ public class DiaryEditServlet extends HttpServlet {
 			//String userId = ((User)session.getAttribute("id")).getId();
 			String userId = "aaaaa";
 			// リクエストパラメータを取得する
-			request.setCharacterEncoding("UTF-8");
 			Part part = request.getPart("IMAGE"); // getPartで取得
-			String photo = "\\photo\\" + userId + System.currentTimeMillis() + this.getExtension(this.getFileName(part));
-			part.write(photo);
+			String photo = null;
+			String fileName = this.getFileName(part);
+			System.out.println(fileName);
+			//System.out.println("part:" + part + "file :"  +this.getFileName(part));
+			if (fileName != null && !(fileName.equals(""))) {
+				photo = userId + System.currentTimeMillis() + "." + this.getExtension(fileName);
+				part.write(photo);
+				photo = "\\photo\\" + photo;
+			}
 			String diaryId = request.getParameter("diary_id");
 			String note = request.getParameter("note");
 
+			String startDate = (String) session.getAttribute("startDate");
+			String endDate = (String) session.getAttribute("endDate");
+			//System.out.println(" 確認" + startDate + endDate);
+
+			System.out.println("1" + photo);
 
 			//dao
 			DiaryDAO dDao = new DiaryDAO();
@@ -81,12 +93,31 @@ public class DiaryEditServlet extends HttpServlet {
 			diary.setId(Integer.parseInt(diaryId));
 			diary.setPhoto(photo);
 			diary.setNote(note);
-
+			//System.out.println("2"+ diary.getNote());
 
 			boolean ret = dDao.update(diary);
 
 			//リクエストスコープに保存する
 			request.setAttribute("diary", diary);
+
+			DiaryDAO dDAO = new DiaryDAO();
+			Diary param = new Diary();
+			//ユーザーid,開始日付、終了日付をセッターメソッドで格納する
+			param.setUserId(userId);
+			param.setStartDate(startDate);
+			param.setEndDate(endDate);
+
+			List<Diary> diaryList = dDAO.selectDiary(param);
+			//System.out.println(diaryList);
+			//System.out.println(diaryList.size());
+			/*
+			for (int i = 0; i< diaryList.size(); i++) {
+				System.out.println(diaryList.get(i).getDate());
+				System.out.println(diaryList.get(i).getDateStr());
+			}*/
+
+			//リクエストスコープに指定した範囲の日記のリストを格納する
+			request.setAttribute("diaryList", diaryList);
 
 			//jspにフォワード
 			// 結果ページにフォワードする
@@ -96,31 +127,33 @@ public class DiaryEditServlet extends HttpServlet {
 		}
 
 	}
+
 	//ファイルの名前を取得してくる
-		private String getFileName(Part part) {
-	        String name = null;
-	        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
-	            if (dispotion.trim().startsWith("filename")) {
-	                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-	                name = name.substring(name.lastIndexOf("\\") + 1);
-	                break;
-	            }
-	        }		// TODO 自動生成されたメソッド・スタブ
-			return name;
+	private String getFileName(Part part) {
+		String name = null;
+		for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+			if (dispotion.trim().startsWith("filename")) {
+				name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+				name = name.substring(name.lastIndexOf("\\") + 1);
+				break;
+			}
+		} // TODO 自動生成されたメソッド・スタブ
+		return name;
+	}
+
+	public String getExtension(String filename) {
+		char[] array = filename.toCharArray();
+		int dotIndex = -1;
+		for (int i = array.length - 1; i >= 0; i--) {
+			if (array[i] == '.') {
+				dotIndex = i;
+				break;
+			}
 		}
-		public String getExtension(String filename) {
-		    char[] array = filename.toCharArray();
-		    int dotIndex = -1;
-		    for (int i = array.length - 1; i >= 0; i--) {
-		      if (array[i] =='.') {
-		        dotIndex = i;
-		        break;
-		      }
-		    }
-		    String str = "";
-		    for (int i = dotIndex + 1; i < array.length; i++) {
-		      str += array[i];
-		    }
-		    return str;
-		  }
+		String str = "";
+		for (int i = dotIndex + 1; i < array.length; i++) {
+			str += array[i];
+		}
+		return str;
+	}
 }

@@ -26,7 +26,7 @@
 		</ul>
 	</nav>
 
-<form method="POST" action="/coordinator/DiaryEditServlet">
+<form method="POST" action="/coordinator/DiaryEditServlet" enctype="multipart/form-data">
   <img src="/coordinator${diary.photo}">
   <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
   <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
