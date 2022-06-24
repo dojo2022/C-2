@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DiaryDAO;
+import dao.WeatherForecastDAO;
 import model.Diary;
 import model.WeatherForecast;
 
@@ -35,6 +38,13 @@ public class DiaryServlet extends HttpServlet {
 		DiaryDAO dDAO = new DiaryDAO();
 		//もし今日の日記がまだなければ追加
 		WeatherForecast weather = (WeatherForecast)session.getAttribute("todayWeather");
+		if (weather == null) {
+			WeatherForecastDAO wDao = new WeatherForecastDAO();
+			weather = wDao.todayWeather();
+			session.setAttribute("todayWeather",weather);
+		}
+		//表示
+		System.out.println("今日の天気" + weather.getWeatherCode());
 		//boolean戻り値
 		boolean b = dDAO.insertTodayDiary(weather,userId);
 		System.out.println(b);
@@ -42,8 +52,15 @@ public class DiaryServlet extends HttpServlet {
 		Diary param = new Diary();
 
 		//ユーザーid,開始日付、終了日付をセッターメソッドで格納する
+		/*
 		param.setStartDate("2022-05-30");
 		param.setEndDate("2022-06-04");
+		*/
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
+		param.setEndDate(sqlFormat.format(cal.getTime()));
+		cal.add(Calendar.DATE, -7);
+		param.setStartDate(sqlFormat.format(cal.getTime()));
 		param.setUserId(userId);
 
 

@@ -692,6 +692,7 @@ public class WeatherForecastDAO {
 					highestTemperature,
 					lowestTemperature,
 					date);
+			System.out.println(weatherCodeAve+Double.parseDouble(String.format("%.1f", rainAmount / cnt))+Double.parseDouble(String.format("%.1f", windAmount / cnt)));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
