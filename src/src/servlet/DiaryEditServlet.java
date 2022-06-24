@@ -14,7 +14,6 @@ import javax.servlet.http.Part;
 
 import dao.DiaryDAO;
 import model.Diary;
-import model.User;
 
 /**
  * Servlet implementation class DiaryEditServlet
@@ -63,7 +62,8 @@ public class DiaryEditServlet extends HttpServlet {
 		} else if (s2 != null) {
 			//id
 			HttpSession session = request.getSession();
-			String userId = ((User)session.getAttribute("id")).getId();;
+			//String userId = ((User)session.getAttribute("id")).getId();
+			String userId = "aaaaa";
 			// リクエストパラメータを取得する
 			request.setCharacterEncoding("UTF-8");
 			Part part = request.getPart("IMAGE"); // getPartで取得
