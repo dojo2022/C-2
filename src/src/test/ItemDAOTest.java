@@ -4,12 +4,12 @@ import java.util.List;
 
 import dao.ItemDAO;
 import model.Item;
-import model.RegistInf;
+import model.SearchCondition;
 
 public abstract class ItemDAOTest {
 	public static void main(String[] args) {
 		ItemDAO dao = new ItemDAO();
-
+/*
 		// select()のテスト
 		System.out.println("---------- select()のテスト ----------");
 		//List<Item> itemList = dao.searchParts(new Item(0 , "", 0, 0, 0, 0, ""));
@@ -24,6 +24,20 @@ public abstract class ItemDAOTest {
 			System.out.println(item.getPhoto());
 			System.out.println();
 		}
+*/
+		SearchCondition sc = new SearchCondition(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+		List<Item> itemList2 = dao.select(sc,"aaaaa");
+		for (Item item : itemList2) {
+			System.out.println(item.getId());
+			System.out.println(item.getUserId());
+			System.out.println(item.getPartsCode());
+			System.out.println(item.getPattern());
+			System.out.println(item.getRain());
+			System.out.println(item.getWind());
+			System.out.println(item.getPhoto());
+			System.out.println();
+		}
+		/*
 		// insert()のテスト
 		System.out.println("---------- insert(Itemテーブル)のテスト ----------");
 		//Item insRec = new Item(800,"xxxxx", 3, 0, 1, 1, ".png");
@@ -44,7 +58,7 @@ public abstract class ItemDAOTest {
 				System.out.println("wind：" + item.getWind());
 				System.out.println("photo：" + item.getPhoto());
 				System.out.println();
-			}*/
+			}
 		}
 		else {
 			System.out.println("登録失敗！");
@@ -83,7 +97,7 @@ public abstract class ItemDAOTest {
 		}
 		else {
 			System.out.println("登録失敗！");
-		}*/
+		}
 
 		// delete()のテスト
 		System.out.println("---------- delete()のテスト ----------");
@@ -93,6 +107,7 @@ public abstract class ItemDAOTest {
 		else {
 			System.out.println("削除失敗！");
 		}
+		*/
 	}
 
 }

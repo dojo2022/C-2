@@ -8,10 +8,12 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 //import java.sql.Date;
 import java.util.List;
 
 import model.Diary;
+import model.WeatherForecast;
 
 public class DiaryDAO {
 	String dbURL = "jdbc:h2:file:C:\\dojo6_data\\C2";
@@ -28,13 +30,13 @@ public class DiaryDAO {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection(dbURL , "sa", "");
+			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
 			String sql = "SELECT *"
-						+ " FROM Diary"
-						+ " WHERE Diary.user_id = ? AND"
-						+ " Diary.date BETWEEN ? AND ?";
+					+ " FROM Diary"
+					+ " WHERE Diary.user_id = ? AND"
+					+ " Diary.date BETWEEN ? AND ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -48,41 +50,6 @@ public class DiaryDAO {
 			pStmt.setString(2, param.getStartDate());
 			pStmt.setString(3, param.getEndDate());
 
-//			if (param.getUserId() != null) {
-//				pStmt.setString(1, "%" + param.getUserId() + "%");
-//			}
-//			else {
-//				pStmt.setString(1, "%");
-//			}
-//			if (param.getStartDate() != null) {
-//				pStmt.setString(2, "%" + param.getStartDate() + "%");
-//			}
-//			else {
-//				pStmt.setString(2, "%");
-//			}
-//			if (param.getEndDate() != null) {
-//				pStmt.setString(3, "%" + param.getEndDate() + "%");
-//			}
-//			else {
-//				pStmt.setString(3, "%");
-//			}
-			/*
-			if (param.getStartDate() != null) {
-				pStmt.setString(2,  String.valueOf(StartDate));
-			}
-			else {
-				pStmt.setString(2, "%");
-			}
-			if (param.getEndDate() != null) {
-				pStmt.setString(3, String.valueOf(EndDate));
-			}
-			else {
-				pStmt.setString(3, "%");
-			}
-			*/
-			/*
-			pStmt.setString(1, id);
-			pStmt.setString(2, String.valueOf(StartDate)); //pStmt.setStringはString型しか受け付けないので、int型のparts_codeをString型に変換 */
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -90,13 +57,13 @@ public class DiaryDAO {
 			// 結果表をコレクションにコピーする
 			//DateというJavaのクラス
 			while (rs.next()) {
-				Diary diary= new Diary();
+				Diary diary = new Diary();
 				//セッターメソッドを使って、12このフィールドに全部値をセットする。
 				diary.setId(Integer.parseInt(rs.getString("id")));
 				diary.setDate(rs.getDate("date"));
 				//rs.getDate("date"); //java.sql.Date型の日付データがかえってくる。→java.util.Date型に変換する
-//				diary.setStartDate(rs.getString("startDate"));
-//				diary.setEndDate(rs.getString("endDate"));
+				//				diary.setStartDate(rs.getString("startDate"));
+				//				diary.setEndDate(rs.getString("endDate"));
 				String ret = rs.getString("user_Id");
 				diary.setUserId(ret);
 				diary.setNote(rs.getString("note"));
@@ -108,44 +75,27 @@ public class DiaryDAO {
 				diary.setAmountOfRain(Double.parseDouble(rs.getString("amount_Of_Rain")));
 				//日付（文字列型）フィールドも
 				//日付(String型)を用意する(Integer.parseInt(new SimpleDateFormat("MM").format(date))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(date)));
-				String dateStr = (Integer.parseInt(new SimpleDateFormat("yyyy").format(rs.getDate("date")))) + "/" + (Integer.parseInt(new SimpleDateFormat("MM").format(rs.getDate("date")))) + "/" + (Integer.parseInt(new SimpleDateFormat("dd").format(rs.getDate("date"))));
-			      System.out.println("DiaryDao:" + dateStr);
+				String dateStr = (Integer.parseInt(new SimpleDateFormat("yyyy").format(rs.getDate("date")))) + "/"
+						+ (Integer.parseInt(new SimpleDateFormat("MM").format(rs.getDate("date")))) + "/"
+						+ (Integer.parseInt(new SimpleDateFormat("dd").format(rs.getDate("date"))));
+				System.out.println("DiaryDao:" + dateStr);
 				diary.setDateStr(dateStr);
-//				Diary diary = new Diary(
-//				//diary.setUserId(
-//						Integer.parseInt(rs.getString("id")),
-//						rs.getString("startDate"),
-//						rs.getString("endDate"),
-//						rs.getString("userId"),
-//						rs.getString("note"),
-//						rs.getString("photo"),
-//						Integer.parseInt(rs.getString("weatherCode")),
-//						Double.parseDouble(rs.getString("maxTemperature")),
-//						Double.parseDouble(rs.getString("minTemperature")),
-//						Double.parseDouble(rs.getString("windSpeed")),
-//						Double.parseDouble(rs.getString("amountOfRain"))
-//				//★diary.setUserId(rs.getString(""));
-//				//	…
-//				);
-//				SQLで取得したデータを全部diaryオブジェクトに格納
+				
+				//SQLで取得したデータを全部diaryオブジェクトに格納
 				diaryList.add(diary);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			diaryList = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			diaryList = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					diaryList = null;
 				}
@@ -155,58 +105,53 @@ public class DiaryDAO {
 		// 結果を返す
 		return diaryList;
 	}
+
 	public List<Diary> search3Photos(String id) {
-	    Connection conn = null;
-	    List<Diary> diaryList = new ArrayList<Diary>();
-	    try {
-	      // JDBCドライバを読み込む
-	      Class.forName("org.h2.Driver");
-	      // データベースに接続する
-	      conn = DriverManager.getConnection(dbURL , "sa", "");
-	      // SQL文を準備する
-	      String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '¥photo¥no_image.png' ORDER BY date DESC LIMIT 3";
-	      PreparedStatement pStmt = conn.prepareStatement(sql);
-	      // SQL文を完成させる
-	      pStmt.setString(1, id);
-	      // SQL文を実行し、結果表を取得する
-	      //System.out.println("SQL文を実行し、結果表を取得する");
-	      ResultSet rs = pStmt.executeQuery();
-	      // 結果表をコレクションにコピーする
-	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Connection conn = null;
+		List<Diary> diaryList = new ArrayList<Diary>();
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL, "sa", "");
+			// SQL文を準備する
+			String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '¥photo¥no_image.png' ORDER BY date DESC LIMIT 3";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// SQL文を完成させる
+			pStmt.setString(1, id);
+			// SQL文を実行し、結果表を取得する
+			//System.out.println("SQL文を実行し、結果表を取得する");
+			ResultSet rs = pStmt.executeQuery();
+			// 結果表をコレクションにコピーする
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-
-	      while (rs.next()) {
-	    	  diaryList.add(new Diary(0, sdf.parse(rs.getString("DATE")), null, null, null, null, rs.getString("PHOTO"), 0,0,0,0,0)
-	    	  );
-	      }
-	    }
-	    catch (SQLException e) {
-	      e.printStackTrace();
-	      diaryList = null;
-	    }
-	    catch (ParseException e) {
-		      e.printStackTrace();
-		      diaryList = null;
+			while (rs.next()) {
+				diaryList.add(new Diary(0, sdf.parse(rs.getString("DATE")), null, null, null, null,
+						rs.getString("PHOTO"), 0, 0, 0, 0, 0));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			diaryList = null;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			diaryList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			diaryList = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					diaryList = null;
+				}
+			}
 		}
-	    catch (ClassNotFoundException e) {
-	      e.printStackTrace();
-	      diaryList = null;
-	    }
-	    finally {
-	      // データベースを切断
-	      if (conn != null) {
-	        try {
-	          conn.close();
-	        }
-	        catch (SQLException e) {
-	          e.printStackTrace();
-	          diaryList = null;
-	        }
-	      }
-	    }
-	    // 結果を返す
-	    return diaryList;
-	  }
+		// 結果を返す
+		return diaryList;
+	}
 
 	public Diary search(String id) {
 		Connection conn = null;
@@ -217,7 +162,7 @@ public class DiaryDAO {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection(dbURL , "sa", "");
+			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
 			String sql = " SELECT * "
@@ -235,36 +180,31 @@ public class DiaryDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) {
 				diary = new Diary(
-				Integer.parseInt(rs.getString("id")),
-				rs.getDate("date"),
-				null,
-				null,
-				rs.getString("user_id"),
-				rs.getString("note"),
-				rs.getString("photo"),
-				-10000,
-				-10000,
-				-10000,
-				-10000,
-				-10000
-				);
+						Integer.parseInt(rs.getString("id")),
+						rs.getDate("date"),
+						null,
+						null,
+						rs.getString("user_id"),
+						rs.getString("note"),
+						rs.getString("photo"),
+						-10000,
+						-10000,
+						-10000,
+						-10000,
+						-10000);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			diary = null;
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			diary = null;
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 					diary = null;
 				}
@@ -281,33 +221,30 @@ public class DiaryDAO {
 
 		try {
 			// JDBCドライバを読み込む
-						Class.forName("org.h2.Driver");
+			Class.forName("org.h2.Driver");
 
-						// データベースに接続する
-						conn = DriverManager.getConnection(dbURL , "sa", "");
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL, "sa", "");
 			// SQL文を準備する　ここも改造
 			String sql = "UPDATE Diary SET Id=?, photo=?, note=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる 改造
-			if (edit.getId() >= 1 ) {
+			if (edit.getId() >= 1) {
 				pStmt.setString(1, String.valueOf(edit.getId()));
-			}
-			else {
+			} else {
 				pStmt.setString(1, null);
 			}
 
 			if (edit.getPhoto() != null && !edit.getPhoto().equals("")) {
 				pStmt.setString(2, edit.getPhoto());
-			}
-			else {
+			} else {
 				pStmt.setString(2, null);
 			}
 
 			if (edit.getNote() != null && !edit.getNote().equals("")) {
 				pStmt.setString(3, edit.getNote());
-			}
-			else {
+			} else {
 				pStmt.setString(3, null);
 			}
 
@@ -315,26 +252,84 @@ public class DiaryDAO {
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 
 		// 結果を返す
+		return result;
+	}
+
+	public boolean insertTodayDiary(WeatherForecast weather, String userId) {
+		boolean result = false;
+		Connection conn = null;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection(dbURL, "sa", "");
+			// SQL文を準備する
+			String sql = "SELECT * FROM Diary WHERE date = ?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cl = Calendar.getInstance();
+			String date = sdf.format(cl.getTime());
+			System.out.println("DiaryDao,insertTodayDiary(),今日の日付：" + date);
+			pStmt.setString(1, date);
+
+			// SQL文を実行する
+			ResultSet rs = pStmt.executeQuery();
+
+			if (!(rs.next())) {
+				String sql1 = "INSERT INTO Diary (date, user_id, note, photo, weather_code, max_temperature, min_temperature, wind_speed, amount_of_rain ) Values (?,?,'','\\photo\\no_image.png',?,?,?,?,?);";
+				PreparedStatement pStmt1 = conn.prepareStatement(sql);
+
+				// SQL文を完成させる
+
+					pStmt.setString(1, date);
+					pStmt.setString(2, userId);
+					pStmt.setString(3, String.valueOf(weather.getWeatherCode()));
+					pStmt.setString(4, String.valueOf(weather.getHighestTemperature()));
+					pStmt.setString(5, String.valueOf(weather.getLowestTemperature()));
+					pStmt.setString(6, String.valueOf(weather.getWind()));
+					pStmt.setString(7, String.valueOf(weather.getRain()));
+
+
+				// SQL文を実行する
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		return result;
 	}
 }

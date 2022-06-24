@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ItemDAO;
 import model.Item;
+import model.SearchCondition;
 
 /**
  * Servlet implementation class ItemSearchServlet
@@ -73,18 +74,19 @@ public class ItemSearchServlet extends HttpServlet {
 				String green = request.getParameter("green");
 				String yellow = request.getParameter("yellow");
 				String other = request.getParameter("other");
-				String pattern1 = request.getParameter("pattern1");
-				String pattern0 = request.getParameter("pattern0");
-				String rain1 = request.getParameter("rain1");
-				String rain0 = request.getParameter("rain0");
-				String wind1 = request.getParameter("wind1");
-				String wind0 = request.getParameter("wind0");
+				String patternYES = request.getParameter("patternYES");
+				String patternNO = request.getParameter("patternNO");
+				String rainOK = request.getParameter("rainOK");
+				String rainNG = request.getParameter("rainNG");
+				String windOK = request.getParameter("windOK");
+				String windNG = request.getParameter("windNG");
 
 
 				// 検索処理を行う　改造
 				ItemDAO IDao = new ItemDAO();
 				//かっこの中を変える
-				List<Item> itemList = IDao.select(new Item(spring,summer,autumn,winter,outer,jacket,tops,skirt,pants,shoes,white,black,grey,beige,red,blue,green,yellow,other,pattern1,pattern0,rain1,rain0,));
+				List<Item> itemList = IDao.select(new SearchCondition(spring,summer,autumn,winter,outer,jacket,tops,skirt,pants,shoes,
+						white,black,grey,beige,red,blue,green,yellow,other,patternYES,patternNO,rainOK,rainNG,windOK,windNG));
 
 				// 検索結果をリクエストスコープに格納する
 				request.setAttribute("itemList", itemList);
