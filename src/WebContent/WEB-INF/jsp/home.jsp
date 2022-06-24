@@ -126,7 +126,7 @@ RECOMMENDS and FORECAST</h3>
 
 <h3 align="center">HISTORY</h3>
 <!-- 過去3日分の服 -->
-<table align="center">
+<table align="center" class="history">
 	<c:forEach var="history" items="${diaryList}">
     <th>
     ${history.dateStr}

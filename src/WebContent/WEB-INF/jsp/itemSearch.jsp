@@ -9,12 +9,14 @@
     <title>itemSearch</title>
     <link rel="stylesheet" href="/coordinator/css/itemSearch.css">
     <link rel="stylesheet" href="/coordinator/css/common.css">
+    <link rel="stylesheet" href="/coordinator/css/headerFooter.css">
     <script src="js/itemSearch.js"></script>
     <script src="js/common.js"></script>
 </head>
 
 <body>
-    <h1> 検索</h1>
+<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
+
     <nav class="nav">
         <ul>
             <li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -26,7 +28,7 @@
     </nav>
     <main>
         <form method="POST" action="/coordinator/ItemSearchServlet">
-            <table>
+            <table align="center" class="search">
                 <tr>
                     <td>
                         <div class="multiselect">
@@ -72,8 +74,8 @@
                         </div>
                     </div>
                     </td>
-                </tr>
-                <tr>
+             <!--    </tr>
+                <tr>-->
                     <td>
                         <div class="multiselect">
                             <div class="selectBox" onclick="showCheckboxeses()">
@@ -104,18 +106,19 @@
                             </div>
                         </div>
                     </td>
+                    <tr>
                     <td>
-                        <label>柄<br>
+                        <label>柄
                             <input type="checkbox" name="pattern1">あり
                         </label>
                         <label>
                             <input type="checkbox" name="pattern0">なし
                         </label>
                     </td>
-                </tr>
-                <tr>
+              <!--   </tr>
+                <tr>-->
                     <td>
-                        <label>雨<br>
+                        <label>雨
                             <input type="checkbox" name="rain1">可
                         </label>
                         <label>
@@ -123,7 +126,7 @@
                         </label>
                     </td>
                     <td>
-                        <label>風<br>
+                        <label>風
                             <input type="checkbox" name="wind1">可
                         </label>
                         <label>
@@ -133,67 +136,58 @@
                 </tr>
 
                 <tr>
-                    <td>
-                        <input type="submit" name="list" value="アイテムの一覧表示">
-                        <input type="submit" name="search" value="検索">
-                        <input type="reset" name="reset" value="リセット">
+                    <td colspan="3" class="button_table">
+                    <p align="center">
+                        <input type="submit" name="list" value="ALL ITEM" class="btn">
+                        <input type="submit" name="search" value="SEARCH" class="btn">
+                        <input type="reset" name="reset" value="RESET" class="btn">
+                    </p>
                     </td>
                 </tr>
             </table><br>
         </form>
     </main>
-    <hr>
+<hr>
 
-    <h2>おすすめコーデ</h2>
-    <table id="recomend">
+    <h2>RECOMMENDS COORDINATE</h2>
+    <table align="center" id="recomend">
         <tr>
-            <td>
-
-                <img src="photo/17.PNG" alt="アウター"><br>
-                <img src="photo/3.PNG" alt="ジャケット"><br>
-                <img src="photo/18.PNG" alt="トップス"><br>
-                <img src="photo/26.PNG" alt="スカート"><br>
-                <img src="photo/55.PNG" alt="シューズ"><br>
-            </td>
+            <td><img src="photo/17.PNG" alt="アウター_1"></td>
+			<td><img src="photo/17.PNG" alt="アウター_2"></td>
+            <td><img src="photo/17.PNG" alt="アウター_3"></td>
+        </tr>
+        <tr>
+            <td><img src="photo/3.PNG" alt="ジャケット_1"></td>
+			<td><img src="photo/3.PNG" alt="ジャケット_2"></td>
+            <td><img src="photo/3.PNG" alt="ジャケット_3"></td>
+        </tr>
+        <tr>
+            <td><img src="photo/18.PNG" alt="トップス_1"></td>
+			<td><img src="photo/18.PNG" alt="トップス_2"></td>
+            <td><img src="photo/18.PNG" alt="トップス_3"></td>
+        </tr>
+        <tr>
+            <td><img src="photo/26.PNG" alt="スカート_1"></td>
+			<td><img src="photo/26.PNG" alt="スカート_2"></td>
+            <td><img src="photo/26.PNG" alt="スカート_3"></td>
+        </tr>
+        <tr>
+            <td><img src="photo/55.PNG" alt="シューズ_1"></td>
+			<td><img src="photo/55.PNG" alt="シューズ_2"></td>
+            <td><img src="photo/55.PNG" alt="シューズ_3"></td>
         </tr>
     </table>
 
-    <table id="recomend">
-        <tr>
-            <td>
 
-                <img src="photo/17.PNG" alt="アウター"><br>
-                <img src="photo/3.PNG" alt="ジャケット"><br>
-                <img src="photo/18.PNG" alt="トップス"><br>
-                <img src="photo/26.PNG" alt="スカート"><br>
-                <img src="photo/55.PNG" alt="シューズ"><br>
-            </td>
-        </tr>
-    </table>
-
-    <table id="recomend">
-        <tr>
-            <td>
-
-                <img src="photo/17.PNG" alt="アウター"><br>
-                <img src="photo/3.PNG" alt="ジャケット"><br>
-                <img src="photo/18.PNG" alt="トップス"><br>
-                <img src="photo/26.PNG" alt="スカート"><br>
-                <img src="photo/55.PNG" alt="シューズ"><br>
-            </td>
-        </tr>
-    </table>
-    <hr>
-
-    <h2>アウター</h2>
-    <div class="list">
+    <h3>OUTER</h3>
+    <div class="list" class="list_outer">
         <div class="list2">
 
 
 
     <table id="item">
 <tr>
-    <td>
+    <td class="result_outer">
     <img src="photo/17.PNG" alt="アウター">
     <img src="photo/23.PNG" alt="アウター">
     <img src="photo/38.PNG" alt="アウター">
@@ -205,16 +199,16 @@
 
 </div>
 </div>
-<hr>
 
 
-    <h2>ジャケット</h2>
-    <div class="list">
+
+    <h3>JACKET</h3>
+    <div class="list" class="list_jk">
         <div class="list2">
 
 <table id="item">
     <tr>
-        <td>
+        <td class="result_jacket">
 
     <img src="photo/1.PNG" alt="ジャケット">
     <img src="photo/2.PNG" alt="ジャケット">
@@ -225,16 +219,16 @@
 
 </div>
 </div>
-<hr>
 
 
-    <h2>トップス</h2>
-    <div class="list">
+
+    <h3>TOPS</h3>
+    <div class="list" class="list_tops">
         <div class="list2">
 
 <tabale id="item">
     <tr>
-        <td>
+        <td class="result_tops">
     <img src="photo/20.PNG" alt="トップス">
     <img src="photo/21.PNG" alt="トップス">
     <img src="photo/22.PNG" alt="トップス">
@@ -244,17 +238,17 @@
 
 </div>
 </div>
-<hr>
 
 
 
-    <h2>スカート</h2>
-    <div class="list">
+
+    <h3>SKIRT</h3>
+    <div class="list" class="list_sk">
         <div class="list2">
 
     <table id="item">
         <tr>
-            <td>
+            <td class="result_skirt">
     <img src="photo/5.PNG" alt="スカート">
     <img src="photo/6.PNG" alt="スカート">
     <img src="photo/7.PNG" alt="スカート">
@@ -264,16 +258,16 @@
 
 </div>
 </div>
-<hr>
 
 
-    <h2>パンツ</h2>
-    <div class="list">
+
+    <h3>PANTS</h3>
+    <div class="list" class="list_p">
         <div class="list2">
 
     <table id="item">
         <tr>
-            <td>
+            <td class="result_pants">
     <img src="photo/42.PNG" alt="パンツ">
     <img src="photo/52.PNG" alt="パンツ">
     <img src="photo/53.PNG" alt="パンツ">
@@ -283,15 +277,15 @@
 
 </div>
 </div>
-<hr>
 
-    <h2>シューズ</h2>
-    <div class="list">
+
+    <h3>SHOES</h3>
+    <div class="list" class="list_shoes">
         <div class="list2">
 
     <table id="item">
         <tr>
-            <td>
+            <td class="result_shoes">
     <img src="photo/13.PNG" alt="アウター">
     <img src="photo/14.PNG" alt="アウター">
     <img src="photo/15.PNG" alt="アウター">
@@ -303,7 +297,7 @@
 </div>
 <hr>
 
-    <style>
+<!--      <style>
         img {
             margin: 30px 0;
             width: 200px;
@@ -431,7 +425,7 @@
             }
         }
 
-    </script>
+    </script>-->
 
 </body>
 
