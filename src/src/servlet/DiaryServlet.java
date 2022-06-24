@@ -123,6 +123,7 @@ public class DiaryServlet extends HttpServlet {
 		request.setAttribute("diaryList", diaryList);
 		session.setAttribute("startDate", startDate);
 		session.setAttribute("endDate", endDate);
+		//session.setAttribute("属性名", 保存したいインスタンス);
 
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");

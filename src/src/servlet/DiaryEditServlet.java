@@ -41,6 +41,7 @@ public class DiaryEditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+
 		String s1 = request.getParameter("edit");
 		String s2 = request.getParameter("update");
 		if (s1 != null) {

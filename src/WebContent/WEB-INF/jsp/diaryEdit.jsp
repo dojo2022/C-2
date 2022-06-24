@@ -14,8 +14,9 @@
 <body>
 <div class="wrapper">
   <h1 id="logo">
-   <img src="\test\logo.PNG" alt="coordinator">
+   <img src="/coordinator/photo/logo.PNG" alt="coordinator">
    </h1>
+   <!--
 <nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -24,12 +25,15 @@
 			<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
 			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
 		</ul>
-	</nav>
+	</nav>-->
+
+    ${diary.dateStr}
+
 
 <form method="POST" action="/coordinator/DiaryEditServlet" enctype="multipart/form-data">
   <img src="/coordinator${diary.photo}">
-  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
-  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
+ <!-- <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
+  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button> -->
   <br>
   <input type="text" name="diary_id" value="${diary.id}"class="hidden">
   画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
