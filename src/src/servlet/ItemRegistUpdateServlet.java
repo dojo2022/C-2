@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import dao.ItemDAO;
+import model.ColorSeason;
 import model.Item;
 import model.RegistInf;
 import model.Result;
@@ -150,7 +151,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 
 			// 更新または削除を行う
 			ItemDAO tDao = new ItemDAO();
-			if (request.getParameter("SUBMIT").equals("更新")) {
+			if (request.getParameter("SUBMIT") != null && request.getParameter("SUBMIT").equals("更新")) {
 				if (tDao.update(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
 						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), userID, itemID, photoExtension)) { // 更新成功
 					request.setAttribute("result",
