@@ -1,21 +1,27 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import dao.ItemDAO;
+import model.Item;
 import model.RegistInf;
 import model.Result;
 
 /**
  * Servlet implementation class ItemRegistUpdateServlet
  */
+@MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\photo") // アップロードファイルの一時的な保存先
 @WebServlet("/ItemRegistUpdateServlet")
 public class ItemRegistUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,6 +49,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			return;
 		}
 		*/
+		HttpSession session = request.getSession();
 
 		//String id = ((User) session.getAttribute("id")).getId();
 		String id = "aaaaa";
@@ -54,6 +61,19 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
+
+
+		Part part = request.getPart("IMAGE"); // getPartで取得
+		String photo = null;
+		String fileName = this.getFileName(part);
+		System.out.println(fileName);
+		//System.out.println("part:" + part + "file :"  +this.getFileName(part));
+		if (fileName != null && !(fileName.equals(""))) {
+			photo = userID + System.currentTimeMillis() + "." + this.getExtension(fileName);
+			part.write(photo);
+			photo = "\\photo\\" + photo;
+			}
+
 		String spring = request.getParameter("spring");
 		String summer = request.getParameter("summer");
 		String autumn = request.getParameter("autumn");
@@ -96,15 +116,37 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 					white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), id, photoExtension)) { // 登録成功
 				request.setAttribute("result",
 						new Result(true));
-			} else { // 登録失敗
+			}
+			else { // 登録失敗
 				request.setAttribute("result",
 						new Result(false));
 			}
+			RegistInf registinf = new RegistInf();
+			Item item =new Item();
+
+			item.setPhoto(photo);
+
+			boolean ret = iDao.insert(registinf, id, photo);
+
+			//リクエストスコープに保存する
+			request.setAttribute("item", item);
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemRegist.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		} else if (request.getParameter("item_id") != null) {
+			String itemId = request.getParameter("item_id");
+			System.out.println("選択したアイテムのid" + itemId);
+			ItemDAO iDao = new ItemDAO();
+			List<Object> itemInf = iDao.select(itemId);
+			Item item = (Item) (itemInf.get(0));
+			ColorSeason colorSeason = (ColorSeason) (itemInf.get(1));
+			request.setAttribute("item", item);
+			request.setAttribute("colorSeason", colorSeason);
+			// 結果ページにフォワードする
+			RequestDispatcher dispatchers = request.getRequestDispatcher("/WEB-INF/jsp/itemUpdate.jsp");
+			dispatchers.forward(request, response);
+		}else {
 
 			// 更新または削除を行う
 			ItemDAO tDao = new ItemDAO();
@@ -132,4 +174,33 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		}
 
 	}
+	//ファイルの名前を取得してくる
+		private String getFileName(Part part) {
+			String name = null;
+			for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+				if (dispotion.trim().startsWith("filename")) {
+					name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+					name = name.substring(name.lastIndexOf("\\") + 1);
+					break;
+				}
+			} // TODO 自動生成されたメソッド・スタブ
+			return name;
+		}
+
+		public String getExtension(String filename) {
+			char[] array = filename.toCharArray();
+			int dotIndex = -1;
+			for (int i = array.length - 1; i >= 0; i--) {
+				if (array[i] == '.') {
+					dotIndex = i;
+					break;
+				}
+			}
+			String str = "";
+			for (int i = dotIndex + 1; i < array.length; i++) {
+				str += array[i];
+			}
+			return str;
+		}
 }
+
