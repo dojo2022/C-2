@@ -12,11 +12,12 @@ public abstract class ItemDAOTest {
 		// select()のテスト
 				System.out.println("---------- select()のテスト ----------");
 				//List<Item> itemList = dao.searchParts(new Item(0 , "", 0, 0, 0, 0, ""));
-				List<Object> itemInf = dao.select("1");
+				List<Object> itemInf = dao.select("2");
 				Item item = (Item) (itemInf.get(0));
 				ColorSeason colorSeason = (ColorSeason) (itemInf.get(1));
 				System.out.println(item.getId());
 				System.out.println(colorSeason.getSpring());
+				System.out.println(colorSeason.getSummer());
 				//System.out.println(item.getId() + colorSeason.getSpring());
 
 /*

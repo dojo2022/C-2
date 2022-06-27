@@ -941,19 +941,19 @@ public class ItemDAO {
 
 			while (rs.next()) {
 				if (rs.getString("code") != null && rs.getString("code").equals("1") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					spring = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("2") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					summer = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("3") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					autumn = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("4") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					winter = true;
 				}
 			}
@@ -965,39 +965,39 @@ public class ItemDAO {
 			rs = pStmt.executeQuery();
 			while (rs.next()) {
 				if (rs.getString("code") != null && rs.getString("code").equals("1") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					white = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("2") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					black = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("3") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					grey = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("4") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					beige = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("5") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					red = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("6") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					blue = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("7") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					green = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("8") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					yellow = true;
 				}
 				if (rs.getString("code") != null && rs.getString("code").equals("9") && rs.getString("flag") != null
-						&& rs.getString("code").equals("1")) {
+						&& rs.getString("flag").equals("1")) {
 					other = true;
 				}
 			}
