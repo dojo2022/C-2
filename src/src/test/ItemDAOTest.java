@@ -3,12 +3,22 @@ package test;
 import java.util.List;
 
 import dao.ItemDAO;
+import model.ColorSeason;
 import model.Item;
-import model.SearchCondition;
 
 public abstract class ItemDAOTest {
 	public static void main(String[] args) {
 		ItemDAO dao = new ItemDAO();
+		// select()のテスト
+				System.out.println("---------- select()のテスト ----------");
+				//List<Item> itemList = dao.searchParts(new Item(0 , "", 0, 0, 0, 0, ""));
+				List<Object> itemInf = dao.select("1");
+				Item item = (Item) (itemInf.get(0));
+				ColorSeason colorSeason = (ColorSeason) (itemInf.get(1));
+				System.out.println(item.getId());
+				System.out.println(colorSeason.getSpring());
+				//System.out.println(item.getId() + colorSeason.getSpring());
+
 /*
 		// select()のテスト
 		System.out.println("---------- select()のテスト ----------");
@@ -24,7 +34,7 @@ public abstract class ItemDAOTest {
 			System.out.println(item.getPhoto());
 			System.out.println();
 		}
-*/
+*/		/*
 		SearchCondition sc = new SearchCondition(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 		List<Item> itemList2 = dao.select(sc,"aaaaa");
 		for (Item item : itemList2) {
@@ -37,6 +47,7 @@ public abstract class ItemDAOTest {
 			System.out.println(item.getPhoto());
 			System.out.println();
 		}
+		*/
 		/*
 		// insert()のテスト
 		System.out.println("---------- insert(Itemテーブル)のテスト ----------");

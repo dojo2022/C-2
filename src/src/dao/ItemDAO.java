@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ColorSeason;
 import model.Item;
 import model.RegistInf;
 import model.SearchCondition;
-
 public class ItemDAO {
 	/* データベースのURLは後で共有フォルダのやつに書き換えます。
 	全部書き換えるのが大変なのでフィールドに書きます。 */
@@ -883,6 +883,7 @@ public class ItemDAO {
 		// 結果を返す
 		return itemList2;
 	}
+
 	public List<Object> select(String itemId) {
 		Connection conn = null;
 		//null:初期化
@@ -896,9 +897,8 @@ public class ItemDAO {
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
-			String sql = "select * from item join item_season on item.id = item_season.item_id join item_color on item.id = item_color.item_id"
-			+ " where Item.id = ?;";
-
+			String sql = "select * from item where id = ?;";
+			//String sql = "select * from item join item_season on item.id = item_season.item_id join item_color on item.id = item_color.item_id"+ " where Item.id = ?;";
 
 			// SQL文を実行し、結果表を取得する
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -916,24 +916,99 @@ public class ItemDAO {
 						Integer.parseInt(rs.getString("RAIN")),
 						Integer.parseInt(rs.getString("WIND")),
 						rs.getString("PHOTO")));
-					Item item = new Item(
-							Integer.parseInt(rs.getString("ID")),
-							rs.getString("USER_ID"),
-							Integer.parseInt(rs.getString("PARTS_CODE")),
-							Integer.parseInt(rs.getString("PATTERN")),
-							Integer.parseInt(rs.getString("RAIN")),
-							Integer.parseInt(rs.getString("WIND")),
-							rs.getString("PHOTO"));
-
-
-					itemInf.add(item);
 			}
+			// SQL文を準備する
+			sql = "select * from item_season where Item_id = ?;";
+			// SQL文を実行し、結果表を取得する
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, itemId);
+
+			rs = pStmt.executeQuery();
+
+			boolean spring = false;
+			boolean summer = false;
+			boolean autumn = false;
+			boolean winter = false;
+			boolean white = false;
+			boolean black = false;
+			boolean grey = false;
+			boolean beige = false;
+			boolean red = false;
+			boolean blue = false;
+			boolean green = false;
+			boolean yellow = false;
+			boolean other = false;
+
+			while (rs.next()) {
+				if (rs.getString("code") != null && rs.getString("code").equals("1") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					spring = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("2") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					summer = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("3") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					autumn = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("4") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					winter = true;
+				}
+			}
+			// SQL文を準備する
+			sql = "select * from item_color where Item_id = ?;";
+			// SQL文を実行し、結果表を取得する
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, itemId);
+			rs = pStmt.executeQuery();
+			while (rs.next()) {
+				if (rs.getString("code") != null && rs.getString("code").equals("1") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					white = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("2") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					black = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("3") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					grey = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("4") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					beige = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("5") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					red = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("6") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					blue = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("7") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					green = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("8") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					yellow = true;
+				}
+				if (rs.getString("code") != null && rs.getString("code").equals("9") && rs.getString("flag") != null
+						&& rs.getString("code").equals("1")) {
+					other = true;
+				}
+			}
+			itemInf.add(new ColorSeason(spring, summer, autumn, winter,
+					white,black,grey,beige,red,blue,green,yellow,other ));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			itemList2 = null;
+			itemInf = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			itemList2 = null;
+			itemInf = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -941,13 +1016,13 @@ public class ItemDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					itemList2 = null;
+					itemInf = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return itemList2;
+		return itemInf;
 	}
 
 }
