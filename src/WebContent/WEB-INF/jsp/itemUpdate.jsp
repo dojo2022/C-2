@@ -25,6 +25,7 @@
         </ul>
     </nav>
     <main>
+    <c:forEach var="item" items="${itemList}" >
         <form method="POST" action="/coordinator/ItemSearchServlet">
             <table>
                 <tr>
@@ -38,7 +39,7 @@
                             </div>
                             <div id="checkboxes">
                                 <label>
-                                    <input type="checkbox" name="spring">春</label>
+                                    <input type="checkbox" name="spring" value="${item.spring}">春</label>
                                 <label>
                                     <input type="checkbox" name="summer">夏</label>
                                 <label>
@@ -94,202 +95,49 @@
                     </td>
                     <td>
                         <label>柄<br>
-                            <input type="radio" name="pattern">あり
+                            <input type="radio" name="pattern_yes">あり
                         </label>
                         <label>
-                            <input type="radio" name="pattern">なし
+                            <input type="radio" name="pattern_no">なし
                         </label>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label>雨<br>
-                            <input type="radio" name="rain">可
+                            <input type="radio" name="rain_ok">可
                         </label>
                         <label>
-                            <input type="radio" name="rain">不可
+                            <input type="radio" name="rain_ng">不可
                         </label>
                     </td>
                     <td>
                         <label>風<br>
-                            <input type="radio" name="wind">可
+                            <input type="radio" name="wind_ok">可
                         </label>
                         <label>
-                            <input type="radio" name="wind">不可
+                            <input type="radio" name="wind_ng">不可
                         </label>
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        <input type="submit" name="list" value="アイテムの一覧表示">
-                        <input type="submit" name="search" value="検索">
-                        <input type="reset" name="reset" value="リセット">
+                        <input type="submit" name="update" value="更新">
+                        <input type="submit" name="delete" value="削除">
                     </td>
                 </tr>
+                <tr>
+					<td><br> 画像:<input type="file" name="IMAGE"
+						accept="image/*" onchange="previewImage(this);"><br>
+						<canvas id="preview" style="max-width: 200px;"></canvas>
+					</td>
+				</tr>
+
             </table><br>
         </form>
+    </c:forEach>
     </main>
-    <hr>
-
-    <h2>おすすめコーデ</h2>
-    <table id="recomend">
-        <tr>
-            <td>
-
-                <img src="photo/17.PNG" alt="アウター"><br>
-                <img src="photo/3.PNG" alt="ジャケット"><br>
-                <img src="photo/18.PNG" alt="トップス"><br>
-                <img src="photo/26.PNG" alt="スカート"><br>
-                <img src="photo/55.PNG" alt="シューズ"><br>
-            </td>
-        </tr>
-    </table>
-
-    <table id="recomend">
-        <tr>
-            <td>
-
-                <img src="photo/17.PNG" alt="アウター"><br>
-                <img src="photo/3.PNG" alt="ジャケット"><br>
-                <img src="photo/18.PNG" alt="トップス"><br>
-                <img src="photo/26.PNG" alt="スカート"><br>
-                <img src="photo/55.PNG" alt="シューズ"><br>
-            </td>
-        </tr>
-    </table>
-
-    <table id="recomend">
-        <tr>
-            <td>
-
-                <img src="photo/17.PNG" alt="アウター"><br>
-                <img src="photo/3.PNG" alt="ジャケット"><br>
-                <img src="photo/18.PNG" alt="トップス"><br>
-                <img src="photo/26.PNG" alt="スカート"><br>
-                <img src="photo/55.PNG" alt="シューズ"><br>
-            </td>
-        </tr>
-    </table>
-    <hr>
-
-    <h2>アウター</h2>
-    <div class="list">
-        <div class="list2">
-
-
-
-    <table id="item">
-<tr>
-    <td>
-    <img src="photo/17.PNG" alt="アウター">
-    <img src="photo/23.PNG" alt="アウター">
-    <img src="photo/38.PNG" alt="アウター">
-
-    </td>
-    </tr>
-    </table>
-
-
-</div>
-</div>
-<hr>
-
-
-    <h2>ジャケット</h2>
-    <div class="list">
-        <div class="list2">
-
-<table id="item">
-    <tr>
-        <td>
-
-    <img src="photo/1.PNG" alt="ジャケット">
-    <img src="photo/2.PNG" alt="ジャケット">
-    <img src="photo/3.PNG" alt="ジャケット">
-    </td>
-    </tr>
-    </table>
-
-</div>
-</div>
-<hr>
-
-
-    <h2>トップス</h2>
-    <div class="list">
-        <div class="list2">
-
-<tabale id="item">
-    <tr>
-        <td>
-    <img src="photo/20.PNG" alt="トップス">
-    <img src="photo/21.PNG" alt="トップス">
-    <img src="photo/22.PNG" alt="トップス">
-    </td>
-    </tr>
-    </tabale>
-
-</div>
-</div>
-<hr>
-
-
-
-    <h2>スカート</h2>
-    <div class="list">
-        <div class="list2">
-
-    <table id="item">
-        <tr>
-            <td>
-    <img src="photo/5.PNG" alt="スカート">
-    <img src="photo/6.PNG" alt="スカート">
-    <img src="photo/7.PNG" alt="スカート">
-    </td>
-    </tr>
-    </table>
-
-</div>
-</div>
-<hr>
-
-
-    <h2>パンツ</h2>
-    <div class="list">
-        <div class="list2">
-
-    <table id="item">
-        <tr>
-            <td>
-    <img src="photo/42.PNG" alt="パンツ">
-    <img src="photo/52.PNG" alt="パンツ">
-    <img src="photo/53.PNG" alt="パンツ">
-    </td>
-    </tr>
-    </table>
-
-</div>
-</div>
-<hr>
-
-    <h2>シューズ</h2>
-    <div class="list">
-        <div class="list2">
-
-    <table id="item">
-        <tr>
-            <td>
-    <img src="photo/13.PNG" alt="アウター">
-    <img src="photo/14.PNG" alt="アウター">
-    <img src="photo/15.PNG" alt="アウター">
-    </td>
-    </tr>
-    </table>
-
-</div>
-</div>
-<hr>
 
     <style>
         img {
