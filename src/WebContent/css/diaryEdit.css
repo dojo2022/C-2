@@ -65,6 +65,12 @@ table#list th, table#list td {
 	display:none;
 }
 
+.new {
+	font-size: 30px;
+	position: relative;
+	left: 90px;
+}
+
 textarea {
 	width: 600px;  /* 横幅 */
 	height: 100px; /* 高さ */

@@ -11,15 +11,21 @@ body {
 }
 
 .wrapper {
-  margin: 0 auto 0 auto;
+  margin: auto auto auto auto;
   width: max;
+  height: max;
 }
 
-h2 {
+h1 {
+	position: relative;
+    top: 160px;
+}
+
+h3 {
   text-align: center;
 	font-size: 18px;
-	margin-top: 20px 0px 20px 0px;
-	padding-top: 10px 10px 10px 10px;
+	/*margin-top: 20px 0px 20px 0px;
+	padding-top: 10px 10px 10px 10px;*/
 }
 
 form {
@@ -32,4 +38,19 @@ form {
 	margin: 0px auto 0px auto; /* 中央揃え */
 	width: 1000px; /* 幅を固定 */
 
+}
+
+.error_message {
+	color: red;
+}
+
+#list {
+	position: relative;
+    top: 160px;
+}
+
+.signup {
+	position: relative;
+	top: 200px;
+	left:800px;
 }
