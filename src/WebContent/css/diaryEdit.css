@@ -24,7 +24,17 @@ h2 {
 	padding-top: 10px 10px 10px 10px;
 }
 
-#nav {
+h3{
+	 position: relative;
+    /*top: 100px;*/
+    left: 300px;
+}
+
+table.update_table td{
+	width: 400px;
+}
+
+/*#nav {
   margin: 0 0 0 0;
   padding: 15px 20px 12px 20px;
 }
@@ -48,4 +58,15 @@ table#list th, table#list td {
   padding: 4px 16px 4px 0;
   text-align: center;
   white-space: nowrap;
+}*/
+
+#new {
+	color: red;
+	display:none;
 }
+
+textarea {
+	width: 600px;  /* 横幅 */
+	height: 100px; /* 高さ */
+}
+

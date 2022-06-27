@@ -1,5 +1,5 @@
 'use strict';
-	window.alert('更新成功');
+	//window.alert('更新成功');
 
 	var expanded = false;
 

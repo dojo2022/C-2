@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DIARY EDIT</title>
 <link rel="stylesheet" href="/coordinator/css/diaryEdit.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
 <link rel="stylesheet" href="/coordinator/css/headerFooter.css">
@@ -27,23 +27,28 @@
 <h3>${diary.dateStr}</h3>
 
 <form method="POST" action="/coordinator/DiaryEditServlet" enctype="multipart/form-data">
-  <img src="/coordinator${diary.photo}">
-  <!--  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
-  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>-->
-  <br>
-  <input type="text" name="diary_id" value="${diary.id}"class="hidden">
-  画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
-		<canvas id="preview" style="max-width:200px;"></canvas>
-    <br>
-  <textarea name="note">${diary.note}</textarea>
-  <!-- <button type="reset" class="btn">リセット</button> -->
-  <br>
-  <input type="submit" name="update" value="更新" class="btn">
+<table align="center" class="update_table">
+	<tr>
+  		<td><img src="/coordinator${diary.photo}" width="243" height="405"></td>
+  		<td><canvas id="preview" style="max-width:200px;"></canvas></td>
+  	</tr>
+  	<tr>
+		<td><input type="text" name="diary_id" value="${diary.id}"class="hidden">
+			画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"></td>
+		<td><p id="new">new</p></td>
+	</tr>
+  <tr>
+  	<td colspan="2"><textarea name="note">${diary.note}</textarea>
+  		<input type="submit" name="update" value="UPDATE" class="btn"></td>
+  </tr>
 </form>
-<a href="/coordinator/DiaryServlet"><img src="/coordinator/photo/backpage.png" alt="Back Page"></a>
+</table>
+ <a href="/coordinator/DiaryServlet"><img src="/coordinator/photo/backpage.png" alt="Back Page"></a>
+
+
 
 </body>
 </html>
-
-</body>
-</html>
+<!--  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
+  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>-->
+  <!-- <button type="reset" class="btn">リセット</button> -->
