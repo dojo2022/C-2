@@ -25,7 +25,7 @@
 	</nav>
   <main>
   <h3 align="center">REGIST</h3>
-	<form method="POST" action="/coordinator/ItemRegistUpdateServlet">
+	<form method="POST" action="/coordinator/ItemRegistUpdateServlet"  enctype="multipart/form-data">
 		<table class="regist_table" align="center">
       <tr>
         <td>
