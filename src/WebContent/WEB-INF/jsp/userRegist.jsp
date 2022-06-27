@@ -12,13 +12,14 @@
 </head>
 <body>
 
-<img src="/coordinator/photo/logo.PNG" alt="coordinator">
-<h1 class="h1">新規登録</h1>
+<img src="/coordinator/photo/logo.PNG" alt="coordinator" width="162" height="37">
+<div class="user">
+<h3>MEMBER REGISTRATION</h3>
  <form method="POST" action="/coordinator/LoginServlet" id="form">
  <div id= "table">
 	<table id="list" align="center">
 		<tr>
-			<td>名前</td>
+			<td>NAME</td>
 			<td><input type="text" name="NAME"></td>
 		</tr>
 		<tr>
@@ -30,15 +31,12 @@
 			<td><input type="password" name="PW" placeholder="パスワード"></td>
 		</tr>
 		<tr>
-			<td>PW確認</td>
-			<td><input type="password" name="PW2" placeholder="パスワード"></td>
+			<td>PW(確認)</td>
+			<td><input type="password" name="PW2" placeholder="パスワード(確認用)"></td>
 		</tr>
 		<tr>
-	<td>
-    <input type="submit" name="REGIST" value="登録">
-    </td>
-    <td>
-    <a href="/coordinator/LoginServlet">ログイン画面に戻る</a>
+	<td colspan="2">
+    <p align="center"><input type="submit" name="REGIST" value="REGIST" class="btn"></p>
     </td>
     </tr>
 	</table>
@@ -48,7 +46,8 @@
 
 </form>
 
-
+<a href="/coordinator/LoginServlet"><img src="/coordinator/photo/backpage.png" alt="Back Page" class="backpage"></a>
+</div>
 </body>
 
 </html>

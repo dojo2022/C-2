@@ -1,4 +1,14 @@
 @charset "UTF-8";
-.h1{
+h3{
 	text-align: center;
+}
+
+.backpage {
+	position: relative;
+	left: 100px;
+}
+
+.user {
+	position: relative;
+	top: 100px;
 }

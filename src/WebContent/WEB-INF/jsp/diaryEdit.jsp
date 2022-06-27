@@ -35,7 +35,7 @@
   	<tr>
 		<td><input type="text" name="diary_id" value="${diary.id}"class="hidden">
 			画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"></td>
-		<td><p id="new">new</p></td>
+		<td class="new"><p id="new">new</p></td>
 	</tr>
   <tr>
   	<td colspan="2"><textarea name="note">${diary.note}</textarea>
