@@ -11,7 +11,7 @@ public abstract class ItemDAOTest {
 		ItemDAO dao = new ItemDAO();
 /*
 		// select()のテスト
-		System.out.println("---------- select()のテスト ----------");
+		System.out.println("---------- select(全件検索)のテスト ----------");
 		//List<Item> itemList = dao.searchParts(new Item(0 , "", 0, 0, 0, 0, ""));
 		List<Item> itemList = dao.searchParts("aaaaa", 1);
 		for (Item item : itemList) {
@@ -25,7 +25,8 @@ public abstract class ItemDAOTest {
 			System.out.println();
 		}
 */
-		SearchCondition sc = new SearchCondition(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
+		System.out.println("---------- select(検索)のテスト ----------");
+		SearchCondition sc = new SearchCondition(null,"on",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 		List<Item> itemList2 = dao.select(sc,"aaaaa");
 		for (Item item : itemList2) {
 			System.out.println(item.getId());

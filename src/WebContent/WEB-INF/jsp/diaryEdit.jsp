@@ -13,36 +13,39 @@
 <script src="js/common.js"></script>
 </head>
 <body>
-<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
-<nav class="nav">
- <ul>
-    <li><a href="/coordinator/HomeServlet">HOME</a></li>
-    <li><a href="/coordinator/DiaryServlet">DIARY</a></li>
-    <li> <a href="/coordinator/ItemSearchServlet">SEARCH</a></li>
-    <li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
-    <li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
-</ul>
-</nav>
+<div class="wrapper">
+  <h1 id="logo">
+   <img src="/coordinator/photo/logo.PNG" alt="coordinator">
+   </h1>
 
-<h3 align="center">
+<nav class="nav">
+		<ul>
+			<li><a href="/coordinator/HomeServlet">HOME</a></li>
+			<li><a href="/coordinator/DiaryServlet">DIARY</a></li>
+			<li><a href="/coordinator/ItemSearchServlet">SEARCH</a></li>
+			<li><a href="/coordinator/ItemRegistUpdateServlet">REGIST</a></li>
+			<li><a href="/coordinator/LoginServlet">LOGOUT</a></li>
+		</ul>
 	</nav>
 
-<form method="POST" action="/coordinator/DiaryEditServlet">
+    <h3>${diary.dateStr}</h3>
+
+
+<form method="POST" action="/coordinator/DiaryEditServlet" enctype="multipart/form-data">
   <img src="/coordinator${diary.photo}">
-  <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
-  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button>
+ <!-- <button type="button" onclick="pushItemPhotoUpdateBtn();">変更</button>
+  <button type="button" onclick="pushItemPhotoDeleteBtn();">削除</button> -->
   <br>
   <input type="text" name="diary_id" value="${diary.id}"class="hidden">
   画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
 		<canvas id="preview" style="max-width:200px;"></canvas>
     <br>
   <textarea name="note">${diary.note}</textarea>
-  <button type="reset" class="btn">リセット</button>
+  <button type="reset">リセット</button>
   <br>
-  <input type="submit" name="update" value="更新" class="btn">
+  <input type="submit" name="update" value="更新">
 </form>
-<a href="/coordinator/DiaryServlet">日記画面に戻る</a>
-
+<a href="/coordinator/DiaryServlet"><img src="/coordinator/photo/backpage.png" alt="Back Page" ></a>
 </body>
 </html>
 

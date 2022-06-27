@@ -4,10 +4,12 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.ItemDAO;
 import model.RegistInf;
@@ -16,6 +18,13 @@ import model.Result;
 /**
  * Servlet implementation class ItemRegistUpdateServlet
  */
+//↓これ絶対入れてね！！
+@MultipartConfig(location = "C:\\\\dojo6\\\\src\\\\WebContent\\\\photo") // アップロードファイルの一時的な保存先
+@WebServlet("/ItemRegistUpdateServlet")
+public class ItemRegistUpdateServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
 @WebServlet("/ItemRegistUpdateServlet")
 public class ItemRegistUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,9 +52,19 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			return;
 		}
 		*/
+		request.setCharacterEncoding("UTF-8");
 
 		//String id = ((User) session.getAttribute("id")).getId();
 		String id = "aaaaa";
+		Part part = request.getPart("IMAGE"); // getPartで取得
+		String photo = null;
+		String fileName = this.getFileName(part);
+
+		if (fileName != null && !(fileName.equals(""))) {
+			photo = userId + System.currentTimeMillis() + "." + this.getExtension(fileName);
+			part.write(photo);
+			photo = "\\photo\\" + photo;
+		}
 
 		// いったんエラーを消すためだけの処理
 		String photoExtension = "";
@@ -82,6 +101,14 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		String parts = request.getParameter("parts");
 
 		System.out.println("parts:" + parts);
+
+
+		request.setAttribute("", );
+
+		 //ディスパッチ
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+		dispatcher.forward(request, response);
+
 		/*
 		System.out.println("spring:" + spring);
 		System.out.println("summer:" +summer);
@@ -131,5 +158,33 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			dispatchers.forward(request, response);
 		}
 
+	}
+	//ファイルの名前を取得してくる
+		private String getFileName(Part part) {
+	        String name = null;
+	        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+	            if (dispotion.trim().startsWith("filename")) {
+	                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+	                name = name.substring(name.lastIndexOf("\\") + 1);
+	                break;
+	            }
+	        }		// TODO 自動生成されたメソッド・スタブ
+			return name;
+		}
+		public String getExtension(String filename) {
+			char[] array = filename.toCharArray();
+			int dotIndex = -1;
+			for (int i = array.length - 1; i >= 0; i--) {
+				if (array[i] == '.') {
+					dotIndex = i;
+					break;
+				}
+			}
+			String str = "";
+			for (int i = dotIndex + 1; i < array.length; i++) {
+				str += array[i];
+			}
+			return str;
+		}
 	}
 }

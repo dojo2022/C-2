@@ -114,7 +114,7 @@ public class DiaryDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '\\photo\\no_image.png' ORDER BY date DESC LIMIT 3";
+			String sql = "SELECT date, photo FROM Diary WHERE user_id = ? AND photo != '¥photo¥no_image.png' ORDER BY date DESC LIMIT 3";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			// SQL文を完成させる
 			pStmt.setString(1, id);
@@ -226,26 +226,27 @@ public class DiaryDAO {
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 			// SQL文を準備する　ここも改造
 			if (edit.getPhoto() != null) {
-				String sql = "UPDATE Diary SET photo=?, note=? where Id=?";
+				String sql = "UPDATE Diary SET photo= ?, note= ? where Id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる 改造
-				if (edit.getId() >= 1) {
-					pStmt.setString(3, String.valueOf(edit.getId()));
-				} else {
-					pStmt.setString(3, null);
-				}
 
 				if (edit.getPhoto() != null && !edit.getPhoto().equals("")) {
 					pStmt.setString(1, edit.getPhoto());
 				} else {
-					pStmt.setString(1, null);
+					pStmt.setString(1, "");
 				}
 
 				if (edit.getNote() != null && !edit.getNote().equals("")) {
+					//System.out.println("3"+ edit.getNote());
 					pStmt.setString(2, edit.getNote());
 				} else {
 					pStmt.setString(2, null);
+				}
+				if (edit.getId() >= 1) {
+					pStmt.setString(3, String.valueOf(edit.getId()));
+				} else {
+					pStmt.setString(3, "");
 				}
 
 				// SQL文を実行する
@@ -253,20 +254,21 @@ public class DiaryDAO {
 					result = true;
 				}
 			} else {
-				String sql = "UPDATE Diary SET note=? where Id=?";
+				String sql = "UPDATE Diary SET note= ? where Id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる 改造
-				if (edit.getId() >= 1) {
-					pStmt.setString(2, String.valueOf(edit.getId()));
-				} else {
-					pStmt.setString(2, null);
-				}
+				// SQL文を完成させる
 
 				if (edit.getNote() != null && !edit.getNote().equals("")) {
+					//System.out.println("3"+ edit.getNote());
 					pStmt.setString(1, edit.getNote());
 				} else {
 					pStmt.setString(1, null);
+				}
+				if (edit.getId() >= 1) {
+					pStmt.setString(2, String.valueOf(edit.getId()));
+				} else {
+					pStmt.setString(2, "");
 				}
 
 				// SQL文を実行する

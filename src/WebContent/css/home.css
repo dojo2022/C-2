@@ -23,7 +23,9 @@ h1{
 	margin: 20px 5px;
 }
 
-
+h3 {
+    font-size: 30px;
+}
 
 .wrapper div {
     float: left;
@@ -104,14 +106,8 @@ h3 {
 	left: 1000px;
 }
 
-table.ondayWeather_table{
-	border: 1px #222222 solid;
+.ondayWeather_table{
 	position: relative;
 	top: 50px;
 	left: 30px;
 }
-
-/*.history table th,td{
-	width: 200px;
-	text-align: center;
-}*/

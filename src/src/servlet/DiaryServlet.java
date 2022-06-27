@@ -71,12 +71,10 @@ public class DiaryServlet extends HttpServlet {
 		List<Diary> diaryList = dDAO.selectDiary(param);
 		System.out.println(diaryList);
 		System.out.println(diaryList.size());
-		/*
 		for (int i = 0; i< diaryList.size(); i++) {
 			System.out.println(diaryList.get(i).getDate());
 			System.out.println(diaryList.get(i).getDateStr());
 		}
-		*/
 
 		//リクエストスコープに写真のデータを格納する
 		request.setAttribute("diaryList", diaryList);
@@ -125,6 +123,7 @@ public class DiaryServlet extends HttpServlet {
 		request.setAttribute("diaryList", diaryList);
 		session.setAttribute("startDate", startDate);
 		session.setAttribute("endDate", endDate);
+		//session.setAttribute("属性名", 保存したいインスタンス);
 
 		// フォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");

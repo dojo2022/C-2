@@ -19,6 +19,7 @@ import model.Diary;
 /**
  * Servlet implementation class DiaryEditServlet
  */
+
 //↓これ絶対入れてね！！
 @MultipartConfig(location = "C:\\dojo6\\src\\WebContent\\photo") // アップロードファイルの一時的な保存先
 @WebServlet("/DiaryEditServlet")
@@ -41,6 +42,7 @@ public class DiaryEditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+
 		String s1 = request.getParameter("edit");
 		String s2 = request.getParameter("update");
 		if (s1 != null) {

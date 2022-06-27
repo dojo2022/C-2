@@ -8,12 +8,11 @@
 <title>itemRegist</title>
 <link rel="stylesheet" href="/coordinator/css/itemRegist.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
-<link rel="stylesheet" href="/coordinator/css/headerFooter.css">
 <script src="js/itemRegist.js"></script>
 <script src="js/common.js"></script>
 </head>
 <body>
-<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
+	アイテム登録ページ
 	<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -24,16 +23,15 @@
 		</ul>
 	</nav>
   <main>
-  <h3 align="center">REGIST</h3>
+  <h2>登録</h2>
 	<form method="POST" action="/coordinator/ItemRegistUpdateServlet">
-		<table class="regist_table" align="center">
+		<table>
       <tr>
         <td>
           <div class="multiselect">
             <div class="selectBox" onclick="showCheckboxes()">
-              <p class="pulldown_name">季節</p>
               <select>
-                <option>複数選択可</option>
+                <option>季節</option>
               </select>
               <div class="overSelect"></div>
             </div>
@@ -61,12 +59,13 @@
           </select>
           </label>
         </td>
+      </tr>
+      <tr>
         <td>
           <div class="multiselect">
             <div class="selectBox" onclick="showCheckboxeses()">
-              <p class="pulldown_name">色</p>
               <select>
-                <option>複数選択可</option>
+                <option>色</option>
               </select>
               <div class="overSelect"></div>
             </div>
@@ -92,9 +91,6 @@
             </div>
           </div>
         </td>
-        </tr>
-        <tr><td></td><td></td><td></td></tr>
-        <tr>
         <td>
           <label>柄<br>
           <input type="radio" name="pattern_yes">あり
@@ -103,6 +99,8 @@
           <input type="radio" name="pattern_no">なし
           </label>
         </td>
+      </tr>
+      <tr>
         <td>
           <label>雨<br>
           <input type="radio" name="rain_ok">可
@@ -121,21 +119,22 @@
         </td>
       </tr>
       <tr>
-					<td><br> 画像:<input type="file" name="IMAGE"
-						accept="image/*" onchange="previewImage(this);"><br>
-						<canvas id="preview" style="max-width: 200px;"></canvas></td>
-				</tr>
-		<tr>
-		<td colspan="3">
-          <p class="button_td"><input type="submit" name="REGIST" value="REGIST" class="btn">
-          <input type="reset" name="reset" value="RESET" class="btn"></p>
+        <td><br>
+          画像:<input type="file" name="IMAGE" accept="image/*" onchange="previewImage(this);"><br>
+          <canvas id="preview" style="max-width:200px;"></canvas>
+        </td>
+      </tr>
+			<tr>
+				<td>
+          <input type="submit" name="REGIST" value="登録">
+          <input type="reset" name="reset" value="リセット">
         </td>
 			</tr>
 		</table><br>
 
 	</form>
 </main>
-<!--  <style>
+<style>
 .multiselect {
   width: 200px;
 }
@@ -208,6 +207,6 @@ function showCheckboxeses() {
   }
 }
 
-</script>-->
+</script>
 </body>
 </html>
