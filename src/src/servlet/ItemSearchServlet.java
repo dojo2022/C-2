@@ -35,6 +35,7 @@ public class ItemSearchServlet extends HttpServlet {
 		//				}
 
 		// 検索ページにフォワードする
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearch.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -148,6 +149,9 @@ public class ItemSearchServlet extends HttpServlet {
 		request.setAttribute("skirtList", skirtList);
 		request.setAttribute("pantsList", pantsList);
 		request.setAttribute("shoesList", shoesList);
+		
+		Boolean flg = true;
+		request.setAttribute("search", flg);
 		// 検索ページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearch.jsp");
 		dispatcher.forward(request, response);

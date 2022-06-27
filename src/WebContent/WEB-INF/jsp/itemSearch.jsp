@@ -122,10 +122,11 @@
 	<hr>
 
 
-
+	<c:set value="0" var="itemAmount"></c:set>
 	<c:set value="0" var="count"></c:set>
 	<c:forEach var="item" items="${outerList}">
 		<c:set value="${count + 1}" var="count"></c:set>
+		<c:set value="${itemAmount + 1}" var="itemAmount"></c:set>
 	</c:forEach>
 	<c:if test="${count > 0}">
 		<h3>OUTER</h3>
@@ -152,6 +153,7 @@
 	<c:set value="0" var="count"></c:set>
 	<c:forEach var="item" items="${jkList}">
 		<c:set value="${count + 1}" var="count"></c:set>
+		<c:set value="${itemAmount + 1}" var="itemAmount"></c:set>
 	</c:forEach>
 	<c:if test="${count > 0}">
 		<h3>JACKET</h3>
@@ -175,6 +177,7 @@
 	<c:set value="0" var="count"></c:set>
 	<c:forEach var="item" items="${topsList}">
 		<c:set value="${count + 1}" var="count"></c:set>
+		<c:set value="${itemAmount + 1}" var="itemAmount"></c:set>
 	</c:forEach>
 	<c:if test="${count > 0}">
 		<h3>TOPS</h3>
@@ -198,6 +201,7 @@
 	<c:set value="0" var="count"></c:set>
 	<c:forEach var="item" items="${skirtList}">
 		<c:set value="${count + 1}" var="count"></c:set>
+		<c:set value="${itemAmount + 1}" var="itemAmount"></c:set>
 	</c:forEach>
 	<c:if test="${count > 0}">
 		<h3>SKIRT</h3>
@@ -221,6 +225,7 @@
 	<c:set value="0" var="count"></c:set>
 	<c:forEach var="item" items="${pantsList}">
 		<c:set value="${count + 1}" var="count"></c:set>
+		<c:set value="${itemAmount + 1}" var="itemAmount"></c:set>
 	</c:forEach>
 	<c:if test="${count > 0}">
 		<h3>PANTS</h3>
@@ -243,6 +248,7 @@
 	<c:set value="0" var="count"></c:set>
 	<c:forEach var="item" items="${shoesList}">
 		<c:set value="${count + 1}" var="count"></c:set>
+		<c:set value="${itemAmount + 1}" var="itemAmount"></c:set>
 	</c:forEach>
 	<c:if test="${count > 0}">
 		<h3>SHOES</h3>
@@ -261,7 +267,10 @@
 			</div>
 		</div>
 	</c:if>
-	<hr>
+	<c:if test="${itemAmount == 0 && search}">
+	<p>検索条件に当てはまるアイテムが見つかりませんでした</p>
+	</c:if>
+
 
 	<!--      <style>
         img {

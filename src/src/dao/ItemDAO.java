@@ -886,7 +886,7 @@ public class ItemDAO {
 	public List<Object> select(String itemId) {
 		Connection conn = null;
 		//null:初期化
-		List<Item> itemList2 = new ArrayList<Item>();
+		List<Object> itemInf = new ArrayList<Object>();
 
 		try {
 			// JDBCドライバを読み込む
@@ -896,253 +896,26 @@ public class ItemDAO {
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
-			String sql = "select * from item join item_season on item.id = item_season.item_id join item_color on item.id = item_color.item_id";
-			if (!((sc.getSpring() != null && sc.getSummer() != null && sc.getAutumn() != null && sc.getWinter() != null)
-					|| (sc.getSpring() == null && sc.getSummer() == null && sc.getAutumn() == null
-							&& sc.getWinter() == null))) {
-				sql += " where item_season.flag = 1 and item_season.code in (";
-				boolean flg = false;
-				if (sc.getSpring() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "1";
-					flg = true;
-				}
-				if (sc.getSummer() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "2";
-					flg = true;
-				}
-				if (sc.getAutumn() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "3";
-					flg = true;
-				}
-				if (sc.getWinter() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "4";
-					flg = true;
-				}
+			String sql = "select * from item join item_season on item.id = item_season.item_id join item_color on item.id = item_color.item_id"
+			+ " where Item.id = ?;";
 
-				sql += ")";
-			}
-			if (!((sc.getWhite() != null && sc.getBlack() != null && sc.getGrey() != null && sc.getBeige() != null
-					&& sc.getRed() != null && sc.getBlue() != null && sc.getGreen() != null && sc.getYellow() != null
-					&& sc.getOther() != null)
-					|| (sc.getWhite() == null && sc.getBlack() == null && sc.getGrey() == null && sc.getBeige() == null
-							&& sc.getRed() == null && sc.getBlue() == null && sc.getGreen() == null
-							&& sc.getYellow() == null && sc.getOther() == null))) {
-				sql += " AND item_color.flag = 1 and item_color.code in (";
-				boolean flg = false;
-				if (sc.getWhite() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "1";
-					flg = true;
-				}
-				if (sc.getBlack() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "2";
-					flg = true;
-				}
-				if (sc.getGrey() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "3";
-					flg = true;
-				}
-				if (sc.getBeige() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "4";
-					flg = true;
-				}
-				if (sc.getRed() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "5";
-					flg = true;
-				}
-				if (sc.getBlue() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "6";
-					flg = true;
-				}
-				if (sc.getGreen() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "7";
-					flg = true;
-				}
-				if (sc.getYellow() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "8";
-					flg = true;
-				}
-				if (sc.getOther() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "9";
-					flg = true;
-				}
-				sql += ")";
-
-			}
-
-			if (!((sc.getOuter() != null && sc.getJacket() != null && sc.getTops() != null && sc.getSkirt() != null
-					&& sc.getPants() != null && sc.getShoes() != null)
-					|| (sc.getOuter() == null && sc.getJacket() == null && sc.getTops() == null && sc.getSkirt() == null
-							&& sc.getPants() == null && sc.getShoes() == null))) {
-				sql += " AND item.parts_code in (";
-				boolean flg = false;
-				if (sc.getOuter() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "1";
-					flg = true;
-				}
-				if (sc.getJacket() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "2";
-					flg = true;
-				}
-				if (sc.getTops() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "3";
-					flg = true;
-				}
-				if (sc.getSkirt() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "4";
-					flg = true;
-				}
-				if (sc.getPants() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "5";
-					flg = true;
-				}
-				if (sc.getShoes() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "6";
-					flg = true;
-				}
-				sql += ")";
-			}
-			//System.out.println("itemDao select 柄:" + sc.getPatternYES() + sc.getPatternNO());
-			if (!((sc.getPatternYES() != null && sc.getPatternNO() != null)
-					|| (sc.getPatternYES() == null && sc.getPatternNO() == null))) {
-				sql += " AND item.pattern in (";
-				boolean flg = false;
-				if (sc.getPatternYES() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "1";
-					flg = true;
-				}
-				if (sc.getPatternNO() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "0";
-					flg = true;
-				}
-				sql += ")";
-			}
-
-			if (!((sc.getRainOK() != null && sc.getRainNG() != null)
-					|| (sc.getRainOK() == null && sc.getRainNG() == null))) {
-				sql += " AND item.Rain in (";
-				boolean flg = false;
-				if (sc.getRainOK() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "1";
-					flg = true;
-				}
-				if (sc.getRainNG() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "0";
-					flg = true;
-				}
-				sql += ")";
-			}
-
-			if (!((sc.getWindOK() != null && sc.getWindNG() != null)
-					|| (sc.getWindOK() == null && sc.getWindNG() == null))) {
-				sql += " AND item.Wind in (";
-				boolean flg = false;
-				if (sc.getWindOK() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "1";
-					flg = true;
-				}
-				if (sc.getWindNG() != null) {
-					if (flg) {
-						sql += ",";
-					}
-					sql += "0";
-					flg = true;
-				}
-				sql += ")";
-			}
-
-			//sql += " AND Item.user_id in = ";
-			sql += " AND Item.user_id = ?";
 
 			// SQL文を実行し、結果表を取得する
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, id);
+			pStmt.setString(1, itemId);
 
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
-			ArrayList<Integer> al = new ArrayList<Integer>();
 			while (rs.next()) {
-				int tmpId = Integer.parseInt(rs.getString("ID"));
-				boolean tmpFlg = true;
-				for (int i = 0; i < al.size(); i++) {
-					if (al.get(i) == tmpId) {
-						tmpFlg = false;
-					}
-				}
-				if (tmpFlg) {
-					al.add(tmpId);
+				itemInf.add(new Item(
+						Integer.parseInt(rs.getString("ID")),
+						rs.getString("USER_ID"),
+						Integer.parseInt(rs.getString("PARTS_CODE")),
+						Integer.parseInt(rs.getString("PATTERN")),
+						Integer.parseInt(rs.getString("RAIN")),
+						Integer.parseInt(rs.getString("WIND")),
+						rs.getString("PHOTO")));
 					Item item = new Item(
 							Integer.parseInt(rs.getString("ID")),
 							rs.getString("USER_ID"),
@@ -1151,8 +924,9 @@ public class ItemDAO {
 							Integer.parseInt(rs.getString("RAIN")),
 							Integer.parseInt(rs.getString("WIND")),
 							rs.getString("PHOTO"));
-					itemList2.add(item);
-				}
+
+
+					itemInf.add(item);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

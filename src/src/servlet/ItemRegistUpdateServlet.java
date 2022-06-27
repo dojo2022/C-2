@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ItemDAO;
+import model.ColorSeason;
+import model.Item;
 import model.RegistInf;
 import model.Result;
 
@@ -94,7 +96,8 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			// 登録処理を行う
 			ItemDAO iDao = new ItemDAO();
 			if (iDao.insert(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
-					white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), id, photoExtension)) { // 登録成功
+					white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG,
+					windOK, windNG, parts), id, photoExtension)) { // 登録成功
 				request.setAttribute("result",
 						new Result(true));
 			} else { // 登録失敗
@@ -105,18 +108,26 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemRegist.jsp");
 			dispatcher.forward(request, response);
-		} else if(request.getParameter("item_id") != null) {
+		} else if (request.getParameter("item_id") != null) {
 			String itemId = request.getParameter("item_id");
 			System.out.println("選択したアイテムのid" + itemId);
 			ItemDAO iDao = new ItemDAO();
 			List<Object> itemInf = iDao.select(itemId);
+			Item item = (Item) (itemInf.get(0));
+			ColorSeason colorSeason = (ColorSeason) (itemInf.get(1));
+			request.setAttribute("item", item);
+			request.setAttribute("colorSeason", colorSeason);
+			// 結果ページにフォワードする
+			RequestDispatcher dispatchers = request.getRequestDispatcher("/WEB-INF/jsp/itemUpdate.jsp");
+			dispatchers.forward(request, response);
 		} else {
 
 			// 更新または削除を行う
 			ItemDAO tDao = new ItemDAO();
 			if (request.getParameter("SUBMIT").equals("更新")) {
 				if (tDao.update(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
-						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), userID, itemID, photoExtension)) { // 更新成功
+						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK,
+						rainNG, windOK, windNG, parts), userID, itemID, photoExtension)) { // 更新成功
 					request.setAttribute("result",
 							new Result(true));
 				} else { // 更新失敗
