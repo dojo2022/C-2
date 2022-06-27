@@ -99,6 +99,7 @@ public class ItemDAO {
 
 	// 引数itemで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(RegistInf registinf, String id, String photo) {
+		System.out.println("登録Daoがもらったregistinf：" + registinf.getParts());
 		Connection conn = null;
 		boolean result = false;
 
