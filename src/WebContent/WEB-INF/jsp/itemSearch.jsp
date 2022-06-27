@@ -149,34 +149,7 @@
     </main>
 <hr>
 
-    <h2>RECOMMENDS COORDINATE</h2>
-    <table align="center" id="recomend">
-        <tr>
-            <td><img src="photo/17.PNG" alt="アウター_1"></td>
-			<td><img src="photo/17.PNG" alt="アウター_2"></td>
-            <td><img src="photo/17.PNG" alt="アウター_3"></td>
-        </tr>
-        <tr>
-            <td><img src="photo/3.PNG" alt="ジャケット_1"></td>
-			<td><img src="photo/3.PNG" alt="ジャケット_2"></td>
-            <td><img src="photo/3.PNG" alt="ジャケット_3"></td>
-        </tr>
-        <tr>
-            <td><img src="photo/18.PNG" alt="トップス_1"></td>
-			<td><img src="photo/18.PNG" alt="トップス_2"></td>
-            <td><img src="photo/18.PNG" alt="トップス_3"></td>
-        </tr>
-        <tr>
-            <td><img src="photo/26.PNG" alt="スカート_1"></td>
-			<td><img src="photo/26.PNG" alt="スカート_2"></td>
-            <td><img src="photo/26.PNG" alt="スカート_3"></td>
-        </tr>
-        <tr>
-            <td><img src="photo/55.PNG" alt="シューズ_1"></td>
-			<td><img src="photo/55.PNG" alt="シューズ_2"></td>
-            <td><img src="photo/55.PNG" alt="シューズ_3"></td>
-        </tr>
-    </table>
+
 
 
     <h3>OUTER</h3>
@@ -188,9 +161,10 @@
     <table id="item">
 <tr>
     <td class="result_outer">
-    <img src="photo/17.PNG" alt="アウター">
-    <img src="photo/23.PNG" alt="アウター">
-    <img src="photo/38.PNG" alt="アウター">
+    <c:forEach var="item" items="${outerList}">
+    	<img src="/coordinator/${item.photo}" alt="アウター">
+    </c:forEach>
+
 
     </td>
     </tr>
@@ -210,9 +184,9 @@
     <tr>
         <td class="result_jacket">
 
-    <img src="photo/1.PNG" alt="ジャケット">
-    <img src="photo/2.PNG" alt="ジャケット">
-    <img src="photo/3.PNG" alt="ジャケット">
+    <c:forEach var="item" items="${jkList}">
+    	<img src="/coordinator/${item.photo}" alt="ジャケット">
+    </c:forEach>
     </td>
     </tr>
     </table>
@@ -229,9 +203,9 @@
 <tabale id="item">
     <tr>
         <td class="result_tops">
-    <img src="photo/20.PNG" alt="トップス">
-    <img src="photo/21.PNG" alt="トップス">
-    <img src="photo/22.PNG" alt="トップス">
+    <c:forEach var="item" items="${topsList}">
+    	<img src="/coordinator/${item.photo}" alt="トップス">
+    </c:forEach>
     </td>
     </tr>
     </tabale>
@@ -249,9 +223,9 @@
     <table id="item">
         <tr>
             <td class="result_skirt">
-    <img src="photo/5.PNG" alt="スカート">
-    <img src="photo/6.PNG" alt="スカート">
-    <img src="photo/7.PNG" alt="スカート">
+    <c:forEach var="item" items="${skirtList}">
+    	<img src="/coordinator/${item.photo}" alt="スカート">
+    </c:forEach>
     </td>
     </tr>
     </table>
@@ -268,9 +242,9 @@
     <table id="item">
         <tr>
             <td class="result_pants">
-    <img src="photo/42.PNG" alt="パンツ">
-    <img src="photo/52.PNG" alt="パンツ">
-    <img src="photo/53.PNG" alt="パンツ">
+    <c:forEach var="item" items="${pantsList}">
+    	<img src="/coordinator/${item.photo}" alt="パンツ">
+    </c:forEach>
     </td>
     </tr>
     </table>
@@ -286,9 +260,9 @@
     <table id="item">
         <tr>
             <td class="result_shoes">
-    <img src="photo/13.PNG" alt="アウター">
-    <img src="photo/14.PNG" alt="アウター">
-    <img src="photo/15.PNG" alt="アウター">
+    <c:forEach var="item" items="${shoesList}">
+    	<img src="/coordinator/${item.photo}" alt="シューズ">
+    </c:forEach>
     </td>
     </tr>
     </table>

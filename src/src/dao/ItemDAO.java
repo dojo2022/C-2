@@ -330,7 +330,7 @@ public class ItemDAO {
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE ITEM SET PARTS_CODE=? PATTERN=? RAIN=?	WIND=? PHOTO=?";
+			String sql = "UPDATE ITEM SET PARTS_CODE=? PATTERN=? RAIN=?	WIND=? PHOTO=? WHERE id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -383,41 +383,123 @@ public class ItemDAO {
 
 			pStmt.setString(5, photo);
 
+			pStmt.setString(6, itemID);
+
 			// SQL文を実行する
 			int cnt = pStmt.executeUpdate();
 			if (cnt == 1) {
-				System.out.println("item:" + cnt);
+				//System.out.println("item:" + cnt);
 				result = true;
 			}
-			//今増やしたレコードのidを取得
 
-			String ItemID = "";
-			/*
-			ResultSet rs = pStmt.getGeneratedKeys();
-			 if (rs.next()) {
-				 ItemID = String.valueOf(rs.getInt(1));
-			 }
-			 System.out.println("今増やしたレコードのid:" + ItemID);
-			 */
-
-			//写真の名前がさっき登録したやつと同じレコードを取得。そのidを調べる
 			// SQL文を準備する
-			String sqlSelectID = "select id FROM Item WHERE photo = ?";
-			pStmt = conn.prepareStatement(sqlSelectID);
-			pStmt.setString(1, photo);
+			String sqlDelete = "DELETE FROM Item_season WHERE item_id = ?;"
+					+ "DELETE FROM Item_color WHERE item_id = ?;";
+			PreparedStatement pStmtDelete = conn.prepareStatement(sqlDelete);
 
-			// SQL文を実行し、結果を取得する
-			ResultSet rs = pStmt.executeQuery();
+			// SQL文を完成させる
+			pStmtDelete.setString(1, itemID);
+			pStmtDelete.setString(2, itemID);
 
-			//
-			// 結果をコピーする
-			while (rs.next()) {
-				ItemID = rs.getString("ID");
+			// SQL文を実行する
+			if (pStmtDelete.executeUpdate() >= 1) {
+				result = true;
+			} else {
+				result = false;
 			}
-			System.out.println("今増やしたレコードのid:" + ItemID);
 
-			//String sqlColorSeason =
-
+			String sqlColorSeason = "INSERT INTO Item_season (ITEM_ID, CODE, FLAG) VALUES (?, 1, ?); "
+					+ "INSERT INTO Item_season (ITEM_ID, CODE, FLAG) VALUES (?, 2, ?);"
+					+ "INSERT INTO Item_season (ITEM_ID, CODE, FLAG) VALUES (?, 3, ?); "
+					+ "INSERT INTO Item_season (ITEM_ID, CODE, FLAG) VALUES (?, 4, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 1, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 2, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 3, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 4, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 5, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 6, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 7, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 8, ?);"
+					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 9, ?);";
+			pStmt = conn.prepareStatement(sqlColorSeason);
+			for (int i = 0; i < 2 * 13; i++) {
+				if (i % 2 == 1) {
+					pStmt.setString(i, itemID);
+				}
+			}
+			if (registinf.getSpring() != null) {
+				pStmt.setString(2, "1");
+			} else {
+				pStmt.setString(2, "0");
+			}
+			if (registinf.getSummer() != null) {
+				pStmt.setString(4, "1");
+			} else {
+				pStmt.setString(4, "0");
+			}
+			if (registinf.getAutumn() != null) {
+				pStmt.setString(6, "1");
+			} else {
+				pStmt.setString(6, "0");
+			}
+			if (registinf.getWinter() != null) {
+				pStmt.setString(8, "1");
+			} else {
+				pStmt.setString(8, "0");
+			}
+			if (registinf.getWhite() != null) {
+				pStmt.setString(10, "1");
+			} else {
+				pStmt.setString(10, "0");
+			}
+			if (registinf.getBlack() != null) {
+				pStmt.setString(12, "1");
+			} else {
+				pStmt.setString(12, "0");
+			}
+			if (registinf.getGrey() != null) {
+				pStmt.setString(14, "1");
+			} else {
+				pStmt.setString(14, "0");
+			}
+			if (registinf.getBeige() != null) {
+				pStmt.setString(16, "1");
+			} else {
+				pStmt.setString(16, "0");
+			}
+			if (registinf.getRed() != null) {
+				pStmt.setString(18, "1");
+			} else {
+				pStmt.setString(18, "0");
+			}
+			if (registinf.getBlue() != null) {
+				pStmt.setString(20, "1");
+			} else {
+				pStmt.setString(20, "0");
+			}
+			if (registinf.getGreen() != null) {
+				pStmt.setString(22, "1");
+			} else {
+				pStmt.setString(22, "0");
+			}
+			if (registinf.getYellow() != null) {
+				pStmt.setString(24, "1");
+			} else {
+				pStmt.setString(24, "0");
+			}
+			if (registinf.getOther() != null) {
+				pStmt.setString(26, "1");
+			} else {
+				pStmt.setString(26, "0");
+			}
+			// SQL文を実行する
+			cnt = pStmt.executeUpdate();
+			if (cnt == 13) {
+				System.out.println("季節、色；" + cnt);
+				result = true;
+			} else {
+				result = false;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
