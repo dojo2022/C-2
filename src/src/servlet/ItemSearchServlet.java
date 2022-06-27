@@ -44,6 +44,7 @@ public class ItemSearchServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		/*
@@ -63,7 +64,7 @@ public class ItemSearchServlet extends HttpServlet {
 		List<Item> pantsList = new ArrayList<Item>();
 		List<Item> shoesList = new ArrayList<Item>();
 		// 季節　パーツ名　色　柄　雨　風
-		if (request.getAttribute("list") != null) {
+		if (request.getParameter("list") != null) {
 			System.out.println("一覧");
 			outerList = IDao.searchParts(userId, 1);
 			jkList = IDao.searchParts(userId, 2);
@@ -71,7 +72,7 @@ public class ItemSearchServlet extends HttpServlet {
 			skirtList = IDao.searchParts(userId, 4);
 			pantsList = IDao.searchParts(userId, 5);
 			shoesList = IDao.searchParts(userId, 6);
-		} else if (request.getAttribute("search") != null) {
+		} else if (request.getParameter("search") != null) {
 			// リクエストパラメータを取得する　改造項目数
 			request.setCharacterEncoding("UTF-8");
 			String spring = request.getParameter("spring");
@@ -93,12 +94,13 @@ public class ItemSearchServlet extends HttpServlet {
 			String green = request.getParameter("green");
 			String yellow = request.getParameter("yellow");
 			String other = request.getParameter("other");
-			String patternYES = request.getParameter("patternYES");
-			String patternNO = request.getParameter("patternNO");
-			String rainOK = request.getParameter("rainOK");
-			String rainNG = request.getParameter("rainNG");
-			String windOK = request.getParameter("windOK");
-			String windNG = request.getParameter("windNG");
+			String patternYES = request.getParameter("pattern1");
+			//System.out.println("itemサーブレットpatternYES:" + patternYES);
+			String patternNO = request.getParameter("pattern0");
+			String rainOK = request.getParameter("rain1");
+			String rainNG = request.getParameter("rain0");
+			String windOK = request.getParameter("wind1");
+			String windNG = request.getParameter("wind0");
 
 			//かっこの中を変える
 			List<Item> itemList = IDao.select(

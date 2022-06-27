@@ -32,3 +32,17 @@
                 expanded = false;
             }
         }
+      function itemEdit(itemId) {
+        //console.log(itemId);
+        let form = document.createElement('form');
+        form.action = '/coordinator//ItemRegistUpdateServlet';
+        form.method = 'POST';
+        document.body.append(form);
+        form.addEventListener('formdata', (e) => {
+          let fd = e.formData;
+          // データをセット
+          fd.set('item_id', itemId);
+        });
+        form.submit();
+      }
+

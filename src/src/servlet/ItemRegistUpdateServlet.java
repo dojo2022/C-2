@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,7 +90,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		System.out.println("patternNO:" + patternNO);
 		*/
 
-		if (request.getParameter("REGIST").equals("登録")) {
+		if (request.getParameter("REGIST") != null) {
 			// 登録処理を行う
 			ItemDAO iDao = new ItemDAO();
 			if (iDao.insert(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
@@ -104,6 +105,11 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemRegist.jsp");
 			dispatcher.forward(request, response);
+		} else if(request.getParameter("item_id") != null) {
+			String itemId = request.getParameter("item_id");
+			System.out.println("選択したアイテムのid" + itemId);
+			ItemDAO iDao = new ItemDAO();
+			List<Object> itemInf = iDao.select(itemId);
 		} else {
 
 			// 更新または削除を行う
