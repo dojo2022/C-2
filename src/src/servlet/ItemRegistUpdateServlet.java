@@ -110,7 +110,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		System.out.println("patternNO:" + patternNO);
 		*/
 
-		if (request.getParameter("REGIST").equals("登録")) {
+		if (request.getParameter("REGIST") != null) {
 			// 登録処理を行う
 			ItemDAO iDao = new ItemDAO();
 			if (iDao.insert(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
@@ -122,6 +122,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 				request.setAttribute("result",
 						new Result(false));
 			}
+			/*
 			RegistInf registinf = new RegistInf();
 			Item item =new Item();
 
@@ -129,8 +130,10 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 
 			boolean ret = iDao.insert(registinf, id, photo);
 
+
 			//リクエストスコープに保存する
 			request.setAttribute("item", item);
+			*/
 
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemRegist.jsp");
