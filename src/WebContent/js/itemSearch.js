@@ -41,7 +41,7 @@
         form.addEventListener('formdata', (e) => {
           let fd = e.formData;
           // データをセット
-          fd.set('item_id', itemId);
+          fd.set('item_id_edit', itemId);
         });
         form.submit();
       }

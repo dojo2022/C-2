@@ -25,7 +25,7 @@
 	</nav>
   <main>
   <h3 align="center">REGIST</h3>
-	<form method="POST" action="/coordinator/ItemRegistUpdateServlet"  enctype="multipart/form-data">
+	<form method="POST" action="/coordinator/ItemRegistUpdateServlet" enctype="multipart/form-data">
 		<table class="regist_table" align="center">
       <tr>
         <td>
@@ -97,26 +97,26 @@
         <tr>
         <td>
           <label>柄<br>
-          <input type="radio" name="pattern_yes">あり
+          <input type="radio" name="pattern_yes" id="pattern_yes" onclick="f1()">あり
           </label>
           <label>
-          <input type="radio" name="pattern_no">なし
+          <input type="radio" name="pattern_no" id="pattern_no" onclick="f2()" checked>なし
           </label>
         </td>
         <td>
           <label>雨<br>
-          <input type="radio" name="rain_ok">可
+          <input type="radio" name="rain_ok" id="rain_ok" onclick="f3()" checked>可
           </label>
           <label>
-          <input type="radio" name="rain_ng">不可
+          <input type="radio" name="rain_ng" id="rain_ng" onclick="f4()">不可
           </label>
         </td>
         <td>
           <label>風<br>
-          <input type="radio" name="wind_ok">可
+          <input type="radio" name="wind_ok" id="wind_ok" onclick="f5()" checked>可
           </label>
           <label>
-          <input type="radio" name="wind_ng">不可
+          <input type="radio" name="wind_ng" id="wind_ng" onclick="f6()">不可
           </label>
         </td>
       </tr>

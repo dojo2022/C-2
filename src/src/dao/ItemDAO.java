@@ -12,6 +12,7 @@ import model.ColorSeason;
 import model.Item;
 import model.RegistInf;
 import model.SearchCondition;
+
 public class ItemDAO {
 	/* データベースのURLは後で共有フォルダのやつに書き換えます。
 	全部書き換えるのが大変なのでフィールドに書きます。 */
@@ -329,68 +330,130 @@ public class ItemDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection(dbURL, "sa", "");
+			if (photo != null) {
+				// SQL文を準備する
+				String sql = "UPDATE ITEM SET PARTS_CODE=?, PATTERN=?, RAIN=?, WIND=?, PHOTO=? WHERE id = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を準備する
-			String sql = "UPDATE ITEM SET PARTS_CODE=? PATTERN=? RAIN=?	WIND=? PHOTO=? WHERE id = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+				// SQL文を完成させる
+				switch (registinf.getParts()) {
+				case "outer":
+					pStmt.setString(1, "1");
+					break;
+				case "jacket":
+					pStmt.setString(1, "2");
+					break;
+				case "tops":
+					pStmt.setString(1, "3");
+					break;
+				case "skirt":
+					pStmt.setString(1, "4");
+					break;
+				case "pants":
+					pStmt.setString(1, "5");
+					break;
+				case "shoes":
+					pStmt.setString(1, "6");
+					break;
+				default:
+					break;
+				}
 
-			// SQL文を完成させる
-			switch (registinf.getParts()) {
-			case "outer":
-				pStmt.setString(1, "1");
-				break;
-			case "jacket":
-				pStmt.setString(1, "2");
-				break;
-			case "tops":
-				pStmt.setString(1, "3");
-				break;
-			case "skirt":
-				pStmt.setString(1, "4");
-				break;
-			case "pants":
-				pStmt.setString(1, "5");
-				break;
-			case "shoes":
-				pStmt.setString(1, "6");
-				break;
-			default:
-				break;
-			}
+				if (registinf.getPatternYES() != null && registinf.getPatternNO() == null) {
+					pStmt.setString(2, "1");
+				} else if (registinf.getPatternYES() == null && registinf.getPatternNO() != null) {
+					pStmt.setString(2, "0");
+				} else {
+					pStmt.setString(2, "0");
+				}
 
-			if (registinf.getPatternYES() != null && registinf.getPatternNO() == null) {
-				pStmt.setString(2, "1");
-			} else if (registinf.getPatternYES() == null && registinf.getPatternNO() != null) {
-				pStmt.setString(2, "0");
+				if (registinf.getRainOK() != null && registinf.getRainNG() == null) {
+					pStmt.setString(3, "1");
+				} else if (registinf.getRainOK() == null && registinf.getRainNG() != null) {
+					pStmt.setString(3, "0");
+				} else {
+					pStmt.setString(3, "1");
+				}
+
+				if (registinf.getWindOK() != null && registinf.getWindNG() == null) {
+					pStmt.setString(4, "1");
+				} else if (registinf.getWindOK() == null && registinf.getWindNG() != null) {
+					pStmt.setString(4, "0");
+				} else {
+					pStmt.setString(4, "1");
+				}
+
+				pStmt.setString(5, photo);
+
+				pStmt.setString(6, itemID);
+
+				// SQL文を実行する
+				int cnt = pStmt.executeUpdate();
+				if (cnt == 1) {
+					//System.out.println("item:" + cnt);
+					result = true;
+				}
 			} else {
-				pStmt.setString(2, "0");
-			}
+				// SQL文を準備する
+				String sql = "UPDATE ITEM SET PARTS_CODE=?, PATTERN=?, RAIN=?, WIND=? WHERE id = ?";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			if (registinf.getRainOK() != null && registinf.getRainNG() == null) {
-				pStmt.setString(3, "1");
-			} else if (registinf.getRainOK() == null && registinf.getRainNG() != null) {
-				pStmt.setString(3, "0");
-			} else {
-				pStmt.setString(3, "1");
-			}
+				// SQL文を完成させる
+				switch (registinf.getParts()) {
+				case "outer":
+					pStmt.setString(1, "1");
+					break;
+				case "jacket":
+					pStmt.setString(1, "2");
+					break;
+				case "tops":
+					pStmt.setString(1, "3");
+					break;
+				case "skirt":
+					pStmt.setString(1, "4");
+					break;
+				case "pants":
+					pStmt.setString(1, "5");
+					break;
+				case "shoes":
+					pStmt.setString(1, "6");
+					break;
+				default:
+					break;
+				}
 
-			if (registinf.getWindOK() != null && registinf.getWindNG() == null) {
-				pStmt.setString(4, "1");
-			} else if (registinf.getWindOK() == null && registinf.getWindNG() != null) {
-				pStmt.setString(4, "0");
-			} else {
-				pStmt.setString(4, "1");
-			}
+				if (registinf.getPatternYES() != null && registinf.getPatternNO() == null) {
+					pStmt.setString(2, "1");
+				} else if (registinf.getPatternYES() == null && registinf.getPatternNO() != null) {
+					pStmt.setString(2, "0");
+				} else {
+					pStmt.setString(2, "0");
+				}
 
-			pStmt.setString(5, photo);
+				if (registinf.getRainOK() != null && registinf.getRainNG() == null) {
+					pStmt.setString(3, "1");
+				} else if (registinf.getRainOK() == null && registinf.getRainNG() != null) {
+					pStmt.setString(3, "0");
+				} else {
+					pStmt.setString(3, "1");
+				}
 
-			pStmt.setString(6, itemID);
+				if (registinf.getWindOK() != null && registinf.getWindNG() == null) {
+					pStmt.setString(4, "1");
+				} else if (registinf.getWindOK() == null && registinf.getWindNG() != null) {
+					pStmt.setString(4, "0");
+				} else {
+					pStmt.setString(4, "1");
+				}
 
-			// SQL文を実行する
-			int cnt = pStmt.executeUpdate();
-			if (cnt == 1) {
-				//System.out.println("item:" + cnt);
-				result = true;
+				pStmt.setString(5, itemID);
+
+				// SQL文を実行する
+				int cnt = pStmt.executeUpdate();
+				if (cnt == 1) {
+					//System.out.println("item:" + cnt);
+					result = true;
+				}
 			}
 
 			// SQL文を準備する
@@ -422,7 +485,7 @@ public class ItemDAO {
 					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 7, ?);"
 					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 8, ?);"
 					+ "INSERT INTO Item_color (ITEM_ID, CODE, FLAG) VALUES (?, 9, ?);";
-			pStmt = conn.prepareStatement(sqlColorSeason);
+			PreparedStatement pStmt = conn.prepareStatement(sqlColorSeason);
 			for (int i = 0; i < 2 * 13; i++) {
 				if (i % 2 == 1) {
 					pStmt.setString(i, itemID);
@@ -494,13 +557,14 @@ public class ItemDAO {
 				pStmt.setString(26, "0");
 			}
 			// SQL文を実行する
-			cnt = pStmt.executeUpdate();
+			int cnt = pStmt.executeUpdate();
 			if (cnt == 13) {
 				System.out.println("季節、色；" + cnt);
 				result = true;
 			} else {
 				result = false;
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -1003,7 +1067,7 @@ public class ItemDAO {
 				}
 			}
 			itemInf.add(new ColorSeason(spring, summer, autumn, winter,
-					white,black,grey,beige,red,blue,green,yellow,other ));
+					white, black, grey, beige, red, blue, green, yellow, other));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			itemInf = null;

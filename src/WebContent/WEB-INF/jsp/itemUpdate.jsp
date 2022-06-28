@@ -26,7 +26,7 @@
 	</nav>
 	<main>
 
-		<form method="POST" action="/coordinator/ItemSearchServlet">
+		<form method="POST" action="/coordinator/ItemRegistUpdateServlet" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>
@@ -62,13 +62,44 @@
 							</div>
 						</div>
 					</td>
-					<td><label>パーツ<br> <select>
+					<td><label>パーツ<br>
+					<select name="parts">
+					<c:if test="${item.partsCode == 1}">
+								<option value="outer" selected>アウター</option>
+					</c:if>
+					<c:if test="${item.partsCode != 1}">
 								<option value="outer">アウター</option>
+					</c:if>
+					<c:if test="${item.partsCode == 2}">
+								<option value="jacket" selected>ジャケット</option>
+					</c:if>
+					<c:if test="${item.partsCode != 2}">
 								<option value="jacket">ジャケット</option>
+					</c:if>
+					<c:if test="${item.partsCode == 3}">
+								<option value="tops" selected>トップス</option>
+					</c:if>
+					<c:if test="${item.partsCode != 3}">
 								<option value="tops">トップス</option>
+					</c:if>
+					<c:if test="${item.partsCode == 4}">
+								<option value="skirt" selected>スカート</option>
+					</c:if>
+					<c:if test="${item.partsCode != 4}">
 								<option value="skirt">スカート</option>
+					</c:if>
+					<c:if test="${item.partsCode == 5}">
+								<option value="pants" selected>パンツ</option>
+					</c:if>
+					<c:if test="${item.partsCode != 5}">
 								<option value="pants">パンツ</option>
+					</c:if>
+					<c:if test="${item.partsCode == 6}">
+								<option value="shoes" selected>シューズ</option>
+					</c:if>
+					<c:if test="${item.partsCode != 6}">
 								<option value="shoes">シューズ</option>
+					</c:if>
 						</select>
 					</label></td>
 				</tr>
@@ -185,6 +216,7 @@
 
 			</table>
 			<br>
+			<input type="text" name="item_id" class="hidden" value="${item.id}">
 		</form>
 	</main>
 

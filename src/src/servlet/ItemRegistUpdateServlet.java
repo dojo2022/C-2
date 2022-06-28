@@ -56,24 +56,18 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		String id = "aaaaa";
 
 		// いったんエラーを消すためだけの処理
+		/*
 		String photoExtension = "";
 		String userID = "";
 		String itemID = "";
+		*/
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 
 
-		Part part = request.getPart("IMAGE"); // getPartで取得
-		String photo = null;
-		String fileName = this.getFileName(part);
-		System.out.println(fileName);
-		//System.out.println("part:" + part + "file :"  +this.getFileName(part));
-		if (fileName != null && !(fileName.equals(""))) {
-			photo = userID + System.currentTimeMillis() + "." + this.getExtension(fileName);
-			part.write(photo);
-			photo = "\\photo\\" + photo;
-			}
+
+
 
 		String spring = request.getParameter("spring");
 		String summer = request.getParameter("summer");
@@ -111,10 +105,21 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		*/
 
 		if (request.getParameter("REGIST") != null) {
+			Part part = request.getPart("IMAGE"); // getPartで取得
+			String photo = null;
+			String fileName = this.getFileName(part);
+			System.out.println(fileName);
+			//System.out.println("part:" + part + "file :"  +this.getFileName(part));
+			if (fileName != null && !(fileName.equals(""))) {
+				photo = id + System.currentTimeMillis() + "." + this.getExtension(fileName);
+				part.write(photo);
+				photo = "\\photo\\" + photo;
+				}
+			//System.out.println(photo);
 			// 登録処理を行う
 			ItemDAO iDao = new ItemDAO();
 			if (iDao.insert(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
-					white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), id, photoExtension)) { // 登録成功
+					white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), id, photo)) { // 登録成功
 				request.setAttribute("result",
 						new Result(true));
 			}
@@ -138,8 +143,8 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemRegist.jsp");
 			dispatcher.forward(request, response);
-		} else if (request.getParameter("item_id") != null) {
-			String itemId = request.getParameter("item_id");
+		} else if (request.getParameter("item_id_edit") != null) {
+			String itemId = request.getParameter("item_id_edit");
 			System.out.println("選択したアイテムのid" + itemId);
 			ItemDAO iDao = new ItemDAO();
 			List<Object> itemInf = iDao.select(itemId);
@@ -151,20 +156,31 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			RequestDispatcher dispatchers = request.getRequestDispatcher("/WEB-INF/jsp/itemUpdate.jsp");
 			dispatchers.forward(request, response);
 		}else {
-
+			Part part = request.getPart("IMAGE"); // getPartで取得
+			String photo = null;
+			String fileName = this.getFileName(part);
+			System.out.println(fileName);
+			//System.out.println("part:" + part + "file :"  +this.getFileName(part));
+			if (fileName != null && !(fileName.equals(""))) {
+				photo = id + System.currentTimeMillis() + "." + this.getExtension(fileName);
+				part.write(photo);
+				photo = "\\photo\\" + photo;
+				}
+			//System.out.println(photo);
+			String itemId = request.getParameter("item_id");
 			// 更新または削除を行う
 			ItemDAO tDao = new ItemDAO();
-			if (request.getParameter("SUBMIT") != null && request.getParameter("SUBMIT").equals("更新")) {
+			if (request.getParameter("update") != null) {
 				if (tDao.update(new RegistInf(spring, summer, autumn, winter, outer, jacket, tops, skirt, pants, shoes,
-						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), userID, itemID, photoExtension)) { // 更新成功
+						white, black, grey, beige, red, blue, green, yellow, other, patternYES, patternNO, rainOK, rainNG, windOK, windNG,parts), id, itemId, photo)) { // 更新成功
 					request.setAttribute("result",
 							new Result(true));
 				} else { // 更新失敗
 					request.setAttribute("result",
 							new Result(false));
 				}
-			} else {
-				if (tDao.delete(id)) { // 削除成功
+			} else if (request.getParameter("delete") != null) {
+				if (tDao.delete(itemId)) { // 削除成功
 					request.setAttribute("result",
 							new Result(true));
 				} else { // 削除失敗
@@ -172,6 +188,8 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 							new Result(false));
 				}
 			}
+			Boolean flag = false;
+			request.setAttribute("search", flag);
 			// 結果ページにフォワードする
 			RequestDispatcher dispatchers = request.getRequestDispatcher("/WEB-INF/jsp/itemSearch.jsp");
 			dispatchers.forward(request, response);
