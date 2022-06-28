@@ -77,7 +77,7 @@ public class DiaryDAO {
 				String dateStr = (Integer.parseInt(new SimpleDateFormat("yyyy").format(rs.getDate("date")))) + "/"
 						+ (Integer.parseInt(new SimpleDateFormat("MM").format(rs.getDate("date")))) + "/"
 						+ (Integer.parseInt(new SimpleDateFormat("dd").format(rs.getDate("date"))));
-				System.out.println("DiaryDao:" + dateStr);
+				//System.out.println("DiaryDao:" + dateStr);
 				diary.setDateStr(dateStr);
 
 				//SQLで取得したデータを全部diaryオブジェクトに格納
@@ -310,7 +310,7 @@ public class DiaryDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar cl = Calendar.getInstance();
 			String date = sdf.format(cl.getTime());
-			System.out.println("DiaryDao,insertTodayDiary(),今日の日付：" + date);
+			//System.out.println("DiaryDao,insertTodayDiary(),今日の日付：" + date);
 			pStmt.setString(1, date);
 
 			// SQL文を実行する

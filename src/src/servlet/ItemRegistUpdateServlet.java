@@ -18,6 +18,7 @@ import model.ColorSeason;
 import model.Item;
 import model.RegistInf;
 import model.Result;
+import model.User;
 
 /**
  * Servlet implementation class ItemRegistUpdateServlet
@@ -43,31 +44,17 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		/*
 		HttpSession session = request.getSession();
 		if (session.getAttribute("id") == null) {
 			response.sendRedirect("/coordinator/LoginServlet");
 			return;
 		}
-		*/
-		HttpSession session = request.getSession();
 
-		//String id = ((User) session.getAttribute("id")).getId();
-		String id = "aaaaa";
-
-		// いったんエラーを消すためだけの処理
-		/*
-		String photoExtension = "";
-		String userID = "";
-		String itemID = "";
-		*/
+		String id = ((User) session.getAttribute("id")).getId();
+		//String id = "aaaaa";
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-
-
-
-
 
 		String spring = request.getParameter("spring");
 		String summer = request.getParameter("summer");
@@ -96,7 +83,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 		String windNG = request.getParameter("wind_ng");
 		String parts = request.getParameter("parts");
 
-		System.out.println("parts:" + parts);
+		//System.out.println("parts:" + parts);
 		/*
 		System.out.println("spring:" + spring);
 		System.out.println("summer:" +summer);
@@ -108,7 +95,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			Part part = request.getPart("IMAGE"); // getPartで取得
 			String photo = null;
 			String fileName = this.getFileName(part);
-			System.out.println(fileName);
+			//System.out.println(fileName);
 			//System.out.println("part:" + part + "file :"  +this.getFileName(part));
 			if (fileName != null && !(fileName.equals(""))) {
 				photo = id + System.currentTimeMillis() + "." + this.getExtension(fileName);
@@ -145,7 +132,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else if (request.getParameter("item_id_edit") != null) {
 			String itemId = request.getParameter("item_id_edit");
-			System.out.println("選択したアイテムのid" + itemId);
+			//System.out.println("選択したアイテムのid" + itemId);
 			ItemDAO iDao = new ItemDAO();
 			List<Object> itemInf = iDao.select(itemId);
 			Item item = (Item) (itemInf.get(0));
@@ -159,7 +146,7 @@ public class ItemRegistUpdateServlet extends HttpServlet {
 			Part part = request.getPart("IMAGE"); // getPartで取得
 			String photo = null;
 			String fileName = this.getFileName(part);
-			System.out.println(fileName);
+			//System.out.println(fileName);
 			//System.out.println("part:" + part + "file :"  +this.getFileName(part));
 			if (fileName != null && !(fileName.equals(""))) {
 				photo = id + System.currentTimeMillis() + "." + this.getExtension(fileName);

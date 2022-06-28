@@ -16,6 +16,7 @@ import dao.DiaryDAO;
 import dao.WeatherForecastDAO;
 import model.Diary;
 import model.Item;
+import model.User;
 import model.WeatherForecast;
 
 /**
@@ -53,8 +54,8 @@ public class HomeServlet extends HttpServlet {
 		//写真３枚取ってくる
 		DiaryDAO dDAO = new DiaryDAO();
 		//String型のidを取ってくる
-		//String id =((User)session.getAttribute("id")).getId();
-		String id = "aaaaa";
+		String id =((User)session.getAttribute("id")).getId();
+		//String id = "aaaaa";
 		List<Diary> diaryList= dDAO.search3Photos(id);
 		/*
 		for (int i = 0; i < diaryList.size(); i++) {

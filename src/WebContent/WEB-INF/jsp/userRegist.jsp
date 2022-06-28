@@ -15,7 +15,7 @@
 <img src="/coordinator/photo/logo.PNG" alt="coordinator" width="162" height="37">
 <div class="user">
 <h3>MEMBER REGISTRATION</h3>
- <form method="POST" action="/coordinator/LoginServlet" id="form">
+ <form method="POST" action="/coordinator/UserRegistServlet" id="form">
  <div id= "table">
 	<table id="list" align="center">
 		<tr>

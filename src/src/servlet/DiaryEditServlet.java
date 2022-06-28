@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 
 import dao.DiaryDAO;
 import model.Diary;
+import model.User;
 
 /**
  * Servlet implementation class DiaryEditServlet
@@ -40,6 +41,12 @@ public class DiaryEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/coordinator/LoginServlet");
+			return;
+		}
 		request.setCharacterEncoding("UTF-8");
 		String s1 = request.getParameter("edit");
 		String s2 = request.getParameter("update");
@@ -48,7 +55,7 @@ public class DiaryEditServlet extends HttpServlet {
 			// リクエストパラメータを取得する
 			String diaryId = request.getParameter("diary_id");
 
-			System.out.println("日記id:" + diaryId);
+			//System.out.println("日記id:" + diaryId);
 
 			DiaryDAO dDao = new DiaryDAO();
 			Diary diary = dDao.search(diaryId);
@@ -62,14 +69,13 @@ public class DiaryEditServlet extends HttpServlet {
 
 		} else if (s2 != null) {
 			//id
-			HttpSession session = request.getSession();
-			//String userId = ((User)session.getAttribute("id")).getId();
-			String userId = "aaaaa";
+			String userId = ((User)session.getAttribute("id")).getId();
+			//String userId = "aaaaa";
 			// リクエストパラメータを取得する
 			Part part = request.getPart("IMAGE"); // getPartで取得
 			String photo = null;
 			String fileName = this.getFileName(part);
-			System.out.println(fileName);
+			//System.out.println(fileName);
 			//System.out.println("part:" + part + "file :"  +this.getFileName(part));
 			if (fileName != null && !(fileName.equals(""))) {
 				photo = userId + System.currentTimeMillis() + "." + this.getExtension(fileName);
@@ -83,7 +89,7 @@ public class DiaryEditServlet extends HttpServlet {
 			String endDate = (String) session.getAttribute("endDate");
 			//System.out.println(" 確認" + startDate + endDate);
 
-			System.out.println("1" + photo);
+			//System.out.println("1" + photo);
 
 			//dao
 			DiaryDAO dDao = new DiaryDAO();
@@ -123,9 +129,7 @@ public class DiaryEditServlet extends HttpServlet {
 			// 結果ページにフォワードする
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/diary.jsp");
 			dispatcher.forward(request, response);
-
 		}
-
 	}
 
 	//ファイルの名前を取得してくる

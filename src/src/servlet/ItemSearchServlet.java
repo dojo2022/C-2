@@ -10,10 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ItemDAO;
 import model.Item;
 import model.SearchCondition;
+import model.User;
 
 /**
  * Servlet implementation class ItemSearchServlet
@@ -48,14 +50,14 @@ public class ItemSearchServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		/*
-				HttpSession session = request.getSession();
-				if (session.getAttribute("id") == null) {
-					response.sendRedirect("/coordinator/LoginServlet");
-					return;
-				}
-				*/
-		String userId = "aaaaa";
+
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/coordinator/LoginServlet");
+			return;
+		}
+
+		String userId = ((User) session.getAttribute("id")).getId();
 		// 検索処理を行う　改造
 		ItemDAO IDao = new ItemDAO();
 		List<Item> outerList = new ArrayList<Item>();
@@ -110,7 +112,6 @@ public class ItemSearchServlet extends HttpServlet {
 							rainNG, windOK, windNG),
 					userId);
 
-
 			for (int i = 0; i < itemList.size(); i++) {
 				switch (itemList.get(i).getPartsCode()) {
 				case 1:
@@ -136,12 +137,14 @@ public class ItemSearchServlet extends HttpServlet {
 				}
 			}
 		}
+		/*
 		System.out.println("outer" + outerList.size());
 		System.out.println("jk" + jkList.size());
 		System.out.println("tops" + topsList.size());
 		System.out.println("skirt" + skirtList.size());
 		System.out.println("pants" + pantsList.size());
 		System.out.println("shoes" + shoesList.size());
+		*/
 		//スコープ
 		request.setAttribute("outerList", outerList);
 		request.setAttribute("jkList", jkList);

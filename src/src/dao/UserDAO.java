@@ -33,7 +33,7 @@ public class UserDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, user.getId());
 			pStmt.setString(2,user.getPassword());
-			System.out.println("select count(*) from USER where ID = " +user.getId()+" and PASSWORD = " + user.getPassword());
+			//System.out.println("select count(*) from USER where ID = " +user.getId()+" and PASSWORD = " + user.getPassword());
 
 
 			// SELECT文を実行し、結果表を取得する
@@ -43,7 +43,7 @@ public class UserDAO {
 			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
 			rs.next();
 			int tmp = rs.getInt("count(*)");
-			System.out.println(tmp);
+			//System.out.println(tmp);
 			if (tmp == 1) {
 				loginResult = true;
 			}
@@ -75,7 +75,7 @@ public class UserDAO {
 
 	// 指定されたレコードを登録し、成功したらtrueを返す
 		public boolean userRegist(User user) {
-			System.out.println("userRegist() start");
+			//System.out.println("userRegist() start");
 			Connection conn = null;
 			boolean result = false;
 
@@ -91,6 +91,7 @@ public class UserDAO {
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる＜改造＞
+				System.out.println(user.getId() + user.getName() + user.getPassword());
 
 				if (user.getId() != null && !user.getId().equals("")) {
 					pStmt.setString(1, user.getId());
@@ -140,8 +141,4 @@ public class UserDAO {
 			// 結果を返す
 			return result;
 		}
-
 }
-
-
-

@@ -1,3 +1,4 @@
+/* 実行するとデータベースに天気予報を登録するサーブレット */
 package servlet;
 
 import java.io.IOException;

@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		String id = request.getParameter("ID");
 		String password = request.getParameter("PW");
 
-		System.out.println("login dopost pw:"+password);
+		//System.out.println("login dopost pw:"+password);
 
 		// ログイン処理を行う
 		UserDAO iDao = new UserDAO();
@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
 			session.setAttribute("id", new User(id, null, password,null));
+			//System.out.println(((User)session.getAttribute("id")).getId());
 
 			// メニューサーブレットにリダイレクトする
 			response.sendRedirect("/coordinator/HomeServlet");

@@ -42,9 +42,10 @@ public class UserRegistServlet extends HttpServlet {
  		String name = request.getParameter("NAME");
  		String password = request.getParameter("PW");
  		String password2 = request.getParameter("PW2");
- 		System.out.println(id + name + password);
+ 		//System.out.println(id + name + password);
 
  		if (password.equals(password2)) {
+
  		// 登録処理を行う
  	 		UserDAO uDao = new UserDAO();
  	 		if (uDao.userRegist(new User(id,name,password,password2))) {	// 登録成功　
@@ -56,6 +57,7 @@ public class UserRegistServlet extends HttpServlet {
  	 			new Result(false));
  	 		}
  		} else {
+
  			request.setAttribute("result",
  	 	 			new Result(false));
  		}

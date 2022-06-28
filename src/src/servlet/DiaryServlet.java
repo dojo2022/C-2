@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import dao.DiaryDAO;
 import dao.WeatherForecastDAO;
 import model.Diary;
+import model.User;
 import model.WeatherForecast;
 
 /**
@@ -31,23 +32,22 @@ public class DiaryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		HttpSession session = request.getSession();
-		//String userId = ((User)session.getAttribute("id")).getId();
-		String userId = "aaaaa";
+		String userId = ((User)session.getAttribute("id")).getId();
+		//String userId = "aaaaa";
 		DiaryDAO dDAO = new DiaryDAO();
 		//もし今日の日記がまだなければ追加
-		WeatherForecast weather = (WeatherForecast)session.getAttribute("todayWeather");
+		WeatherForecast weather = (WeatherForecast) session.getAttribute("todayWeather");
 		if (weather == null) {
 			WeatherForecastDAO wDao = new WeatherForecastDAO();
 			weather = wDao.todayWeather();
-			session.setAttribute("todayWeather",weather);
+			session.setAttribute("todayWeather", weather);
 		}
 		//表示
-		System.out.println("今日の天気" + weather.getWeatherCode());
+		//System.out.println("今日の天気" + weather.getWeatherCode());
 		//boolean戻り値
-		boolean b = dDAO.insertTodayDiary(weather,userId);
-		System.out.println(b);
+		boolean b = dDAO.insertTodayDiary(weather, userId);
+		System.out.println("b");
 
 		Diary param = new Diary();
 
@@ -67,10 +67,9 @@ public class DiaryServlet extends HttpServlet {
 		session.setAttribute("startDate", startDate);
 		session.setAttribute("endDate", endDate);
 
-
 		List<Diary> diaryList = dDAO.selectDiary(param);
-		System.out.println(diaryList);
-		System.out.println(diaryList.size());
+		//System.out.println(diaryList);
+		//System.out.println(diaryList.size());
 		/*
 		for (int i = 0; i< diaryList.size(); i++) {
 			System.out.println(diaryList.get(i).getDate());
@@ -90,16 +89,20 @@ public class DiaryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") == null) {
+			response.sendRedirect("/coordinator/LoginServlet");
+			return;
+		}
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String startDate = request.getParameter("startDate");
 		String endDate = request.getParameter("endDate");
 		//System.out.println("diaryServlet確認" + startDate);
 
-		HttpSession session = request.getSession();
-		//String userId = ((User)session.getAttribute("id")).getId();
-		String userId = "aaaaa";
+		String userId = ((User)session.getAttribute("id")).getId();
+		//String userId = "aaaaa";
 
 		//今取ってきた始まりの日と終わりの日をdaoに渡して日記のリストが返される。それをスコープに入れる
 
@@ -116,10 +119,12 @@ public class DiaryServlet extends HttpServlet {
 		List<Diary> diaryList = dDAO.selectDiary(param);
 		//System.out.println(diaryList);
 		//System.out.println(diaryList.size());
-		for (int i = 0; i< diaryList.size(); i++) {
+		/*
+		for (int i = 0; i < diaryList.size(); i++) {
 			System.out.println(diaryList.get(i).getDate());
 			System.out.println(diaryList.get(i).getDateStr());
 		}
+		*/
 
 		//リクエストスコープに指定した範囲の日記のリストを格納する
 		request.setAttribute("diaryList", diaryList);

@@ -61,7 +61,7 @@ public class ItemDAO {
 			pStmt.setString(2, String.valueOf(parts_code)); //pStmt.setStringはString型しか受け付けないので、int型のparts_codeをString型に変換 */
 
 			// SQL文を実行し、結果表を取得する
-			System.out.println("SQL文を実行し、結果表を取得する");
+			//System.out.println("SQL文を実行し、結果表を取得する");
 			ResultSet rs = pStmt.executeQuery();
 
 			// 結果表をコレクションにコピーする
@@ -100,7 +100,7 @@ public class ItemDAO {
 
 	// 引数itemで指定されたレコードを登録し、成功したらtrueを返す
 	public boolean insert(RegistInf registinf, String id, String photo) {
-		System.out.println("登録Daoがもらったregistinf：" + registinf.getParts());
+		//System.out.println("登録Daoがもらったregistinf：" + registinf.getParts());
 		Connection conn = null;
 		boolean result = false;
 
@@ -198,7 +198,6 @@ public class ItemDAO {
 			// SQL文を実行し、結果を取得する
 			ResultSet rs = pStmt.executeQuery();
 
-			//
 			// 結果をコピーする
 			while (rs.next()) {
 				ItemID = rs.getString("ID");

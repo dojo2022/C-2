@@ -121,46 +121,7 @@ public class WeatherForecastDAO {
 	 * 一つ目は７時から、二つ目は１１時から、三つめは１５時からの４時間です。
 	 */
 	public List<WeatherForecast> oneDayWeatherForecast() {
-		//もし1週間後までの天気予報がデータベースになかったら今日はまだ取得していないということなので、取得する
-		/*
-		Connection conn = null;
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
 
-			// データベースに接続する
-			conn = DriverManager.getConnection(dbURL, "sa", "");
-
-			// SQL文を準備する
-			String sql = "select * FROM WEATHER_FORECAST WHERE DATE = ?";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
-
-			// SQL文を完成させる
-			pStmt.setString(1, LocalDate.now().plusDays(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
-
-			// SQL文を実行し、結果表を取得する
-			System.out.println("SQL文を実行し、結果表を取得する");
-			ResultSet rs = pStmt.executeQuery();
-			if (!(rs.next())) {
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					cardList = null;
-				}
-			}
-		}
-		*/
 		List<WeatherForecast> weatherList = new ArrayList<WeatherForecast>();
 		Connection conn = null;
 		try {
@@ -399,12 +360,7 @@ public class WeatherForecastDAO {
 								rs.getString("PHOTO")));
 					}
 				}
-				/*
-				System.out.println("おすすめコーデすでにありの場合の、パンツスカート統合前のリスト");
-				for (int n = 0; n < itemList.size(); n++ ) {
-					System.out.println(n + "周目" + itemList.get(n).getId());
-				}
-				*/
+
 
 				//パンツかスカートのどっちかはnullなので削除
 				if (itemList.get(3).getUserId() == null && itemList.get(4).getUserId() != null) {
@@ -462,8 +418,6 @@ public class WeatherForecastDAO {
 				highestTemperature = 10;
 				lowestTemperature = 3;
 				*/
-
-
 
 				List<Item> tmpItemList = new ArrayList<Item>();
 
@@ -692,7 +646,7 @@ public class WeatherForecastDAO {
 					highestTemperature,
 					lowestTemperature,
 					date);
-			System.out.println(weatherCodeAve+Double.parseDouble(String.format("%.1f", rainAmount / cnt))+Double.parseDouble(String.format("%.1f", windAmount / cnt)));
+			//System.out.println(weatherCodeAve+Double.parseDouble(String.format("%.1f", rainAmount / cnt))+Double.parseDouble(String.format("%.1f", windAmount / cnt)));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
