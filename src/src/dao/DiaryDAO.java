@@ -304,7 +304,7 @@ public class DiaryDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection(dbURL, "sa", "");
 			// SQL文を準備する
-			String sql = "SELECT * FROM Diary WHERE date = ?";
+			String sql = "SELECT * FROM Diary WHERE date = ? AND User_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -312,6 +312,7 @@ public class DiaryDAO {
 			String date = sdf.format(cl.getTime());
 			//System.out.println("DiaryDao,insertTodayDiary(),今日の日付：" + date);
 			pStmt.setString(1, date);
+			pStmt.setString(2, userId);
 
 			// SQL文を実行する
 			ResultSet rs = pStmt.executeQuery();
