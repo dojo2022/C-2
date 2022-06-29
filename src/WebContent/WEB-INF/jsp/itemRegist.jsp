@@ -121,7 +121,7 @@
         </td>
       </tr>
       <tr>
-					<td><br> 画像:<input type="file" name="IMAGE"
+					<td><br> 画像を登録してください:<input type="file" name="IMAGE"
 						accept="image/*" onchange="previewImage(this);"><br>
 						<canvas id="preview" style="max-width: 200px;"></canvas></td>
 				</tr>

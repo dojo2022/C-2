@@ -109,7 +109,7 @@
 				<tr>
 					<td colspan="3" class="button_table">
 						<p align="center">
-							<input type="submit" name="list" value="ALL ITEM" class="btn">
+							<input type="submit" name="list" value="ALL ITEMS" class="btn">
 							<input type="submit" name="search" value="SEARCH" class="btn">
 							<input type="reset" name="reset" value="RESET" class="btn">
 						</p>

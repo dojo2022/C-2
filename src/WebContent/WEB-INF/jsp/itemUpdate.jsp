@@ -6,15 +6,16 @@
 
 <head>
 <meta charset="UTF-8">
-<title>itemSearch</title>
-<link rel="stylesheet" href="/coordinator/css/itemSearch.css">
+<title>itemUpdate</title>
+<link rel="stylesheet" href="/coordinator/css/itemRegist.css">
 <link rel="stylesheet" href="/coordinator/css/common.css">
+<link rel="stylesheet" href="/coordinator/css/headerFooter.css">
 <script src="js/itemSearch.js"></script>
 <script src="js/common.js"></script>
 </head>
 
 <body>
-	<h1>更新・削除</h1>
+<h1 align="center"><img src="/coordinator/photo/logo.PNG" alt="coodinater" ></h1>
 	<nav class="nav">
 		<ul>
 			<li><a href="/coordinator/HomeServlet">HOME</a></li>
@@ -25,15 +26,17 @@
 		</ul>
 	</nav>
 	<main>
-
+	<h3 align="center">UPDATE</h3>
 		<form method="POST" action="/coordinator/ItemRegistUpdateServlet" enctype="multipart/form-data">
-			<table>
+			<table class="regist_table" align="center">
 				<tr>
 					<td>
 						<div class="multiselect">
 							<div class="selectBox" onclick="showCheckboxes()">
+
+								<p class="pulldown_name">季節</p>
 								<select>
-									<option>季節</option>
+									<option>複数選択可</option>
 								</select>
 								<div class="overSelect"></div>
 							</div>
@@ -102,13 +105,13 @@
 					</c:if>
 						</select>
 					</label></td>
-				</tr>
-				<tr>
 					<td>
 						<div class="multiselect">
 							<div class="selectBox" onclick="showCheckboxeses()">
+
+								<p class="pulldown_name">色</p>
 								<select>
-									<option>色</option>
+									<option>複数選択可</option>
 								</select>
 								<div class="overSelect"></div>
 							</div>
@@ -162,6 +165,8 @@
 							</div>
 						</div>
 					</td>
+					</tr>
+					<tr>
 					<td><c:if test="${item.pattern == 1}">
 							<label>柄<br> <input type="radio" name="pattern_yes"
 								checked>あり
@@ -174,8 +179,6 @@
 							<label> <input type="radio" name="pattern_no" checked>なし
 							</label>
 						</c:if></td>
-				</tr>
-				<tr>
 					<td><c:if test="${item.rain == 1}">
 							<label>雨<br> <input type="radio" name="rain_ok"
 								checked>可
@@ -201,18 +204,21 @@
 							</label>
 						</c:if></td>
 				</tr>
+
 				<tr>
-					<img src="/coordinator/${item.photo}">
+					<td><img src="/coordinator/${item.photo}"><br>
+					画像を登録してください:<input type="file" name="IMAGE"
+						accept="image/*" onchange="previewImage(this);">
+						</td>
+						<td>
+						<canvas id="preview" style="max-width: 200px;"></canvas>
+						</td>
+						<td align="right" valign="bottom">
+					<input type="submit" name="update" value="UPDATE" class="btn"><br><br> <input
+						type="submit" name="delete" value="DELETE" class="btn"></td>
 				</tr>
-				<tr>
-					<td><input type="submit" name="update" value="更新"> <input
-						type="submit" name="delete" value="削除"></td>
-				</tr>
-				<tr>
-					<td><br> 画像:<input type="file" name="IMAGE"
-						accept="image/*" onchange="previewImage(this);"><br>
-						<canvas id="preview" style="max-width: 200px;"></canvas></td>
-				</tr>
+
+
 
 			</table>
 			<br>
@@ -220,7 +226,7 @@
 		</form>
 	</main>
 
-	<style>
+<style>
 img {
 	margin: 30px 0;
 	width: 200px;
@@ -291,6 +297,8 @@ img {
 	padding: 1em;
 	padding-right: calc(2em + 100px);
 }
+
+
 </style>
 
 	<script>
